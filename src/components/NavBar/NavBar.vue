@@ -1,8 +1,8 @@
 <template>
   <div class="nav-bar">
     <div class="container">
-      <div class="logo">
-        <a>Logo</a>
+      <div class="logo" @click="$router.push('/')">
+        Logo
       </div>
       <nav>
         <ul class="nav-list">
@@ -38,4 +38,6 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  @import "NavBar.scss"
+</style>

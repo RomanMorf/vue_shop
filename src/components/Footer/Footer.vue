@@ -1,8 +1,8 @@
 <template>
   <div class="footer">
     <div class="container">
-      <div class="logo">
-        <a>Logo</a>
+      <div class="logo" @click="$router.push('/')">
+        Logo
       </div>
       <div class="social">
         <img class="social-img" src="@/assets/img/social/001-twitter.svg" alt="twitter">
@@ -24,5 +24,5 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  
+  @import 'Footer.scss';
 </style> 

@@ -10,37 +10,12 @@ body {
 ul {
   list-style: none;
 }
+
 .container {
   margin: 0 auto;
   max-width: 800px;
 }
 
-.nav-bar,
-.footer {
-  background-color: rgba(211, 211, 211, 0.445);
-}
-
-.footer {
-  .container {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    align-items: center;
-    min-height: 50px;
-  }
-  .logo {
-    width: 100px;
-    height: 30px;
-    border: 1px solid grey;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .social-img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-
-  }
-
+.center {
+  text-align: center;
 }

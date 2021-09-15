@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import NavBar from '@/components/app/NavBar'
-import Footer from '@/components/app/Footer'
+import NavBar from '@/components/NavBar/NavBar'
+import Footer from '@/components/Footer/Footer'
 
 export default {
   name: 'main-layout',
