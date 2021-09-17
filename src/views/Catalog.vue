@@ -4,10 +4,9 @@
     <div class="card">
       <div class="card-image"></div>
       <p class="card-description center">desription</p>
-      <p class="price"></p>
-      <button class="basket"></button>
+      <p class="card-price">В корзину</p>
       <div>
-        <button>Test</button>
+        <button class="basket"></button>
       </div>
     </div>
   </div>
