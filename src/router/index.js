@@ -17,6 +17,12 @@ const routes = [
     component: () => import('../views/About.vue'),
   },
   {
+    path: '/catalog',
+    name: 'Catalog',
+    meta: { layout: 'main' },
+    component: () => import('../views/Catalog.vue'),
+  },
+  {
     path: '/contacts',
     name: 'Contacts',
     meta: { layout: 'main' },
@@ -27,7 +33,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

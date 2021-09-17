@@ -31,6 +31,7 @@ export default {
       links: [
         { title: 'Home', url: '/', exact: true }, //исключить "/"
         { title: 'About', url: '/about' },
+        { title: 'Catalog', url: '/catalog' },
         { title: 'Contacts', url: '/contacts' },
       ],
     }

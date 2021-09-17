@@ -1,14 +1,13 @@
 <template>
-  <div class="home">
-    <h1 class="center">This is an home page</h1>
-
+  <div>
+    <h1 class="center">This is an catalog page</h1>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Home',
+  name: 'Catalog',
   components: {
   }
 }
