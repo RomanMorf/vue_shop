@@ -23,6 +23,12 @@ const routes = [
     component: () => import('../views/Catalog.vue'),
   },
   {
+    path: '/delivery',
+    name: 'Delivery',
+    meta: { layout: 'main' },
+    component: () => import('../views/Delivery.vue'),
+  },
+  {
     path: '/contacts',
     name: 'Contacts',
     meta: { layout: 'main' },
