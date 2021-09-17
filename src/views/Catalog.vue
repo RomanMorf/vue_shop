@@ -2,8 +2,10 @@
   <div>
     <h1 class="center">This is an catalog page</h1>
     <div class="card">
-      <h3 class="card-title center">title</h3>
+      <div class="card-image"></div>
       <p class="card-description center">desription</p>
+      <p class="price"></p>
+      <button class="basket"></button>
       <div>
         <button>Test</button>
       </div>
