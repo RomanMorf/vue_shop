@@ -8,6 +8,8 @@
     </div>
     <div class="card-footer">
       <button>press me !</button>
+      <button>press me !</button>
+      <button>press me !</button>
     </div>
   </div>
 </template>
