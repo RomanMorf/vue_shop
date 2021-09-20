@@ -13,38 +13,16 @@ export default {
     },
   },
   actions: {
-    async updateInfo({ dispatch, commit, getters }, toUpdate) {
-      // обновить инфо
+    async createRecord({ dispatch, commit, getters }, data) {
+      console.log('trying to create record');
       try {
-        const uid = await dispatch('getUid')
-        const updateData = { ...getters.info, ...toUpdate }
-        if (uid) {
-          await firebase
-            .database()
-            .ref(`/users/${uid}/userInfo`)
-            .set(updateData)
-        }
-        commit('setInfo', updateData)
+        // console.log(firebase.database(), 'firebase.database()');
+        return await firebase.database().ref(`/users/records`).push(data)
       } catch (error) {
-        commit('setError', error)
+        console.log(error, 'error');
         throw error
       }
-    },
-    async fetchInfo({ dispatch, commit }) {
-      //получить инфо
-      try {
-        const uid = await dispatch('getUid')
-        const info = (
-          await firebase
-            .database()
-            .ref(`/users/${uid}/userInfo`)
-            .once('value')
-        ).val()
-        commit('setInfo', info)
-      } catch (error) {
-        commit('setError', error)
-        throw error
-      }
+
     },
   },
   getters: {

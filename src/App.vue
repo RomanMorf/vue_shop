@@ -8,6 +8,7 @@
 
 <script>
 import MainLayout from '@/layouts/MainLayout'
+import AdminLayout from '@/layouts/AdminLayout'
 
 export default {
   name: 'App',
@@ -18,6 +19,7 @@ export default {
   },
   components: {
     MainLayout,
+    AdminLayout
   }
 
 }
