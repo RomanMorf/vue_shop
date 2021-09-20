@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
-    <form 
+  <div>
+    <form class="center"
       @submit.prevent="showInfo"
     >
       <div>
-        <h3>Form for producs add</h3>
+        <h3>Form for products add</h3>
       </div>
       <div>
-        Title <input v-model="title" type="text" placeholder="Enter product title">
-        Category <input v-model="category" type="text" placeholder="Enter category name">
-        Price <input v-model="price" type="number" placeholder="Enter price">
+        <p>Title <input v-model="title" type="text" placeholder="Enter product title"></p>
+        <p>Category <input v-model="category" type="text" placeholder="Enter category name"></p>
+        <p>Price <input v-model="price" type="number" placeholder="Enter price"></p>
       </div>
       <div>
         <button type="submit">ADD</button>
@@ -51,3 +51,12 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+  form {
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 300px;
+    border: 1px solid black
+  }
+</style>

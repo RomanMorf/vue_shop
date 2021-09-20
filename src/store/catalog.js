@@ -15,10 +15,12 @@ export default {
   actions: {
     async createRecord({ dispatch, commit, getters }, data) {
       console.log('trying to create record');
+      
       try {
         // console.log(firebase.database(), 'firebase.database()');
         console.log('try send to firebase');
         return await firebase.database().ref(`/users/records`).push(data)
+
       } catch (error) {
         console.log(error, 'error');
         throw error

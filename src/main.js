@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import {App} from './App.vue'
 import router from './router'
 import store from './store'
 
@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 firebase.initializeApp({
   apiKey: 'AIzaSyBe-uq9ugjQF0p3Ga7GVdk8Jc0rpRzcSkw',
   authDomain: 'romario-vue-shop.firebaseapp.com',
-  databaseURL: 'https://romario-vue-shop-default-rtdb.europe-west1.firebasedatabase.app/',
+  databaseURL:'https://romario-vue-shop-default-rtdb.europe-west1.firebasedatabase.app/',
   projectId: 'romario-vue-shop',
   storageBucket: 'romario-vue-shop.appspot.com',
   messagingSenderId: '492072039756',
