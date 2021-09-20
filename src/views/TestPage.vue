@@ -1,17 +1,17 @@
 <template>
 	<div>
 
-			<FormAdd></FormAdd>
+			<FormAddProduct></FormAddProduct>
 
 	</div>
 </template>
 
 <script>
-import FormAdd from '@/components/Admin/FormAdd'
+import FormAddProduct from '@/components/Admin/FormAddProduct'
 
 export default {
 	components: {
-		FormAdd,
+		FormAddProduct,
 	}
 }
 </script>
