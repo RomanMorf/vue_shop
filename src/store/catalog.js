@@ -14,18 +14,43 @@ export default {
   },
   actions: {
     async createRecord({ dispatch, commit, getters }, data) {
-      console.log('trying to create record');
-      
       try {
-        // console.log(firebase.database(), 'firebase.database()');
-        console.log('try send to firebase');
-        return await firebase.database().ref(`/users/records`).push(data)
-
+        return await firebase
+          .database()
+          .ref(`/catalog/${data.category}/`)
+          .push(data)
       } catch (error) {
-        console.log(error, 'error');
+        throw error.message
+      }
+    },
+    async editRecord({ dispatch, commit }, newInfo) {
+      try {
+        const uid = await dispatch('getUid')
+        await firebase
+          .database()
+          .ref(`/catalog/category/`)
+          .child(newInfo.id)
+          .set(newInfo)
+      } catch (error) {
+        commit('setError', error)
         throw error
       }
+    },
+    async fetchRecord({ dispatch, commit }) {
+      try {
+        const records =
+          (
+            await firebase
+              .database()
+              .ref(`/catalog/Test Category/`)
+              .once('value')
+          ).val() || {}
 
+        return Object.keys(records).map((key) => ({ ...records[key], id: key }))
+
+      } catch (error) {
+        throw error
+      }
     },
   },
   getters: {
