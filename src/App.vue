@@ -29,3 +29,4 @@ export default {
 @import '@/assets/style.scss';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons'
 </style>
+
