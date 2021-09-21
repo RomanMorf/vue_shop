@@ -2,28 +2,28 @@ import firebase from 'firebase/app'
 
 export default {
   state: {
-    catalog: [],
+    categories: [],
   },
   mutations: {
-    setCatalog(state, catalog) {
-      state.catalog = catalog
+    setCatalog(state, categories) {
+      state.categories = categories
     },
     clearCatalog(state) {
-      state.catalog = []
+      state.categories = []
     },
   },
   actions: {
-    async createRecord({ dispatch, commit, getters }, data) {
+    async createCategory({ dispatch, commit, getters }, data) {
       try {
         return await firebase
           .database()
-          .ref(`/catalog/${data.category}/`)
+          .ref(`/categories/`)
           .push(data)
       } catch (error) {
         throw error.message
       }
     },
-    async editRecord({ dispatch, commit }, newInfo) {
+    async editCategory({ dispatch, commit }, newInfo) {
       try {
         const uid = await dispatch('getUid')
         await firebase
@@ -36,24 +36,23 @@ export default {
         throw error
       }
     },
-    async fetchRecord({ dispatch, commit }) {
+    async fetchCategories({ dispatch, commit }) {
       try {
         const records =
           (
             await firebase
               .database()
-              .ref(`/catalog/Test Category/`)
+              .ref(`/categories/`)
               .once('value')
           ).val() || {}
 
         return Object.keys(records).map((key) => ({ ...records[key], id: key }))
-
       } catch (error) {
         throw error
       }
     },
   },
   getters: {
-    catalog: (s) => s.catalog,
+    categories: (s) => s.categories,
   },
 }

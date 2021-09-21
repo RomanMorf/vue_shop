@@ -34,6 +34,13 @@ const routes = [
     meta: { layout: 'main' },
     component: () => import('../views/Contacts.vue'),
   },
+  {
+    path: '/testpage',
+    name: 'TestPage',
+    meta: { layout: 'admin' },
+    component: () => import('../views/TestPage.vue'),
+  },
+
 ]
 
 const router = new VueRouter({

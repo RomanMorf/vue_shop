@@ -2,12 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import catalog from './catalog.js'
+import categories from './categories.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    error: null
+    error: null,
   },
   mutations: {
     setError(state, error) {
@@ -15,15 +16,14 @@ export default new Vuex.Store({
     },
     clearError(state) {
       state.error = null
-    }
+    },
   },
-  actions: {
-    
-  },
+  actions: {},
   getters: {
-    error: s => s.error
+    error: (s) => s.error,
   },
   modules: {
-    catalog
-  }
+    catalog,
+    categories,
+  },
 })
