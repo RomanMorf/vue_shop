@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import FormAddProduct from '@/components/admin/FormAddProduct'
-import FormAddCategory from '@/components/admin/FormAddCategory'
+import FormAddProduct from '@/components/Admin/FormAddProduct'
+import FormAddCategory from '@/components/Admin/FormAddCategory'
 
 export default {
 	components: {

@@ -1,28 +1,33 @@
 <template>
   <div>
-    <form class="center"
+    <form class="form center"
       @submit.prevent="createCategory"
     >
       <div>
-        <h3>Form for category add</h3>
+        <h3>Products categories</h3>
       </div>
       <div>
-        <p>Category title <input v-model="title" type="text" placeholder="Enter category title"></p>
+        <p>Category title <input v-model="selected" type="text" placeholder="Enter category title"></p>
       </div>
       <div>
-        <button type="submit">ADD</button>
-        <button @click="editData">Edit</button>
+        <select v-model="selected" class="form-select">
+          <option 
+            v-for="cat in categories" 
+            :key="cat.id" 
+            v-bind:value="cat.title"
+          >
+            {{ cat.title }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <button @click="createCategory">ADD</button>
+        <button @click="editCategory">Edit</button>
+        <button @click="deleteCategory">Delete</button>
       </div>
     </form>
     <div>
       <button @click="fetchCategories">fetchCategories</button>
-    </div>
-    <div>
-      <p v-for="cat in categories" :key="cat.id">
-        Title: <span>{{ cat.title }}</span>
-        <br>
-        ID: {{ cat.id }}
-      </p>
     </div>
   </div>
 </template>
@@ -31,7 +36,8 @@
 export default {
   data() {
     return {
-      title: 'testTitle',
+      title: '',
+      selected: '',
       categories: []
     }
   },
@@ -46,7 +52,7 @@ export default {
         return 
       }
     },
-    async editData() {
+    async editCategory() {
       const data = {
         name: this.title
       }
@@ -57,24 +63,32 @@ export default {
       this.categories = await this.$store.dispatch('fetchCategories')
       console.log(this.categories, 'categories');
     },
-    clearData() {
+    deleteCategory() {
     },
     async updateRecords() {
       this.records = await this.$store.dispatch('fetchRecord')
     }
   },
-  // async mounted() {
-  //     this.categories = await this.$categories.dispatch('fetchCategories')
-  // },
+  async mounted() {
+      this.categories = await this.$store.dispatch('fetchCategories')
+  },
 
 }
 </script>
 
-<style lang="scss">
-  form {
+<style scoped lang="scss">
+  .form {
     padding: 10px;
     margin: 10px auto;
     max-width: 300px;
-    border: 1px solid black
+    border: 1px solid black;
+
+    & div {
+    margin-bottom: 10px;
+    }
+
+    &-select {
+      width: 50%;
+    }
   }
 </style>

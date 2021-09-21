@@ -34,6 +34,7 @@ export default {
         { title: 'Catalog', url: '/catalog' },
         { title: 'Delivery', url: '/delivery' },
         { title: 'Contacts', url: '/contacts' },
+        { title: 'TestPage', url: '/testpage' },
       ],
     }
   },
