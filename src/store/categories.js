@@ -36,7 +36,7 @@ export default {
         throw error
       }
     },
-    async fetchCategory({ dispatch, commit }) {
+    async fetchCategories({ dispatch, commit }) {
       try {
         const records =
           (
@@ -47,13 +47,12 @@ export default {
           ).val() || {}
 
         return Object.keys(records).map((key) => ({ ...records[key], id: key }))
-
       } catch (error) {
         throw error
       }
     },
   },
   getters: {
-    catalog: (s) => s.categories,
+    categories: (s) => s.categories,
   },
 }

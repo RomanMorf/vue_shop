@@ -14,6 +14,16 @@
         <button @click="editData">Edit</button>
       </div>
     </form>
+    <div>
+      <button @click="fetchCategories">fetchCategories</button>
+    </div>
+    <div>
+      <p v-for="cat in categories" :key="cat.id">
+        Title: <span>{{ cat.title }}</span>
+        <br>
+        ID: {{ cat.id }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -33,7 +43,7 @@ export default {
       if (this.title.trim()) {
         await this.$store.dispatch('createCategory', data)
       } else {
-        return
+        return 
       }
     },
     async editData() {
@@ -42,15 +52,20 @@ export default {
       }
       await this.$store.dispatch('editRecord', data)
     },
+    async fetchCategories() {
+      console.log('fetchCategories');
+      this.categories = await this.$store.dispatch('fetchCategories')
+      console.log(this.categories, 'categories');
+    },
     clearData() {
     },
     async updateRecords() {
       this.records = await this.$store.dispatch('fetchRecord')
     }
   },
-  async mounted() {
-      this.records = await this.$store.dispatch('fetchRecord')
-  },
+  // async mounted() {
+  //     this.categories = await this.$categories.dispatch('fetchCategories')
+  // },
 
 }
 </script>

@@ -8,7 +8,7 @@
       </div>
       <div>
         <p>Title <input v-model="title" type="text" placeholder="Enter product title"></p>
-        <p>Category <input v-model="category" type="text" placeholder="Enter category name"></p>
+        <p>Category <input v-model="category" type="text" placeholder="Enter category name dsfasdf"></p>
         <p>Price <input v-model="price" type="number" placeholder="Enter price"></p>
         <br>
         <p>Img URL <input v-model="imgUrl" type="text" placeholder="Enter img URL"></p>
@@ -18,16 +18,6 @@
         <button @click="editData">Edit</button>
       </div>
     </form>
-    <div>
-      <button @click="updateRecords">updateRecords</button>
-    </div>
-    <div>
-      <ul>
-        <li v-for="record in records" :key="record.id">
-          {{record}}
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 
