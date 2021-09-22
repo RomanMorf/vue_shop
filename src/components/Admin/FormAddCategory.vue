@@ -22,6 +22,7 @@
         <button @click.prevent="createCategory">ADD</button>
         <button @click.prevent="editCategory">Edit</button>
         <button @click.prevent="deleteCategory">Delete</button>
+        <button type="reset">Reset form</button>
       </div>
     </form>
     <div>

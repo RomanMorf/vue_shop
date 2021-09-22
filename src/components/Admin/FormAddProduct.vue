@@ -1,22 +1,44 @@
 <template>
   <div>
     <form class="center"
-      @submit.prevent="showInfo"
+      @submit.prevent=""
     >
       <div>
         <h3>Form for products add</h3>
       </div>
+
       <div>
-        <p>Title <input v-model="title" type="text" placeholder="Enter product title"></p>
-        <p>Category <input v-model="category" type="text" placeholder="Enter category name dsfasdf"></p>
-        <p>Price <input v-model="price" type="number" placeholder="Enter price"></p>
-        <br>
-        <p>Img URL <input v-model="imgUrl" type="text" placeholder="Enter img URL"></p>
+        <p>Title: <input v-model="title" type="text" placeholder="Enter product title"></p>
+
+        <div>Choose category
+          <select v-model="currentCategory">
+            <option 
+              v-for="cat in categories" 
+              :key="cat.id" 
+              :value="cat.id"
+            >
+              {{ cat.title }}
+            </option>
+          </select>
+          <p>Category name: {{ category }}</p>
+        </div>
+
+        <p>Price: <input v-model="price" type="number" placeholder="Enter price"></p> 
+
+        <p>Img URL: <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr"></p>
+        <button class="btn" @click="addImgUlr">Add url</button>
+
+        <div class="img_preview" v-for="(image, index) in img" :key="index">
+          <img class="img" :src="image">
+          <span class="cursor" @click="deleteImgUlr(index)">X</span>
+        </div>
       </div>
+
       <div>
-        <button type="submit">ADD</button>
-        <button @click="editData">Edit</button>
+        <button class="btn" @click="createProduct">Create</button>
+        <button class="btn" type="reset">Reset form</button>
       </div>
+      
     </form>
   </div>
 </template>
@@ -25,61 +47,91 @@
 export default {
   data() {
     return {
-      title: 'testTitle',
-      category: 'Test Category',
-      price: '100',
-      imgUrl: 'https://static-sl.insales.ru/images/products/1/3530/300559818/large_14537885-1-beige.jpeg',
-      records: []
+      title: '',
+      category: '',
+      categoryId: '',
+      price: '',
+      imgUrl: '',
+      img: [],
+      categories: [],
+      currentCategory: null,
     }
   },
   methods: {
-    showInfo() {
-      // console.log(this.title, this.category, this.price, 'log');
-      this.sendData()
-    },
-    async sendData() {
-      const data = {
-        title: this.title,
-        category: this.category,
-        price: this.price,
-        imgUrl: this.imgUrl,
-
+    addImgUlr() { // добавление url в список
+      if (this.imgUrl.trim()) {
+        this.img.push(this.imgUrl)
       }
-      // console.log(data, 'data');
-      await this.$store.dispatch('createRecord', data)
+      this.imgUrl = ''
     },
-    async editData() {
-      const data = {
-        id: 1632143531004,
-        title: this.title,
-        category: this.category,
-        price: this.price,
-        imgUrl: this.imgUrl,
-      }
-      // console.log(data, 'data');
-      await this.$store.dispatch('editRecord', data)
+    deleteImgUlr(index) { // удаление url из списка
+      this.img.splice(index, 1)
     },
-    clearData() {
+    clearForm() { // очистка формы
       this.title = ''
       this.category = ''
+      this.categoryId = ''
       this.price = ''
+      this.imgUrl = ''
+      this.img = []
+      this.categories = []
+      this.currentCategory = null
     },
-    async updateRecords() {
-      this.records = await this.$store.dispatch('fetchRecord')
+    async createProduct() { // создание продуктв
+      const data = {
+        categoryName: this.category,
+        categoryId: this.categoryId,
+        title: this.title,
+        price: this.price,
+        img: this.img,
+      }
+      if (this.title.trim() && this.price && this.price > 0 && this.category) {
+        await this.$store.dispatch('CREATE_PRODUCT', data)
+        this.clearForm()
+      }
+    },
+  },
+  watch: {  // следим за обновлениями в данном объекте
+    currentCategory(catId) {
+      const {title} = this.categories.find(c => c.id === catId)
+      this.category = title
+      this.categoryId = catId
     }
   },
+
   async mounted() {
-      this.records = await this.$store.dispatch('fetchRecord')
+      this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
   },
 
 }
 </script>
 
 <style lang="scss">
+  p {
+    padding: 0;
+    margin: 5px;
+  }
   form {
     padding: 10px;
     margin: 10px auto;
     max-width: 300px;
     border: 1px solid black
+  }
+  button {
+    margin: 5px;
+  }
+  .cursor {
+    cursor: pointer;
+  }
+  .img {
+    max-width: 60px;
+    max-height: 60px;
+    border: 1px solid black;
+    margin-bottom: 2px;
+  }
+  .img_preview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 </style>
