@@ -2,35 +2,36 @@ import firebase from 'firebase/app'
 
 export default {
   state: {
-    categories: [],
+    products: [],
   },
   mutations: {
-    SET_CATEGORIES(state, categories) {
-      state.categories = categories
+    SET_PRODUCTS(state, products) {
+      state.products = products
     },
-    CLEAR_CATEGORIES(state) {
-      state.categories = []
+    CLEAR_SET_PRODUCTS(state) {
+      state.products = []
     },
   },
   actions: {
-    async CREATE_CATEGORY({ dispatch, commit, getters }, data) {
+    async CREATE_PRODUCT({ dispatch, commit, getters }, data) {
+      console.log('stating create product');
       try {
         console.log(data, 'data')
 
         return await firebase
           .database()
-          .ref(`/categories/`)
+          .ref(`/products/`)
           .push(data)
       } catch (error) {
         console.log(error.message, 'error')
         throw error
       }
     },
-    async EDIT_CATEGORY({ dispatch, commit }, newInfo) {
+    async EDIT_PRODUCT({ dispatch, commit }, newInfo) {
       try {
         await firebase
           .database()
-          .ref(`/categories/`)
+          .ref(`/products/`)
           .child(newInfo.id)
           .set(newInfo)
       } catch (error) {
@@ -38,12 +39,12 @@ export default {
         throw error
       }
     },
-    async DELETE_CATEGORY({ dispatch, commit }, data) {
-      console.log(data.id, 'id');
+    async DELETE_PRODUCT({ dispatch, commit }, data) {
+      console.log(data.id, 'id')
       try {
         await firebase
           .database()
-          .ref(`/categories/`)
+          .ref(`/products/`)
           .child(data.id)
           .remove()
       } catch (error) {
@@ -51,23 +52,26 @@ export default {
         throw error
       }
     },
-    async FETCH_CATEGORIES({ dispatch, commit }) {
+    async FETCH_PRODUCTS({ dispatch, commit }) {
       try {
-        const records =
+        const products =
           (
             await firebase
               .database()
-              .ref(`/categories/`)
+              .ref(`/products/`)
               .once('value')
           ).val() || {}
 
-        return Object.keys(records).map((key) => ({ ...records[key], id: key }))
+        return Object.keys(products).map((key) => ({
+          ...products[key],
+          id: key,
+        }))
       } catch (error) {
         throw error
       }
     },
   },
   getters: {
-    GET_CATEGORIES: (s) => s.categories,
+    GET_PRODUCTS: (s) => s.products,
   },
 }

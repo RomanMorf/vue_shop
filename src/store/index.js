@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import catalog from './catalog.js'
+import products from './products.js'
 import categories from './categories.js'
 
 Vue.use(Vuex)
@@ -23,7 +23,7 @@ export default new Vuex.Store({
     error: (s) => s.error,
   },
   modules: {
-    catalog,
+    products,
     categories,
   },
 })
