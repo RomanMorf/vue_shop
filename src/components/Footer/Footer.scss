@@ -8,6 +8,23 @@
     align-items: center;
     min-height: 50px;
   }
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #fff;
+    
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
   .logo {
     width: 100px;
     height: 30px;
