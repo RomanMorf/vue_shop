@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1 class="center">This is an catalog page</h1>
+
     <div class="card-wrapper">
-      <Card ></Card>
       <Card></Card>
       <Card></Card>
       <Card></Card>
@@ -10,8 +10,9 @@
       <Card></Card>
       <Card></Card>
       <Card></Card>
+    
     </div>
-    <div class="card-wrapper">
+    <!-- <div class="card-wrapper">
       <div class="cardss" v-for="(card, index) in cards" :key="index">
         <p>Title : {{ card.title }}</p>
         <p>Price : {{ card.price }} UAH</p>
@@ -23,7 +24,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </template>
