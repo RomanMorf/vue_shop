@@ -1,5 +1,8 @@
 .footer {
-  background-color: rgba(211, 211, 211, 0.445);
+  margin-top: 80px;
+  &_wrapper {
+    background-color: rgba(211, 211, 211, 0.445);
+  }
   
   .container {
     display: flex;
@@ -9,13 +12,27 @@
     min-height: 50px;
   }
   .content {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     background-color: #fff;
-    
+
+    .section{
+      min-width: 150px;
+      margin: 0 5px;
+
+      &:first-child {
+        max-width: 350px;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+
   }
+  // .Shoes {
+  //   width: 350px;
+  // }
+  
   ul {
     list-style: none;
     padding-left: 0;
