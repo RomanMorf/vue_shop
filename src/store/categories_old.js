@@ -5,33 +5,31 @@ export default {
     categories: [],
   },
   mutations: {
-    SET_CATEGORIES(state, categories) {
+    setCatalog(state, categories) {
       state.categories = categories
     },
-    CLEAR_CATEGORIES(state) {
+    clearCatalog(state) {
       state.categories = []
     },
   },
   actions: {
-    async CREATE_CATEGORY({ dispatch, commit, getters }, data) {
+    async createCategory({ dispatch, commit, getters }, data) {
       try {
-        console.log(data, 'data')
-
         return await firebase
           .database()
           .ref(`/categories/`)
           .push(data)
-        commit
       } catch (error) {
-        console.log(error.message, 'error')
+        console.log(error.message)
         throw error
       }
     },
-    async EDIT_CATEGORY({ dispatch, commit }, newInfo) {
+    async editCategory({ dispatch, commit }, newInfo) {
       try {
+        const uid = await dispatch('getUid')
         await firebase
           .database()
-          .ref(`/categories/`)
+          .ref(`/catalog/category/`)
           .child(newInfo.id)
           .set(newInfo)
       } catch (error) {
@@ -39,20 +37,7 @@ export default {
         throw error
       }
     },
-    async DELETE_CATEGORY({ dispatch, commit }, data) {
-      console.log(data.id, 'id');
-      try {
-        await firebase
-          .database()
-          .ref(`/categories/`)
-          .child(data.id)
-          .remove()
-      } catch (error) {
-        commit('setError', error)
-        throw error
-      }
-    },
-    async FETCH_CATEGORIES({ dispatch, commit }) {
+    async fetchCategories({ dispatch, commit }) {
       try {
         const records =
           (
@@ -69,6 +54,6 @@ export default {
     },
   },
   getters: {
-    CATEGORIES: (s) => s.categories,
+    categories: (s) => s.categories,
   },
 }

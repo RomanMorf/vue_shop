@@ -1,29 +1,27 @@
 <template>
   <div>
-    <form class="form center"
-      @submit.prevent="createCategory"
-    >
+    <form class="form center">
       <div>
         <h3>Products categories</h3>
       </div>
       <div>
-        <p>Category title <input v-model="selected" type="text" placeholder="Enter category title"></p>
+        <p>Category title <input v-model="selectedTitle" type="text" placeholder="Enter category title"></p>
       </div>
       <div>
-        <select v-model="selected" class="form-select">
+        <select v-model="current" class="form-select">
           <option 
             v-for="cat in categories" 
             :key="cat.id" 
-            v-bind:value="cat.title"
+            :value="cat.id"
           >
             {{ cat.title }}
           </option>
         </select>
       </div>
       <div>
-        <button @click="createCategory">ADD</button>
-        <button @click="editCategory">Edit</button>
-        <button @click="deleteCategory">Delete</button>
+        <button @click.prevent="createCategory">ADD</button>
+        <button @click.prevent="editCategory">Edit</button>
+        <button @click.prevent="deleteCategory">Delete</button>
       </div>
     </form>
     <div>
@@ -33,44 +31,57 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      title: '',
-      selected: '',
-      categories: []
+      selectedTitle: '',
+      selectedId: '',
+      categories: [],
+      current: null,
     }
   },
   methods: {
-    async createCategory() {
+    async createCategory() { // вызываем создание категории
       const data = {
-        title: this.title
+        title: this.selectedTitle
       }
-      if (this.title.trim()) {
-        await this.$store.dispatch('createCategory', data)
+      if (this.selectedTitle.trim()) {
+        await this.$store.dispatch('CREATE_CATEGORY', data)
+        await this.fetchCategories()
       } else {
         return 
       }
     },
-    async editCategory() {
-      const data = {
-        name: this.title
+    async editCategory() { // вызываем редактирование категории
+      const editedCategory = {
+        title: this.selectedTitle,
+        id: this.selectedId
       }
-      await this.$store.dispatch('editRecord', data)
+      await this.$store.dispatch('EDIT_CATEGORY', editedCategory)
+      await this.fetchCategories()
     },
-    async fetchCategories() {
-      console.log('fetchCategories');
-      this.categories = await this.$store.dispatch('fetchCategories')
-      console.log(this.categories, 'categories');
+    async fetchCategories() { // запрашиваем категории
+      this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
     },
-    deleteCategory() {
+    async deleteCategory() { // запрашиваем удаление категории
+      const categoryForDelete = {
+        id: this.selectedId,
+      }
+      await this.$store.dispatch('DELETE_CATEGORY', categoryForDelete)
+      await this.fetchCategories()
+
     },
-    async updateRecords() {
-      this.records = await this.$store.dispatch('fetchRecord')
+  },
+  watch: {  // следим за обновлениями в данном объекте
+    current(catId) {
+      const {title} = this.categories.find(c => c.id === catId)
+      this.selectedTitle = title
+      this.selectedId = catId
     }
   },
-  async mounted() {
-      this.categories = await this.$store.dispatch('fetchCategories')
+  async mounted() { // запрашиваем категории при загрузке страницы
+      this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
   },
 
 }
