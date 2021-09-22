@@ -1,6 +1,6 @@
 .footer {
   background-color: rgba(211, 211, 211, 0.445);
-  
+
   .container {
     display: flex;
     justify-content: space-around;
@@ -14,13 +14,12 @@
     justify-content: space-between;
     align-items: flex-start;
     background-color: #fff;
-    
   }
   ul {
     list-style: none;
     padding-left: 0;
   }
-  a{
+  a {
     text-decoration: none;
     color: black;
   }
@@ -33,7 +32,6 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
   }
   .social-img {
     width: 20px;
