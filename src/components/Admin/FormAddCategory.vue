@@ -25,9 +25,6 @@
         <button type="reset">Reset form</button>
       </div>
     </form>
-    <div>
-      <button @click="fetchCategories">fetchCategories</button>
-    </div>
   </div>
 </template>
 

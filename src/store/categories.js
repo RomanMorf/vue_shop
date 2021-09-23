@@ -53,15 +53,19 @@ export default {
     },
     async FETCH_CATEGORIES({ dispatch, commit }) {
       try {
-        const records =
+        const categorise =
           (
             await firebase
               .database()
               .ref(`/categories/`)
               .once('value')
           ).val() || {}
-
-        return Object.keys(records).map((key) => ({ ...records[key], id: key }))
+        const newCategorise = Object.keys(categorise).map((key) => ({
+          ...categorise[key],
+          id: key,
+        }))
+        commit('SET_CATEGORIES', newCategorise)
+        return newCategorise 
       } catch (error) {
         throw error
       }
