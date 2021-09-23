@@ -2,7 +2,7 @@
   <div class="nav-bar">
     <div class="container">
       <div class="logo" @click="$router.push('/')">
-        Logo
+        <img class="logo_img" src="https://svgsilh.com/svg_v2/311825.svg" alt="">
       </div>
       <nav>
         <ul class="nav-list">

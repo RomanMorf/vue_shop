@@ -26,9 +26,12 @@
 .logo {
   width: 100px;
   height: 30px;
-  border: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  &_img {
+    max-width: 70px;
+  }
 }
