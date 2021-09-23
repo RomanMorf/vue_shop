@@ -14,10 +14,7 @@ export default {
   },
   actions: {
     async CREATE_PRODUCT({ dispatch, commit, getters }, data) {
-      console.log('stating create product');
       try {
-        console.log(data, 'data')
-
         return await firebase
           .database()
           .ref(`/products/`)
@@ -61,11 +58,12 @@ export default {
               .ref(`/products/`)
               .once('value')
           ).val() || {}
-
-        return Object.keys(products).map((key) => ({
+        const newProducts = Object.keys(products).map((key) => ({
           ...products[key],
           id: key,
         }))
+        commit('SET_PRODUCTS', newProducts)
+        return newProducts
       } catch (error) {
         throw error
       }

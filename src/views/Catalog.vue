@@ -2,17 +2,16 @@
   <div>
     <h1 class="center">This is an catalog page</h1>
 
-      <Loader v-if="isLoding"></Loader>
+    <Loader class="center" v-if="isLoding"></Loader>
 
     <div v-else class="card-wrapper">
       <Card 
         v-for="product in products" 
         :key="product.id"
         :product="product"
-      >
-      </Card>
-    
+      />
     </div>
+
   </div>
 </template>
 
@@ -24,26 +23,7 @@ export default {
   data() {
     return {
       products: [],
-      cards: [
-        {id: '123', title: 'name 1', price: '100'},
-        {id: '124', title: 'name 2', price: '100'},
-        {id: '125', title: 'name 125', price: '158', colors: [
-          {colorName: 'red', colorHesh: '#e3e3e3'}, 
-          {colorName: 'black', colorHesh: '#e4e4e4'}
-          ]},
-        {id: '126', title: 'name 4', price: '160'},
-        {id: '127', title: 'name 5', price: '100'},
-        {id: '128', title: 'name 6', price: '101'},
-        {id: '129', title: 'name 7', price: '170'},
-        {id: '110', title: 'name 8', price: '178'},
-        {id: '111', title: 'name 9', price: '100'},
-      ],
       isLoding: true
-    }
-  },
-  methods: {
-    showProducts() {
-      console.log(this.products);
     }
   },
   async mounted() {
@@ -59,7 +39,7 @@ export default {
 <style lang="scss">
   .card-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
   }
