@@ -34,16 +34,35 @@
         </div>
       </div>
 
+        <p>Colors : 
+          <select v-model="currentColor">
+            <option 
+              v-for="color in colorNames" 
+              :key="color.colorHex" 
+              :value="color.colorHex"
+            >
+              <span>
+                {{ color.colorName }}
+              </span>
+            </option>
+          </select>
+          <button @click="addColor">Add</button>
+        </p>
+        <p>{{ colors }}</p>
+
       <div>
         <button class="btn" @click="createProduct">Create</button>
         <button class="btn" type="reset">Reset form</button>
       </div>
       
     </form>
+    <button @click="showInfo">showInfo</button>
   </div>
 </template>
 
 <script>
+import colorsMixin from '@/mixins/productColor_mixins.js'
+
 export default {
   data() {
     return {
@@ -51,18 +70,32 @@ export default {
       category: '',
       categoryId: '',
       price: '',
-      imgUrl: '',
+      imgUrl: '',      
+      colorName: '',
+      colorHex: '',
       img: [],
+      colors: [],
       categories: [],
       currentCategory: null,
+      currentColor: null,
     }
   },
+  mixins: [colorsMixin],
   methods: {
+    showInfo() {
+      console.log(this.colorsMixin, 'mixins');
+    },
     addImgUlr() { // добавление url в список
       if (this.imgUrl.trim()) {
         this.img.push(this.imgUrl)
       }
       this.imgUrl = ''
+    },
+    addColor() {
+      if (this.colorName.trim()) {
+        this.colors.push(this.colorName)
+      }
+      this.colorName = ''
     },
     deleteImgUlr(index) { // удаление url из списка
       this.img.splice(index, 1)
@@ -91,11 +124,21 @@ export default {
       }
     },
   },
+  computed: {
+    styleObject: function() { // вычисляемое свойство
+      return { backgroundColor: this.colorHex }
+    },
+  },
   watch: {  // следим за обновлениями в данном объекте
     currentCategory(catId) {
       const {title} = this.categories.find(c => c.id === catId)
       this.category = title
       this.categoryId = catId
+    },
+    currentColor(catId) {
+      const {colorName, colorHex} = this.colorNames.find(c => c.colorHex === catId)
+      this.colorName = colorName
+      this.colorHex = colorHex
     }
   },
 
@@ -150,6 +193,13 @@ export default {
       background-color: rgb(248, 250, 221);
       transition: all .1s ease-in-out;
       background: linear-gradient(71deg, #67768f 29%, #a3b5b8);
+    }
+  }
+
+  .color {
+    &_cube {
+      width: 10px;
+      height: 5px;
     }
   }
 </style>
