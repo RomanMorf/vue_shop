@@ -2,30 +2,17 @@
   <div>
     <h1 class="center">This is an catalog page</h1>
 
-    <div class="card-wrapper">
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      <Loader v-if="isLoding"></Loader>
+
+    <div v-else class="card-wrapper">
+      <Card 
+        v-for="product in products" 
+        :key="product.id"
+        :product="product"
+      >
+      </Card>
     
     </div>
-    <!-- <div class="card-wrapper">
-      <div class="cardss" v-for="(card, index) in cards" :key="index">
-        <p>Title : {{ card.title }}</p>
-        <p>Price : {{ card.price }} UAH</p>
-        <p>Id : {{ card.id }}</p>
-
-        <div v-show="card.colors">
-          <p v-for="color in card.colors" :key="color.colorName">
-            {{color.colorName}}
-          </p>
-        </div>
-      </div>
-    </div> -->
-
   </div>
 </template>
 
@@ -36,6 +23,7 @@ export default {
   name: 'Catalog',
   data() {
     return {
+      products: [],
       cards: [
         {id: '123', title: 'name 1', price: '100'},
         {id: '124', title: 'name 2', price: '100'},
@@ -49,8 +37,18 @@ export default {
         {id: '129', title: 'name 7', price: '170'},
         {id: '110', title: 'name 8', price: '178'},
         {id: '111', title: 'name 9', price: '100'},
-      ]
+      ],
+      isLoding: true
     }
+  },
+  methods: {
+    showProducts() {
+      console.log(this.products);
+    }
+  },
+  async mounted() {
+    this.products = await this.$store.dispatch('FETCH_PRODUCTS')
+    this.isLoding = false
   },
   components: {
     Card,
@@ -66,10 +64,4 @@ export default {
     flex-wrap: wrap;
   }
 
-  .cardss {
-    width: 150px;
-    border: 1px solid black;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
 </style>

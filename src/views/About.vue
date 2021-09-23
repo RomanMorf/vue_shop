@@ -2,13 +2,10 @@
   <div>
     <h1 class="center">This is an about page</h1>
 
-    <Modal>
-    </Modal>
   </div>
 </template>
 
 <script>
-import Modal from '@/components/modal/Modal'
 
 
 export default {
@@ -18,7 +15,6 @@ export default {
     }
   },
   components: {
-    Modal,
   }
 }
 </script>

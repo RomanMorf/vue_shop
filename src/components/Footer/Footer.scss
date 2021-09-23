@@ -1,8 +1,6 @@
 .footer {
   margin-top: 80px;
-  &_wrapper {
-    background-color: rgba(121, 116, 92, 0.445);
-  }
+  background-color: rgba(211, 211, 211, 0.445);
   
   .container {
     display: flex;
@@ -28,13 +26,14 @@
         text-align: right;
       }
     }
+
   }
   
   ul {
     list-style: none;
     padding-left: 0;
   }
-  a{
+  a {
     text-decoration: none;
     color: black;
   }
