@@ -4,9 +4,12 @@ import router from './router'
 import store from './store'
 import firebase from 'firebase/app'
 import 'firebase/database'
+import Loader from '@/components/Loader'
 
 
 Vue.config.productionTip = false
+
+Vue.component('Loader', Loader)
 
 firebase.initializeApp({
   apiKey: "AIzaSyBe-uq9ugjQF0p3Ga7GVdk8Jc0rpRzcSkw",

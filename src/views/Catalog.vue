@@ -2,9 +2,9 @@
   <div>
     <h1 class="center">This is an catalog page</h1>
 
-    <button @click="showProducts">showProducts</button>
+      <Loader v-if="isLoding"></Loader>
 
-    <div class="card-wrapper">
+    <div v-else class="card-wrapper">
       <Card 
         v-for="product in products" 
         :key="product.id"
@@ -37,7 +37,8 @@ export default {
         {id: '129', title: 'name 7', price: '170'},
         {id: '110', title: 'name 8', price: '178'},
         {id: '111', title: 'name 9', price: '100'},
-      ]
+      ],
+      isLoding: true
     }
   },
   methods: {
@@ -47,6 +48,7 @@ export default {
   },
   async mounted() {
     this.products = await this.$store.dispatch('FETCH_PRODUCTS')
+    this.isLoding = false
   },
   components: {
     Card,
@@ -62,10 +64,4 @@ export default {
     flex-wrap: wrap;
   }
 
-  .cardss {
-    width: 150px;
-    border: 1px solid black;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
 </style>
