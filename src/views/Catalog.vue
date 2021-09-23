@@ -2,30 +2,17 @@
   <div>
     <h1 class="center">This is an catalog page</h1>
 
+    <button @click="showProducts">showProducts</button>
+
     <div class="card-wrapper">
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      <Card 
+        v-for="product in products" 
+        :key="product.id"
+        :product="product"
+      >
+      </Card>
     
     </div>
-    <!-- <div class="card-wrapper">
-      <div class="cardss" v-for="(card, index) in cards" :key="index">
-        <p>Title : {{ card.title }}</p>
-        <p>Price : {{ card.price }} UAH</p>
-        <p>Id : {{ card.id }}</p>
-
-        <div v-show="card.colors">
-          <p v-for="color in card.colors" :key="color.colorName">
-            {{color.colorName}}
-          </p>
-        </div>
-      </div>
-    </div> -->
-
   </div>
 </template>
 
@@ -36,6 +23,7 @@ export default {
   name: 'Catalog',
   data() {
     return {
+      products: [],
       cards: [
         {id: '123', title: 'name 1', price: '100'},
         {id: '124', title: 'name 2', price: '100'},
@@ -51,6 +39,14 @@ export default {
         {id: '111', title: 'name 9', price: '100'},
       ]
     }
+  },
+  methods: {
+    showProducts() {
+      console.log(this.products);
+    }
+  },
+  async mounted() {
+    this.products = await this.$store.dispatch('FETCH_PRODUCTS')
   },
   components: {
     Card,
