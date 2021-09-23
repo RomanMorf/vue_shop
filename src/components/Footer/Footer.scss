@@ -1,6 +1,10 @@
 .footer {
-  background-color: rgba(211, 211, 211, 0.445);
+  margin-top: 80px;
 
+  &_wrapper {
+    background-color: rgba(121, 116, 92, 0.445);
+  }
+  
   .container {
     display: flex;
     justify-content: space-around;
@@ -8,13 +12,25 @@
     align-items: center;
     min-height: 50px;
   }
+  
   .content {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     background-color: #fff;
+
+    .section{
+      min-width: 150px;
+      margin: 0 5px;
+
+      &:first-child {
+        max-width: 350px;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
   }
+  
   ul {
     list-style: none;
     padding-left: 0;
@@ -25,13 +41,17 @@
   }
 
   .logo {
-    width: 100px;
+    max-width: 100px;
     height: 30px;
-    border: 1px solid grey;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    &_boot {
+      max-width: 70px;
+    }
+
   }
   .social-img {
     width: 20px;
