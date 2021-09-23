@@ -65,16 +65,6 @@ export default {
       50%  { transform: scale(1,1)    translateY(0); }
       100% { transform: scale(1,1)    translateY(0); }
     }
-
-
-		&_header {
-		}
-
-		&_content {
-		}
-
-		&_footer {
-		}
 }
 
 
