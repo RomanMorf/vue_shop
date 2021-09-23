@@ -47,6 +47,14 @@
           <img class="img" :src="image">
           <span class="cursor" @click="deleteImgUlr(index)">X</span>
         </div>
+
+        <p>Colors : <input v-model="colorHesh" type="color" ></p>
+        <button class="btn" @click="addColor">Add color</button>
+
+        <div class="img_preview" v-for="(color, index) in colors" :key="index">
+          <img class="img" :src="image">
+          <span class="cursor" @click="deleteImgUlr(index)">X</span>
+        </div>
       </div>
 
 <!-- =============== COLORS ======================== -->
@@ -152,6 +160,13 @@ export default {
       if (this.title.trim() && this.price && this.price > 0 && this.category) {
         await this.$store.dispatch('CREATE_PRODUCT', data)
         this.clearForm()
+      }
+    },
+    addColor() {
+      if (this.colorHesh.trim()) {
+        console.log('можно добалвять')
+      } else {
+        console.log('нельяз добавлять');
       }
     },
   },
