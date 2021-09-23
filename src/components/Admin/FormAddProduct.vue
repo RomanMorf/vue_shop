@@ -10,7 +10,7 @@
       <div>
         <p>Title: <input v-model="title" type="text" placeholder="Enter product title"></p>
 
-        <div>Choose category
+        <div>Category
           <select v-model="currentCategory">
             <option 
               v-for="cat in categories" 
@@ -25,7 +25,7 @@
 
         <p>Price: <input v-model="price" type="number" placeholder="Enter price"></p> 
 
-        <p>Img URL: <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr"></p>
+        <p>URL : <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr"></p>
         <button class="btn" @click="addImgUlr">Add url</button>
 
         <div class="img_preview" v-for="(image, index) in img" :key="index">
@@ -115,7 +115,15 @@ export default {
     padding: 10px;
     margin: 10px auto;
     max-width: 300px;
-    border: 1px solid black
+    border: 1px solid black;
+    border-radius: 2px;
+    background: linear-gradient(#84848a, #d6d6d6, #5f5068);
+    
+    &:hover {
+      box-shadow: 0 0 2px 3px rgba(194, 194, 194, 0.425);
+      transition: all .1s ease-in-out;
+    }
+    
   }
   button {
     margin: 5px;
@@ -133,5 +141,15 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+  .btn {
+    background: linear-gradient(71deg, #b28bb9 29%, #a3b5b8);
+
+    &:hover {
+      box-shadow: 0 0 2px 3px rgba(247, 217, 119, 0.425);
+      background-color: rgb(248, 250, 221);
+      transition: all .1s ease-in-out;
+      background: linear-gradient(71deg, #67768f 29%, #a3b5b8);
+    }
   }
 </style>

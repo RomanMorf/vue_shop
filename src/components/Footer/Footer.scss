@@ -1,7 +1,7 @@
 .footer {
   margin-top: 80px;
   &_wrapper {
-    background-color: rgba(211, 211, 211, 0.445);
+    background-color: rgba(121, 116, 92, 0.445);
   }
   
   .container {
@@ -27,7 +27,6 @@
         text-align: right;
       }
     }
-
   }
   
   ul {
@@ -40,13 +39,16 @@
   }
 
   .logo {
-    width: 100px;
+    max-width: 100px;
     height: 30px;
-    border: 1px solid grey;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    &_boot {
+      max-width: 70px;
+    }
 
   }
   .social-img {

@@ -42,7 +42,7 @@
     <div class="footer_wrapper">
       <div class="container">
         <div class="logo" @click="$router.push('/')">
-          Logo
+          <img class="logo_boot" src="https://svgsilh.com/svg_v2/311825.svg" alt="">
         </div>
         <div class="social">
           <img class="social-img" src="@/assets/img/social/001-twitter.svg" alt="twitter">
@@ -50,6 +50,9 @@
           <img class="social-img" src="@/assets/img/social/003-linkedin.svg" alt="linkedin">
           <img class="social-img" src="@/assets/img/social/004-instagram.svg" alt="instagram">
           <img class="social-img" src="@/assets/img/social/005-telegram.svg" alt="telegram">
+        </div>
+        <div class="copiright">
+          <a href="http://www.copyright.ru/ru/documents/zashita_avtorskih_prav/znak_ohrani_avtorskih_i_smegnih_prav/">Copiright ©</a>
         </div>
       </div>
     </div>
