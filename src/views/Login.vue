@@ -1,19 +1,20 @@
 <template>
   <div class="form_wrapper">
     <div class="form">
-      <h3 class="center">Регистрация</h3>
+      <h3 class="center">Вход в личный кабинет</h3>
       <form @click.prevent="" class="form">
         <div class="form_section">
-          <p>Email *</p>
-          <input v-model="userEmail" type="email" placeholder="Enter your email">
+          <input id="email" class="form_input" v-model.trim="userEmail" type="text"  required="">
+          <label for="email" class="form_label">Введите ваш Email</label>
         </div>
         <div class="form_section">
-          <p>Пароль *</p>
-          <input v-model="userPass" type="password" placeholder="Enter your password">
+          <input id="tel" class="form_input" v-model.trim="userPass" type="зфыыцщкв"  required="">
+          <label for="tel" class="form_label">Введите ваш пароль</label>
         </div>
         <div class="form_section btn">
-          <button>Зарегистрироваться</button>
-          <a href="#">У меня уже есть аакаунт</a>
+          <button>Войти</button>
+          <a @click="$router.push('/restore_password')">Восстановить пароль</a>
+          <a @click="$router.push('/register')">Зарегитрироваться</a>
         </div>
       </form>
     </div>
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Register',
   data() {

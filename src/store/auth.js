@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 
 export default {
   actions: {
-
     async LOGIN ({commit}, {email, password}) { // Авторизация
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
@@ -27,20 +26,24 @@ export default {
       return userData ? userData : null
     },
 
-    async REGISTER ({dispatch, commit}, {email, password, name}) { // регистрация
+    async REGISTER ({dispatch, commit}, data) { // регистрация
       try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password)
+        console.log(data, 'from store')
+        const { name, email, password, tel } = data
 
-      // await firebase.auth().sendPasswordResetEmail
-      // await firebase.auth().verifyPasswordResetCode
-      // await firebase.auth().confirmPasswordReset
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
 
-      const uid = await dispatch('GET_UID');
+        // await firebase.auth().sendPasswordResetEmail
+        // await firebase.auth().verifyPasswordResetCode
+        // await firebase.auth().confirmPasswordReset
 
-      await firebase.database().ref(`/users/${uid}/userInfo`).set({
-        name: name,
-        email: email,
-      })
+        const uid = await dispatch('GET_UID');
+
+        await firebase.database().ref(`/users/${uid}/userInfo`).set({
+          name: name,
+          email: email,
+          tel: tel,
+        })
 
       } catch (e) {
         commit('setError', e)

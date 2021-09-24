@@ -1,39 +1,71 @@
 <template>
   <div class="form_wrapper">
     <div class="form">
-      <h3 class="center">Вход в личный кабинет</h3>
-      <form @click.prevent="">
+      <h3 class="center">Регистрация</h3>
+      <form>
         <div class="form_section">
-          <p>Email *</p>
-          <input v-model="userEmail" type="email" placeholder="Enter your email">
+          <input id="email" class="form_input" v-model.trim="userEmail" type="text"  required="">
+          <label for="email" class="form_label">Введите ваш Email</label>
+          <small 
+            class="form_helper invalid"
+            v-if="($v.userEmail.$dirty && !$v.userEmail.required) || ($v.userEmail.$dirty && !$v.userEmail.email) "
+            >Введите корректный Email
+          </small>
         </div>
         <div class="form_section">
-          <p>Телефон</p>
-          <input v-model="userTel" type="tel" placeholder="Enter your phone number">
+          <input id="tel" class="form_input" v-model.trim="userTel" type="tel"  required="">
+          <label for="tel" class="form_label">Введите ваш номер телефона</label>
         </div>
         <div class="form_section">
-          <p>ФИО</p>
-          <input v-model="userName" type="text" placeholder="Enter your name">
+          <input id='name' class="form_input" v-model.trim="$v.userName.$model" type="text" required="">
+          <label for='name' class="form_label">Введите имя</label>
+          <small 
+            class="form_helper invalid"
+            v-if="$v.userName.$dirty && !$v.userName.required"
+          >Введите имя пользователя
+          </small>
+          <small 
+            class="form_helper invalid"
+            v-if="$v.userName.$dirty && !$v.userName.minLength"
+          >Имя должно содержать не меньше {{ this.$v.userName.$params.minLength.min }} символов
+          </small>
         </div>
         <div class="form_section">
-          <p>Пароль *</p>
-          <input v-model="userPass" type="password" placeholder="Enter your password">
+          <input id="pass" class="form_input" v-model.trim="$v.userPass.$model" type="password" required="" >
+          <label for="pass" class="form_label">Введите пароль</label>
+          <small 
+            class="form_helper invalid"
+            v-if="$v.userPass.$dirty && !$v.userPass.required"
+          >Введите имя пользователя
+          </small>
+          <small 
+            class="form_helper invalid"
+            v-if="$v.userPass.$dirty && !$v.userPass.minLength"
+          >Имя должно содержать не меньше {{ this.$v.userPass.$params.minLength.min }} символов
+          </small>
         </div>
         <div class="form_section">
-          <p>Повторите пароль *</p>
-          <input v-model="userPassRepeat" type="password" placeholder="Repeat your password">
+          <input id="pass2" class="form_input" v-model.trim="userPassRepeat" type="password" required="" >
+          <label for="pass2" class="form_label">Введите пароль повторно</label>
+          <small 
+            class="form_helper invalid"
+            v-if="userPass !== userPassRepeat"
+          >Пароли должны совпадать
+          </small>
         </div>
         <div class="form_section btn">
-          <button @click="registerUser">Войти</button>
-          <a href="#">Восстановить пароль</a>
-          <a href="#">Зарегитрироваться</a>
+          <button @click.prevent="registerUser">Регистрация</button>
+          <a @click.prevent="$router.push('/login')">У меня уже есть аккаунт</a>
         </div>
+
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import {email, required, minLength } from 'vuelidate/lib/validators'
+
 export default {
   name: 'Login',
   data() {
@@ -45,63 +77,32 @@ export default {
       userPassRepeat: '',
     }
   },
+  validations: {
+    userName: {required, minLength: minLength(4)},
+    userEmail: {required, email},
+    userPass: {required, minLength: minLength(6)},
+    userPassRepeat: {required},
+  },
   methods: {
-    registerUser() {
+    async registerUser() {
       const userInfo = {
-        email: this.userEmail,
-        password: this.userPass,
         name: this.userName,
+        email: this.userEmail,
+        tel: this.userTel,
+        password: this.userPass,
       }
 
-      if (this.userPass.trim() && this.userPass === this.userPassRepeat) {
-        console.log('пароли совпадают');
-        if (this.userName.trim() && this.userPass.trim() && this.userEmail.trim()) {
-          console.log('Можно создавать пользователя');
-        }
-      } else {
-        console.log('пароли не совпадают !!! ');
+      if (this.$v.$invalid) { // проверка на валидность формы
+        this.$v.$touch()
+        return
       }
-
-      // console.log(userInfo, 'userInfo');
+      
+      await this.$store.dispatch('REGISTER', userInfo)
     }
   },
 }
 </script>
 
 <style lang="scss">
-// .form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
 
-//   &_wrapper {
-//     margin: 50px auto;
-//     width: 70%;
-//     border: 1px solid black;
-//     padding: 10px;
-//   }
-
-//   &_section {
-//     margin: 10px auto;
-//     width: 80%;
-
-//     & p {
-//       font-weight: 300;
-//       font-size: 14px;
-//     }
-    
-//     & input {
-//       height: 30px;
-//       width: 100%;
-//     }
-
-//     &.btn {
-//       display: flex;
-//       justify-content: space-around;
-//       & a {
-//         font-size: 12px;
-//       }
-//     }
-//   }
-// }
 </style>

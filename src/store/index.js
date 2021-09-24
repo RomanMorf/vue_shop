@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import auth from './auth.js'
 import products from './products.js'
 import categories from './categories.js'
 
@@ -25,5 +26,6 @@ export default new Vuex.Store({
   modules: {
     products,
     categories,
+    auth
   },
 })
