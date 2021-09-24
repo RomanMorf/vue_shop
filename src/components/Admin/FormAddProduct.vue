@@ -195,7 +195,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   p {
     padding: 0;
     margin: 5px;

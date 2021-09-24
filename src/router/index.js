@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import firebase from 'firebase/app'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,6 @@ const routes = [
   {
     path: '/contacts',
     name: 'Contacts',
-    meta: { layout: 'main' },
     component: () => import('@/views/Contacts.vue'),
   },
   {
@@ -53,6 +53,13 @@ const routes = [
     component: () => import('@/views/Register.vue'),
   },
   {
+    path: '/cabinet',
+    name: 'Cabinet',
+    meta: { layout: 'main', auth: true },
+    component: () => import('@/views/Cabinet.vue'),
+  },
+
+  {
     path: '*',
     name: 'NotFound',
     meta: { layout: 'main' },
@@ -60,10 +67,17 @@ const routes = [
   },
 ]
 
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
 })
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser
+  to.meta.auth && !currentUser ? next('/login') : next()
+})
+
 
 export default router

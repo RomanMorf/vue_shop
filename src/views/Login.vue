@@ -2,17 +2,28 @@
   <div class="form_wrapper">
     <div class="form">
       <h3 class="center">Вход в личный кабинет</h3>
-      <form @click.prevent="" class="form">
+      <form class="form">
         <div class="form_section">
-          <input id="email" class="form_input" v-model.trim="userEmail" type="text"  required="">
+          <input id="email" class="form_input" v-model.trim="$v.userEmail.$model" type="text"  required="">
           <label for="email" class="form_label">Введите ваш Email</label>
+          <small 
+            class="form_helper invalid"
+            v-if="($v.userEmail.$dirty && !$v.userEmail.required)"
+            >Введите Email
+          </small>
         </div>
         <div class="form_section">
-          <input id="tel" class="form_input" v-model.trim="userPass" type="зфыыцщкв"  required="">
+          <input id="tel" class="form_input" v-model.trim="$v.userPass.$model" type="password"  required="">
           <label for="tel" class="form_label">Введите ваш пароль</label>
+          <small 
+            class="form_helper invalid"
+            v-if="($v.userPass.$dirty && !$v.userPass.required)"
+            >Введите пароль
+          </small>
+
         </div>
         <div class="form_section btn">
-          <button>Войти</button>
+          <button @click.prevent="authUserWithEmailPass">Войти</button>
           <a @click="$router.push('/restore_password')">Восстановить пароль</a>
           <a @click="$router.push('/register')">Зарегитрироваться</a>
         </div>
@@ -22,6 +33,7 @@
 </template>
 
 <script>
+import {required} from 'vuelidate/lib/validators'
 
 export default {
   name: 'Register',
@@ -31,44 +43,27 @@ export default {
       userPass: '',
     }
   },
+  validations: {
+    userEmail: {required},
+    userPass: {required},
+  },
+  methods: {
+    async authUserWithEmailPass() {
+      const userInfo = {
+        email: this.userEmail,
+        password: this.userPass,
+      }
+
+      if (this.$v.$invalid) { // проверка на валидность формы
+        this.$v.$touch()
+        return
+      }
+      await this.$store.dispatch('LOGIN', userInfo)
+      this.$router.push('/cabinet')
+    }
+  },
 }
 </script>
 
 <style lang="scss">
-// .form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-
-//   &_wrapper {
-//     margin: 50px auto;
-//     width: 70%;
-//     border: 1px solid black;
-//     padding: 10px;
-//   }
-
-//   &_section {
-//     margin: 10px auto;
-//     width: 80%;
-
-//     & p {
-//       font-weight: 300;
-//       font-size: 14px;
-//     }
-    
-//     & input {
-//       height: 30px;
-//       width: 100%;
-//     }
-
-//     &.btn {
-//       display: flex;
-//       justify-content: space-around;
-//       & a {
-//         font-size: 12px;
-//       }
-//     }
-
-//   }
-// }
 </style>

@@ -54,8 +54,8 @@
           </small>
         </div>
         <div class="form_section btn">
-          <button @click.prevent="registerUser">Регистрация</button>
-          <a @click.prevent="$router.push('/login')">У меня уже есть аккаунт</a>
+          <button class="btn" @click.prevent="registerUser">Регистрация</button>
+          <a class="btn" @click.prevent="$router.push('/login')">У меня уже есть аккаунт</a>
         </div>
 
       </form>
@@ -98,11 +98,14 @@ export default {
       }
       
       await this.$store.dispatch('REGISTER', userInfo)
+      this.$router.push('/login')
     }
   },
 }
 </script>
 
 <style lang="scss">
-
+.btn {
+  cursor: pointer;
+}
 </style>

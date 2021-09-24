@@ -5,15 +5,18 @@ export default {
     async LOGIN ({commit}, {email, password}) { // Авторизация
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
+        commit('SET_USER_INFO')
       } catch (e) {
         commit('setError', e)
+        console.log(e, 'message from store')
         throw e
       }
     },
 
     async LOGOUT({commit}) {  // Выйти из аккаунта
       await firebase.auth().signOut()
-      // commit('clearInfo')
+      commit('CLEAR_USER_INFO')
+      this.$router.push('/login')
     },
 
     GET_UID () { // получить ID пользователя
