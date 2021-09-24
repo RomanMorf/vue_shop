@@ -27,7 +27,7 @@ export default {
       return userData ? userData : null
     },
 
-    async REGISTER ({dispatch, commit}, {email, password, name, locale}) { // регистрация
+    async REGISTER ({dispatch, commit}, {email, password, name}) { // регистрация
       try {
       await firebase.auth().createUserWithEmailAndPassword(email, password)
 
