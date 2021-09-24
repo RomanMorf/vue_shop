@@ -8,8 +8,11 @@
       </div>
 
       <div>
-        <p>Title: <input v-model="title" type="text" placeholder="Enter product title"></p>
+        <p>Title: 
+          <input v-model="title" type="text" placeholder="Enter product title">
+        </p>
 
+<!-- =============== CATEGORIES ======================== -->
         <div>Category
           <select v-model="currentCategory">
             <option 
@@ -23,9 +26,21 @@
           <p>Category name: {{ category }}</p>
         </div>
 
-        <p>Price: <input v-model="price" type="number" placeholder="Enter price"></p> 
+<!-- =============== PRICE ======================== -->
+        <p>Price: 
+          <input v-model="price" type="number" placeholder="Enter price">
+        </p> 
 
-        <p>URL : <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr"></p>
+<!-- =============== DESCRIPTION ======================== -->
+        <p>Product info: 
+          <textarea v-model="description" cols="30" rows="10"></textarea>
+        </p> 
+
+<!-- =============== URLS ======================== -->
+
+        <p>URL : 
+          <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr">
+        </p>
         <button class="btn" @click="addImgUlr">Add url</button>
 
         <div class="img_preview" v-for="(image, index) in img" :key="index">
@@ -42,6 +57,27 @@
         </div>
       </div>
 
+<!-- =============== COLORS ======================== -->
+        <p>Colors : 
+          <select v-model="currentColor">
+            <option 
+              v-for="color in colorNames" 
+              :key="color.colorHex" 
+              :value="color.colorHex"
+            >
+              <span>
+                {{ color.colorName }}
+              </span>
+            </option>
+          </select>
+          <button class="btn" @click="addColor">Add</button>
+        </p>
+        <div class="color_preview">
+          <div class="color_cube" :style="{'background-color': color.colorHex}" v-for="(color, index) in colors" :key="color.colorName" @click="deleteColor(index)">
+          </div>
+        </div>
+
+<!-- =============== BUTTONS ======================== -->
       <div>
         <button class="btn" @click="createProduct">Create</button>
         <button class="btn" type="reset">Reset form</button>
@@ -52,21 +88,27 @@
 </template>
 
 <script>
+import colorsMixin from '@/mixins/productColor_mixins.js'
+
 export default {
   data() {
     return {
       title: '',
+      description: '',
       category: '',
       categoryId: '',
       price: '',
-      imgUrl: '',
-      colorHesh: '',
+      imgUrl: '',      
+      colorName: '',
+      colorHex: '',
       img: [],
       colors: [],
       categories: [],
       currentCategory: null,
+      currentColor: null,
     }
   },
+  mixins: [colorsMixin],
   methods: {
     addImgUlr() { // добавление url в список
       if (this.imgUrl.trim()) {
@@ -74,26 +116,46 @@ export default {
       }
       this.imgUrl = ''
     },
+    addColor() { // добавление цвет в список
+      if (this.colors.find(c => c.colorName === this.colorName)) { // проверка на повторение цвета
+        return
+      } else {
+        if (this.colorName.trim()) {
+          const colorObj = {
+            colorName: this.colorName,
+            colorHex: this.colorHex
+          }
+          this.colors.push(colorObj)
+        }
+        this.colorName = ''
+      }
+    },
+    deleteColor(index) { // удалить цвет из списка
+      this.colors.splice(index, 1)
+    },
     deleteImgUlr(index) { // удаление url из списка
       this.img.splice(index, 1)
     },
     clearForm() { // очистка формы
       this.title = ''
-      this.category = ''
+      this.description = ''
       this.categoryId = ''
       this.price = ''
       this.imgUrl = ''
+      this.colorName = ''
+      this.colorHex = ''
       this.img = []
-      this.categories = []
-      this.currentCategory = null
+      this.colors = []
     },
     async createProduct() { // создание продуктв
       const data = {
         categoryName: this.category,
         categoryId: this.categoryId,
         title: this.title,
+        description: this.description,
         price: this.price,
         img: this.img,
+        color: this.colors,
       }
       if (this.title.trim() && this.price && this.price > 0 && this.category) {
         await this.$store.dispatch('CREATE_PRODUCT', data)
@@ -108,15 +170,25 @@ export default {
       }
     },
   },
-  watch: {  // следим за обновлениями в данном объекте
-    currentCategory(catId) {
+  computed: {
+    styleObject: function() { // вычисляемое свойство - цвет заливки блока
+      return { backgroundColor: this.colorHex }
+    },
+  },
+  watch: {  
+    currentCategory(catId) { // следим за обновлениями - выбранная категория
       const {title} = this.categories.find(c => c.id === catId)
       this.category = title
       this.categoryId = catId
+    },
+    currentColor(catId) { // следим за обновлениями - выбранный цвет
+      const {colorName, colorHex} = this.colorNames.find(c => c.colorHex === catId)
+      this.colorName = colorName
+      this.colorHex = colorHex
     }
   },
 
-  async mounted() {
+  async mounted() { // действия при загрузке страницы
       this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
   },
 
@@ -167,6 +239,25 @@ export default {
       background-color: rgb(248, 250, 221);
       transition: all .1s ease-in-out;
       background: linear-gradient(71deg, #67768f 29%, #a3b5b8);
+    }
+  }
+
+  .color {
+    &_preview {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    &_cube {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      margin-right: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
     }
   }
 </style>
