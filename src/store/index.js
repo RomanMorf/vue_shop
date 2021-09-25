@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 import auth from './auth.js'
 import products from './products.js'
 import categories from './categories.js'
-import userInfo from './userInfo.js'
 
 Vue.use(Vuex)
 
@@ -28,6 +27,5 @@ export default new Vuex.Store({
     products,
     categories,
     auth,
-    userInfo,
   },
 })

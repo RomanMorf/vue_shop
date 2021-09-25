@@ -4,6 +4,7 @@
     <h2>Under development</h2>
 
     <button @click="getUserData">GetUserData</button>
+    <button @click="getUserDataFromState">getUserDataFromState</button>
 
   </div>
 </template>
@@ -20,7 +21,11 @@ export default {
   methods: {
     async getUserData() {
       const userInfo = await this.$store.dispatch('GET_USER_DATA')
-      console.log(userInfo, 'userInfo');
+      console.log(userInfo, 'getUserData');
+    },
+    getUserDataFromState() {
+      const userInfo = this.$store.getters.USER_INFO
+      console.log(userInfo, 'getUserDataFromState');
     }
   },
 }

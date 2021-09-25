@@ -1,11 +1,23 @@
 import firebase from 'firebase/app'
 
 export default {
+  state: {
+    userInfo: {}
+  },
+  mutations: {
+    SET_USER_INFO(state, info){
+      state.userInfo = info
+    },
+    CLEAR_USER_INFO(state){
+      state = {}
+    },
+  },
   actions: {
     async LOGIN ({commit}, {email, password}) { // Авторизация
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
-        commit('SET_USER_INFO')
+        const currentUser = await firebase.auth().currentUser
+        commit('SET_USER_INFO', currentUser)
       } catch (e) {
         commit('setError', e)
         console.log(e, 'message from store')
@@ -19,13 +31,16 @@ export default {
       this.$router.push('/login')
     },
 
-    GET_UID () { // получить ID пользователя
-      const user = firebase.auth().currentUser
+    async GET_UID ({commit}) { // получить ID пользователя
+      const user = await firebase.auth().currentUser
+      if (user) {
+        commit('SET_USER_INFO', user)
+      } 
       return user ? user.uid : null
     },
 
-    GET_USER_DATA() { // получить данные из формы аутентификации
-      const userData = firebase.auth().currentUser
+    async GET_USER_DATA() { // получить данные из формы аутентификации
+      const userData = await firebase.auth().currentUser
       return userData ? userData : null
     },
 
@@ -53,6 +68,8 @@ export default {
         throw e
       }
     },
-
+  },
+  getters: {
+    USER_INFO: s => s.userInfo 
   },
 }
