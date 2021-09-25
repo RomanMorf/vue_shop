@@ -2,9 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 import firebase from 'firebase/app'
 import 'firebase/database'
+import 'firebase/auth'
+
 import Loader from '@/components/Loader'
+import Vuelidate from 'vuelidate'
 
 
 Vue.config.productionTip = false
@@ -22,6 +26,7 @@ firebase.initializeApp({
   measurementId: "G-VZ87V7G0CH"
 })
 
+Vue.use(Vuelidate)
 
 new Vue({
   router,

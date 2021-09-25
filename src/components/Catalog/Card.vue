@@ -56,7 +56,7 @@ p {
 }
 .card {
   margin: 10px;
-  width: 330px;
+  width: 250px;
   min-height: 550px;
   border-radius: 5px;
   position: relative;
