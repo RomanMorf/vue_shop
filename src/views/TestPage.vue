@@ -2,18 +2,31 @@
   <div>
     <div class="product_container">
       <h2 class="product_title">Товары</h2>
-      <button class="product_btn" @click="fetchProducts">Загрузить список товаров</button>
+      <button class="product_btn" @click="fetchProducts">
+        Загрузить список товаров
+      </button>
       <div
         class="product_card"
         v-for="(pruduct, index) in PRODUCTS"
         :key="index"
       >
-        <p class="product_text">Title: {{ pruduct.title }}</p>
-        <p class="product_text">Price: {{ pruduct.price }}</p>
-        <p class="product_text">Category: {{ pruduct.categoryName }}</p>
-        <img class="product_img" v-if="pruduct.img" :src="pruduct.img[0]">
-        <button @click.prevent="productEdit(pruduct.id)">Edit</button>
-        <button @click.prevent="productDelete(pruduct.id)">Delete</button>
+        <section>
+          <img class="card_img" v-if="pruduct.img" :src="pruduct.img[0]" />
+          <img
+            class="card_img"
+            v-if="!pruduct.img"
+            src="@/assets/img/no-image.jpg"
+          />
+        </section>
+        <section>
+          <p class="card_text">Title: {{ pruduct.title }}</p>
+          <p class="card_text">Price: {{ pruduct.price }}</p>
+          <p class="card_text">Category: {{ pruduct.categoryName }}</p>
+        </section>
+        <div class="card_buttons">
+          <button @click.prevent="$router.push(`/edit/${pruduct.id}`)">Edit</button>
+          <button @click.prevent="productDelete(pruduct.id)">Delete</button>
+        </div>
       </div>
     </div>
 
@@ -38,10 +51,10 @@ export default {
       this.$store.dispatch('FETCH_PRODUCTS')
     },
     productEdit(id) {
-      console.log(id, 'id for edit');
+      console.log(id, 'id for edit')
     },
     productDelete(id) {
-      console.log(id, 'id for delete');
+      console.log(id, 'id for delete')
     },
   },
   computed: {
@@ -54,20 +67,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.product{
+.product {
   &_container {
     padding: 5px;
     margin: 10px;
   }
   &_card {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid grey;
-  border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
+}
+.card {
   &_img {
-    width: 100px;
+    width: 200px;
+    margin-right: 20px;
   }
-
+  &_buttons {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 }
 </style>
