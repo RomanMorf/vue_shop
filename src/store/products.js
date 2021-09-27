@@ -70,6 +70,6 @@ export default {
     },
   },
   getters: {
-    GET_PRODUCTS: (s) => s.products,
+    PRODUCTS: (s) => s.products,
   },
 }
