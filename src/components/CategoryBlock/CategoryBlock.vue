@@ -6,6 +6,7 @@
       <div class="btn">Смотреть</div>
     </div>
   </div>
+  
 </template>
 
 <script>
