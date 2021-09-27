@@ -11,8 +11,6 @@
         <p>Title: 
           <input v-model="title" type="text" placeholder="Enter product title">
         </p>
-
-<!-- =============== CATEGORIES ======================== -->
         <div>Category
           <select v-model="currentCategory">
             <option 
@@ -25,59 +23,43 @@
           </select>
           <p>Category name: {{ category }}</p>
         </div>
-
-<!-- =============== PRICE ======================== -->
         <p>Price: 
           <input v-model="price" type="number" placeholder="Enter price">
         </p> 
-
-<!-- =============== DESCRIPTION ======================== -->
         <p>Product info: 
           <textarea v-model="description" cols="30" rows="10"></textarea>
         </p> 
-
-<!-- =============== URLS ======================== -->
-
         <p>URL : 
           <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr">
         </p>
         <button class="btn" @click="addImgUlr">Add url</button>
-
         <div class="img_preview" v-for="(image, index) in img" :key="index">
           <img class="img" :src="image">
           <span class="cursor" @click="deleteImgUlr(index)">X</span>
         </div>
-
-        <p>Colors : <input v-model="colorHesh" type="color" ></p>
-        <button class="btn" @click="addColor">Add color</button>
-
-        <div class="img_preview" v-for="(color, index) in colors" :key="index">
-          <img class="img" :src="image">
-          <span class="cursor" @click="deleteImgUlr(index)">X</span>
+      </div>
+      <p>Colors : 
+        <select v-model="currentColor">
+          <option 
+            v-for="color in colorNames" 
+            :key="color.colorHex" 
+            :value="color.colorHex"
+          >
+            <span>
+              {{ color.colorName }}
+            </span>
+          </option>
+        </select>
+        <button class="btn" @click="addColor">Add</button>
+      </p>
+      <div class="color_preview">
+        <div class="color_cube" 
+          :style="{'background-color': color.colorHex}" 
+          v-for="(color, index) in colors" 
+          :key="color.colorName" 
+          @click="deleteColor(index)">
         </div>
       </div>
-
-<!-- =============== COLORS ======================== -->
-        <p>Colors : 
-          <select v-model="currentColor">
-            <option 
-              v-for="color in colorNames" 
-              :key="color.colorHex" 
-              :value="color.colorHex"
-            >
-              <span>
-                {{ color.colorName }}
-              </span>
-            </option>
-          </select>
-          <button class="btn" @click="addColor">Add</button>
-        </p>
-        <div class="color_preview">
-          <div class="color_cube" :style="{'background-color': color.colorHex}" v-for="(color, index) in colors" :key="color.colorName" @click="deleteColor(index)">
-          </div>
-        </div>
-
-<!-- =============== BUTTONS ======================== -->
       <div>
         <button class="btn" @click="createProduct">Create</button>
         <button class="btn" type="reset">Reset form</button>
@@ -127,7 +109,6 @@ export default {
           }
           this.colors.push(colorObj)
         }
-        this.colorName = ''
       }
     },
     deleteColor(index) { // удалить цвет из списка
@@ -162,13 +143,7 @@ export default {
         this.clearForm()
       }
     },
-    addColor() {
-      if (this.colorHesh.trim()) {
-        console.log('можно добалвять')
-      } else {
-        console.log('нельяз добавлять');
-      }
-    },
+
   },
   computed: {
     styleObject: function() { // вычисляемое свойство - цвет заливки блока
@@ -195,7 +170,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   p {
     padding: 0;
     margin: 5px;

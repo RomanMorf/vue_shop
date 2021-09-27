@@ -4,25 +4,28 @@ export default {
   actions: {
     async LOGIN ({commit}, {email, password}) { // Авторизация
       try {
-        await firebase.auth().signInWithEmailAndPassword(email, password)
+        await firebase.auth().signInWithEmailAndPassword(email, password) // авторизация через firebase
       } catch (e) {
         commit('setError', e)
+        console.log(e, 'message from store')
         throw e
       }
     },
 
     async LOGOUT({commit}) {  // Выйти из аккаунта
       await firebase.auth().signOut()
-      // commit('clearInfo')
+      commit('CLEAR_INFO')
+
+      this.$router.push('/login')
     },
 
-    GET_UID () { // получить ID пользователя
-      const user = firebase.auth().currentUser
+    async GET_UID ({commit}) { // получить ID пользователя
+      const user = await firebase.auth().currentUser
       return user ? user.uid : null
     },
 
-    GET_USER_DATA() { // получить данные из формы аутентификации
-      const userData = firebase.auth().currentUser
+    async GET_USER_DATA() { // получить данные из формы аутентификации
+      const userData = await firebase.auth().currentUser
       return userData ? userData : null
     },
 
@@ -50,6 +53,5 @@ export default {
         throw e
       }
     },
-
   },
 }
