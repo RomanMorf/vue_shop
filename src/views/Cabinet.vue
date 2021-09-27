@@ -24,11 +24,15 @@ export default {
   methods: {
     showInfo() {
       console.log(this.INFO, 'this.INFO from cabinete');
+    },
+    fetchProducts() {
+      this.$store.dispatch('FETCH_PRODUCTS')
     }
   },
   computed: {
     ...mapGetters([
-      'INFO'
+      'INFO',
+      'PRODUCTS'
     ])
   },
   mounted() {
@@ -38,5 +42,4 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  
 </style> 

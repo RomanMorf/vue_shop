@@ -53,10 +53,22 @@ const routes = [
     component: () => import('@/views/Register.vue'),
   },
   {
+    path: '/product/:id',
+    name: 'Product',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Product.vue'),
+  },
+  {
     path: '/cabinet',
     name: 'Cabinet',
     meta: { layout: 'main', auth: true },
     component: () => import('@/views/Cabinet.vue'),
+  },
+  {
+    path: '/edit/:id',
+    name: 'Edit',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Edit.vue'),
   },
 
   {

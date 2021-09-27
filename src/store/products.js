@@ -68,8 +68,23 @@ export default {
         throw error
       }
     },
+    async FETCH_PRODUCT_BY_ID({ dispatch, commit }, id) {
+      try {
+        const product =
+          (
+            await firebase
+              .database()
+              .ref(`/products/`)
+              .child(id)
+              .once('value')
+          ).val() || {}
+        return product
+      } catch (error) {
+        throw error
+      }
+    },
   },
   getters: {
-    GET_PRODUCTS: (s) => s.products,
+    PRODUCTS: (s) => s.products,
   },
 }
