@@ -20,9 +20,9 @@
         </ul>
       </nav>
       <div class="tests_btn">
-        <a v-if="!checkAuth" @click="$router.push('/login')">Login</a> 
-        <a v-if="checkAuth" @click="$store.dispatch('LOGOUT')">Logout | </a>
-        <a v-if="checkAuth" @click="$router.push('/cabinet')">Cabinet</a>
+        <a @click="$router.push('/login')">Login | </a> 
+        <a @click="$store.dispatch('LOGOUT')">Logout | </a>
+        <a @click="$router.push('/cabinet')">Cabinet</a>
       </div>
     </div>
   </div>
@@ -50,6 +50,13 @@ export default {
       return uid ? true : false
     }
   },
+  computed: {
+    async authUser() {
+      const uid = await this.$store.dispatch('GET_UID')
+      return uid ? true : false
+    }
+  },
+
 }
 </script>
 
