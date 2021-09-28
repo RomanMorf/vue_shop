@@ -10,6 +10,8 @@ import 'firebase/auth'
 import Loader from '@/components/Loader'
 import Vuelidate from 'vuelidate'
 
+import '@/assets/scss/style.scss'
+
 
 Vue.config.productionTip = false
 

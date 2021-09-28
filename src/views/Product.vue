@@ -16,7 +16,6 @@
         >
           <img class="img_item" :src="img" :alt="product.title">
         </div>
-
       </div>
     </form>
   </div>
