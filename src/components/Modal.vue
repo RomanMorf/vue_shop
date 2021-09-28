@@ -1,3 +1,58 @@
+<template>
+  <div class="window">
+    <div class="window__inner">
+      <div class="window__container">
+
+        <section class="window__header header">
+          <slot name="header"></slot>
+        </section>
+        
+        <section class="window__content content">
+          <slot name="content"></slot>
+        </section>
+
+        <section class="window__footer footer">
+          <slot name="footer"></slot>
+        </section>
+
+        <section>
+          <slot name="closeBtn">
+            <span class="window__close" @click="close">
+              <i class="material-icons">close</i>
+            </span>
+          </slot>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  props: {
+    windowData: {
+      type: Object,
+    }
+  },
+  methods: {
+    close() {
+      this.$emit('close');
+    },
+    confirm() {
+      this.$emit('confirmed');
+    },
+    decline() {
+      this.$emit('declined');
+    },
+
+  },
+
+}
+</script>
+
+<style lang="scss">
   .window {
     position: fixed;
     left: 0px;
@@ -5,7 +60,6 @@
     top: 0px;
     bottom: 0px;
     z-index: 1000;
-
     background-color: rgba(0, 0, 0, .4);
 
     &__inner {
@@ -38,13 +92,6 @@
       animation-timing-function: ease;
     }
 
-    @keyframes bounce {
-      0%   { transform: scale(1,1)    translateY(0); }
-      10%  { transform: scale(1.1,.9) translateY(0); }
-      30%  { transform: scale(.9,1.1) translateY(-100px); }
-      50%  { transform: scale(1,1)    translateY(0); }
-      100% { transform: scale(1,1)    translateY(0); }
-    }
 
     &__footer {
       display: flex;
@@ -62,7 +109,6 @@
       position: absolute;
       right: -10px;
       top: -10px;
-
       transition: all .5s;
 
       &:active{
@@ -70,3 +116,5 @@
       }
     }
   }
+
+</style>

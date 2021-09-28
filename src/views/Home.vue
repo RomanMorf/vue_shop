@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1 class="center">This is an home page</h1>
-    <Loader></Loader>
+    <Loader v-if="isLoading"></Loader>
     <div class="section">
       <CategoryBlock></CategoryBlock>
       <CategoryBlock></CategoryBlock>
@@ -42,8 +42,14 @@
 <script>
 import CategoryBlock from '@/components/CategoryBlock/CategoryBlock.vue'
 import BTN from '@/components/Buttons/ButtonBorderHiden.vue'
+
 export default {
   name: 'Home',
+  data() {
+    return {
+      isLoading: false
+    }
+  },
   components: {
     CategoryBlock,
     BTN,
