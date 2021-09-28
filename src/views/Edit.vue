@@ -20,7 +20,8 @@
       </p>
       <p></p>
       <div class="img_container">
-        <div             
+        <div
+          class="img_wrapper"
           v-for="(img, index) in product.img" 
           :key="index"
         >
@@ -28,8 +29,8 @@
           <button class="img_btn delete">
             <span class="material-icons">delete</span>
           </button>
-          <button class="img_btn edite">
-            <span class="material-icons">edite</span>
+          <button class="img_btn edit">
+            <span class="material-icons">edit</span>
           </button>
         </div>
 
@@ -85,12 +86,29 @@ export default {
     flex-wrap: wrap;
     
     & .img_item {
-      width: 300px;
+      max-width: 300px;
       margin: 5px
     }
     & .img_item:hover {
       width: 300px;
       margin: 5px
     }
+  }
+  .img_btn {
+    width: 40px;
+    height: 30px;
+    &.delete {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+    &.edit {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+    }
+  }
+  .img_wrapper{
+    position: relative;
   }
 </style> 

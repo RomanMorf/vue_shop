@@ -18,7 +18,8 @@ export default {
   name: 'Cabinet',
   data() {
     return {
-      userInfo: null
+      userInfo: null,
+
     }
   },
   methods: {
@@ -33,7 +34,7 @@ export default {
     ...mapGetters([
       'INFO',
       'PRODUCTS'
-    ])
+    ]),
   },
   mounted() {
     this.$store.dispatch('FETCH_INFO')
