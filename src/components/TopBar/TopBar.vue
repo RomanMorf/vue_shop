@@ -7,16 +7,19 @@
       CATEGORIIES
     </div>
     <div class="bar_buttons">
-      <span class="material-icons-outlined">
-        compare_arrows
-        <span class="bar_buttons_number"></span>
-      </span>
-      <span class="material-icons-outlined">
+      <div class="bar_btn">
+        <span class="material-icons-outlined md-50">
+          compare_arrows
+        </span>
+        <span class="bar_btn_number">0</span>
+      </div>
+      <span class="material-icons md-50">
         favorite_border
       </span>      
-      <span class="material-icons-outlined">
+      <span class="material-icons-outlined md-50 btn">
         shopping_bag
-      </span>    </div>
+      </span>    
+    </div>
   </div>
 </template>
 
@@ -34,12 +37,37 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   &_buttons{
     width: 130px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+  
+  &_btn {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+    &_number {
+      position: absolute;
+      min-width: 10px;
+      min-height: 10px;
+      bottom: -5px;
+      left: -5px;
+    }
+  }
 }
+.material-icons.md-50 {
+  font-size: 50px;
+}
+.material-icons-outlined.md-50 {
+    font-size: 50px;
+}
+
 
 </style> 
