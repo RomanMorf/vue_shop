@@ -8,12 +8,16 @@ import 'firebase/database'
 import 'firebase/auth'
 
 import Loader from '@/components/Loader'
+import Modal from '@/components/Modal'
 import Vuelidate from 'vuelidate'
+
+import '@/assets/scss/style.scss'
 
 
 Vue.config.productionTip = false
 
 Vue.component('Loader', Loader)
+Vue.component('Modal', Modal)
 
 firebase.initializeApp({
   apiKey: "AIzaSyBe-uq9ugjQF0p3Ga7GVdk8Jc0rpRzcSkw",

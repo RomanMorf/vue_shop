@@ -19,6 +19,11 @@
           </router-link>
         </ul>
       </nav>
+      <div class="tests_btn">
+        <a @click="$router.push('/login')">Login | </a> 
+        <a @click="$store.dispatch('LOGOUT')">Logout | </a>
+        <a @click="$router.push('/cabinet')">Cabinet</a>
+      </div>
     </div>
   </div>
 </template>
@@ -38,9 +43,31 @@ export default {
       ],
     }
   },
+  methods: {
+    async checkAuth() {
+      const uid = await this.$store.dispatch('GET_UID')
+      console.log(uid, 'uid');
+      return uid ? true : false
+    }
+  },
+  computed: {
+    async authUser() {
+      const uid = await this.$store.dispatch('GET_UID')
+      return uid ? true : false
+    }
+  },
+
 }
 </script>
 
 <style scoped lang="scss">
-  @import "NavBar.scss"
+  @import "NavBar.scss";
+
+  .tests_btn {
+    border: 1px solid black;
+    padding: 5px;
+    & a {
+      cursor: pointer;
+    }
+  }
 </style>

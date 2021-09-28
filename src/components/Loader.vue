@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="loader_wrapper">
     <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   </div>
 </template>
@@ -12,6 +12,11 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+  .loader_wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
     .lds-roller {
     display: inline-block;
     position: relative;

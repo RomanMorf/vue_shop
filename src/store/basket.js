@@ -2,17 +2,20 @@ import firebase from 'firebase/app'
 
 export default {
   state: {
-    products: [],
+    basket: [],
   },
   mutations: {
-    SET_PRODUCTS(state, products) {
-      state.products = products
+    SET_PRODUCT_TO_BASKET(state, product) {
+      state.basket = product
     },
-    CLEAR_SET_PRODUCTS(state) {
-      state.products = []
+    CLEAR_BSKET(state) {
+      state.basket = []
     },
   },
   actions: {
+    ADD_TO_BASKET({ dispatch, commit, getters }, data) {
+      console.log(data, 'data from bastek')
+    },
     async CREATE_PRODUCT({ dispatch, commit, getters }, data) {
       try {
         return await firebase
@@ -85,6 +88,6 @@ export default {
     },
   },
   getters: {
-    PRODUCTS: (s) => s.products,
+    BASKET: (s) => s.basket,
   },
 }

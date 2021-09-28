@@ -26,8 +26,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/style.scss';
-@import '@/assets/scss/colors.scss';
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons'
+// @import '@/assets/scss/style.scss';
+// @import '@/assets/scss/colors.scss';
 </style>
 

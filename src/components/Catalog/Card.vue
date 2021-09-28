@@ -1,30 +1,46 @@
 <template>
-  <div class="card" @mouseover="flag = false" @mouseleave="flag = true">
-    <div class="card_img" :style="styleObject">
-      <p class="card_category">{{ product.categoryName }}</p>
-      <div class="card_category_favorite"></div>
-      <div class="card_category_check"></div>
-    </div>
-    <div class="card_info">
-      <h3 class="card_title">{{ product.title }}</h3>
-      <div >
-        <p class="card_info_color">Colors</p>
-        <span class="card_info_btn white">First</span>
-        <span class="card_info_btn black">Second</span>
+  <div class="card" @mouseover="flag = false" @mouseleave="flag = true" >
+    <div class="card_category_favorite" @click="addToFavorite(product.id)"></div>
+    <div class="card_category_check"></div>
+
+    <div class="card_body" @click="$router.push(`/product/${product.id}`)">
+      <div class="card_img" :style="styleObject">
+        <p class="card_category">{{ product.categoryName }}</p>
       </div>
-      <p class="card_info_price">{{ product.price }} UAH</p>
-      <div class="card_busket">Busket</div>
+      <div class="card_info">
+        <h3 class="card_title">{{ product.title }}</h3>
+        <div >
+          <p class="card_info_color">Colors</p>
+          <span class="card_info_btn white">First</span>
+          <span class="card_info_btn black">Second</span>
+        </div>
+        <p class="card_info_price">{{ product.price }} UAH</p>
+      </div>
     </div>
+
+    <div class="card_info" >
+      <div class="card_busket" @click="addToBasket(product.id)">Busket</div>
+    </div> 
+
   </div>
 </template>
 
 <script>
+
 export default {
   props: ['product'],
   data() {
     return {
       // флаг для опеределния наведения мыши. используется для динамического изменения фона
       flag: true, 
+    }
+  },
+  methods: {
+    addToBasket(id) {
+      console.log(id, ' - добавлен в корзину');
+    },
+    addToFavorite(id) {
+      console.log(id, ' - добавлен в список избранное');
     }
   },
   computed: {
@@ -64,7 +80,6 @@ p {
   &:hover {
     box-shadow: 0 0 2px 3px rgba(206, 201, 201, 0.425);
   }
-
   &_category {
     position: absolute;
     padding: 5px 10px;
@@ -157,7 +172,6 @@ p {
     border-bottom: 2px solid rgb(165, 165, 165);
     width: 50px;
     margin: 10px 0;
-    padding: 5px 0;
     font-weight: bold;
     transition: all 0.2s ease-in;
 
