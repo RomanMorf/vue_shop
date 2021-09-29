@@ -19,7 +19,7 @@
     </div>
 
     <div class="card_info" >
-      <div class="card_busket" @click="addToBasket(product.id)">Busket</div>
+      <div class="card_busket" @click="addToBasket(product)">Busket</div>
     </div> 
 
   </div>

@@ -3,7 +3,7 @@
     <div class="bar_logo">
       LOGO
     </div>
-    
+
     <div class="bar_categories">
       CATEGORIES
     </div>
@@ -14,26 +14,52 @@
         <span class="bar_btn_number">0</span>
       </div>
       <div class="bar_btn">
-        <span class="material-icons md-40">favorite_border</span>    
+        <span class="material-icons md-40">favorite_border</span>
         <span class="bar_btn_number">1</span>
       </div>
-      <div class="bar_btn">
-        <span class="material-icons-outlined md-40 btn">shopping_bag</span>    
-        <span class="bar_btn_number">0</span>
+      <div class="bar_btn" @click="showModal = !showModal">
+        <span class="material-icons-outlined md-40 btn">shopping_bag</span>
+        <span class="bar_btn_number">{{ BASKET.length }}</span>
       </div>
-
     </div>
+    <Modal v-show="showModal" @close="closeModal">
+      <template v-slot:content>
+        <div class="content" v-for="(product, index) in BASKET" :key="product.id">
+          <p>{{ index + 1 }} {{ product.title }} кол-во {{ product.count }}</p>
+          <p v-if="product.img">{{ product.img[0] }}</p>
+          <img v-if="product.img" :src="product.img[0]" alt="product.title">
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
-  
+  data() {
+    return {
+      showModal: false,
+    }
+  },
+  methods: {
+    closeModal() {
+      this.showModal = false
+    },
+  },
+  computed: {
+    ...mapGetters(['BASKET']),
+  },
 }
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
+.content {
+      
+      max-height: 700px;
+}
+
 .bar {
   border-bottom: 1px solid rgba(146, 146, 146, 0.5);
   padding: 20px;
@@ -41,20 +67,20 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-  &_buttons{
+  &_buttons {
     width: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   &_btn {
-  width: 30px;
-  height: 30px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &_number {
       position: absolute;
@@ -76,8 +102,6 @@ export default {
   font-size: 40px;
 }
 .material-icons-outlined.md-40 {
-    font-size: 40px;
+  font-size: 40px;
 }
-
-
-</style> 
+</style>

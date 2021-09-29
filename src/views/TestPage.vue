@@ -37,7 +37,7 @@
       v-show="showModal"
       @close="closeModal"
     >
-      <template v-slot:content>
+      <template v-slot:header>
         <h5 class="center">ВНИМАНИЕ !!!</h5>
         <p class="big_title">Вы уверенны, что хотите удалить товар - {{ titleForDel }} ?!</p>
       </template>

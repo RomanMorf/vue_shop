@@ -56,7 +56,7 @@ export default {
     bottom: 0px;
     z-index: 1000;
     background-color: rgba(0, 0, 0, .4);
-
+    
     &_inner {
       width: 100%;
       height: 100%;
@@ -81,7 +81,7 @@ export default {
       justify-content: space-between;
       align-items: stretch;
     }
-
+    
     &_footer {
       display: flex;
       justify-content: space-around;

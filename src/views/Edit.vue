@@ -61,11 +61,9 @@ export default {
     const product = await this.$store.dispatch('FETCH_PRODUCT_BY_ID', id)
     const categories = await this.$store.dispatch('FETCH_CATEGORIES')
     this.id = id
-    this.product = product.length > 1 ? product[0] : product
+    this.product = product
     this.categories = categories
     this.loading = false
-    console.log(product, 'product');
-    console.log(categories, 'categories');
   },
   watch: {  // следим за обновлениями в данном объекте
     currentCategory(catId) {
