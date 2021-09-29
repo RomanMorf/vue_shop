@@ -40,11 +40,10 @@
       <template v-slot:content>
         <h5 class="center">ВНИМАНИЕ !!!</h5>
         <p class="big_title">Вы уверенны, что хотите удалить товар - {{ titleForDel }} ?!</p>
+      </template>
+      <template v-slot:footer>
         <button @click="Confirm">Confirm</button>
         <button @click="closeModal">Decline</button>
-      </template>
-      <template v-slot:confirm>
-
       </template>
     </Modal>
 
@@ -62,7 +61,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      showModal: false,
+      showModal: true,
       idForDel: '',
       titleForDel: '',
     }
@@ -132,7 +131,5 @@ export default {
     top: 10px;
   }
 }
-.big_title {
-  font-size: 30px;
-}
+
 </style>

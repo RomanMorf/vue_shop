@@ -1,23 +1,23 @@
 <template>
   <div class="window">
-    <div class="window__inner">
-      <div class="window__container">
+    <div class="window_inner" @click="catchEvent">
+      <div class="window_container">
 
-        <section class="window__header header">
+        <section class="window_header header">
           <slot name="header"></slot>
         </section>
         
-        <section class="window__content content">
+        <section class="window_content content">
           <slot name="content"></slot>
         </section>
 
-        <section class="window__footer footer">
+        <section class="window_footer footer">
           <slot name="footer"></slot>
         </section>
 
         <section>
           <slot name="closeBtn">
-            <span class="window__close" @click="close">
+            <span class="window_close" @click="close">
               <i class="material-icons">close</i>
             </span>
           </slot>
@@ -40,15 +40,10 @@ export default {
     close() {
       this.$emit('close');
     },
-    confirm() {
-      this.$emit('confirmed');
-    },
-    decline() {
-      this.$emit('declined');
-    },
-
+    catchEvent(event) {
+      if (event.target.className === 'window_inner') this.$emit('close')
+    }
   },
-
 }
 </script>
 
@@ -62,16 +57,15 @@ export default {
     z-index: 1000;
     background-color: rgba(0, 0, 0, .4);
 
-    &__inner {
+    &_inner {
       width: 100%;
       height: 100%;
-
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    &__container {
+    &_container {
       min-width: 230px;
       max-width: 600px;
       min-height: 150px;
@@ -80,39 +74,39 @@ export default {
       position: relative;
       background-color: white;
       border-radius: 10px;
-
+      overflow: hidden;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: stretch;
-
-      animation-name: bounce;
-      animation-timing-function: ease;
     }
 
-
-    &__footer {
+    &_footer {
       display: flex;
       justify-content: space-around;
-
     }
 
-    &__header, &__content {
+    &_header, &_content {
       margin-bottom: 20px;
     }
 
-    &__close {
+    &_close {
       cursor: pointer;
       font-size: 16px;
       position: absolute;
       right: -10px;
       top: -10px;
       transition: all .5s;
+      background-color: rgb(128, 128, 128);
+      border-radius: 10px;
+      padding: 10px 10px 0 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
-      &:active{
-          transform: scale(.8);
+      &:active,
+      &:hover {
+        background-color: rgb(155, 155, 155);
+        box-shadow: -5px 6px 9px 3px rgb(122 122 122 / 48%);
       }
     }
   }
