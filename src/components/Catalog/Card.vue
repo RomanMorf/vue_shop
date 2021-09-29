@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addToBasket(id) {
-      console.log(id, ' - добавлен в корзину');
+      this.$store.dispatch('ADD_TO_BASKET', id)
     },
     addToFavorite(id) {
       console.log(id, ' - добавлен в список избранное');

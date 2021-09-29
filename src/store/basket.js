@@ -13,8 +13,13 @@ export default {
     },
   },
   actions: {
-    ADD_TO_BASKET({ dispatch, commit, getters }, data) {
-      console.log(data, 'data from bastek')
+    ADD_TO_BASKET({ dispatch, commit, getters }, id) {
+      
+      const product = {
+        id: id,
+        count: 1
+      }
+      console.log(product,  'data from bastek')
     },
     async CREATE_PRODUCT({ dispatch, commit, getters }, data) {
       try {
