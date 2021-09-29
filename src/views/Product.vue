@@ -46,8 +46,6 @@ export default {
     this.product = product
     this.categories = categories
     this.loading = false
-    console.log(product, 'product');
-    console.log(categories, 'categories');
   },
   watch: {  // следим за обновлениями в данном объекте
     currentCategory(catId) {

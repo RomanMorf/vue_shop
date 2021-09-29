@@ -6,7 +6,7 @@
 
     <div v-else class="card-wrapper">
       <Card 
-        v-for="product in products" 
+        v-for="product in PRODUCTS" 
         :key="product.id"
         :product="product"
       />
@@ -17,6 +17,7 @@
 
 <script>
 import Card from '@/components/Catalog/Card'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Catalog',
@@ -27,13 +28,16 @@ export default {
     }
   },
   async mounted() {
-    this.products = await this.$store.dispatch('FETCH_PRODUCTS')
-    console.log(this.products, 'this.products');
+    this.$store.dispatch('FETCH_PRODUCTS')
     this.isLoding = false
   },
   components: {
     Card,
-  }
+  },
+  computed: {
+    ...mapGetters(['PRODUCTS']),
+  },
+
 }
 </script>
 

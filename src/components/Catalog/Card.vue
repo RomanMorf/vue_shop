@@ -19,7 +19,7 @@
     </div>
 
     <div class="card_info" >
-      <div class="card_busket" @click="addToBasket(product.id)">Busket</div>
+      <div class="card_busket" @click="addToBasket(product)">Busket</div>
     </div> 
 
   </div>
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addToBasket(id) {
-      console.log(id, ' - добавлен в корзину');
+      this.$store.dispatch('ADD_TO_BASKET', id)
     },
     addToFavorite(id) {
       console.log(id, ' - добавлен в список избранное');

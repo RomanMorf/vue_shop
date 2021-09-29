@@ -5,11 +5,14 @@
       <button class="product_btn" @click="fetchProducts">
         Загрузить список товаров
       </button>
+      <button class="product_btn" @click="showModal = !showModal">
+        Открыть модалку
+      </button>
       <div
         class="product_card"
         v-for="(pruduct, index) in PRODUCTS"
         :key="index"
-      >
+        >
         <section>
           <img class="card_img" v-if="pruduct.img" :src="pruduct.img[0]" />
           <img
@@ -25,10 +28,24 @@
         </section>
         <div class="card_buttons">
           <button @click.prevent="$router.push(`/edit/${pruduct.id}`)">Edit</button>
-          <button @click.prevent="productDelete(pruduct.id)">Delete</button>
+          <button @click.prevent="confirmDelete(pruduct.id, pruduct.title)">Delete</button>
         </div>
       </div>
     </div>
+
+    <Modal 
+      v-show="showModal"
+      @close="closeModal"
+    >
+      <template v-slot:header>
+        <h5 class="center">ВНИМАНИЕ !!!</h5>
+        <p class="big_title">Вы уверенны, что хотите удалить товар - {{ titleForDel }} ?!</p>
+      </template>
+      <template v-slot:footer>
+        <button @click="Confirm">Confirm</button>
+        <button @click="closeModal">Decline</button>
+      </template>
+    </Modal>
 
     <FormAddProduct></FormAddProduct>
 
@@ -42,11 +59,31 @@ import FormAddCategory from '@/components/Admin/FormAddCategory'
 import { mapGetters } from 'vuex'
 
 export default {
+  data() {
+    return {
+      showModal: true,
+      idForDel: '',
+      titleForDel: '',
+    }
+  },
   components: {
     FormAddProduct,
     FormAddCategory,
   },
   methods: {
+    Confirm() {
+      console.log(this.idForDel, '... удален ');
+      this.showModal = false
+
+    },
+    confirmDelete(id, title) {
+      this.idForDel = id
+      this.titleForDel = title
+      this.showModal = true
+    },
+    closeModal() {
+      this.showModal = false
+    },
     fetchProducts() {
       this.$store.dispatch('FETCH_PRODUCTS')
     },
@@ -94,4 +131,5 @@ export default {
     top: 10px;
   }
 }
+
 </style>
