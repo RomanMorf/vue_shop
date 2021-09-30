@@ -61,7 +61,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      showModal: true,
+      showModal: false,
       idForDel: '',
       titleForDel: '',
     }

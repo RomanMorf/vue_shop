@@ -3,6 +3,9 @@
     <h1 class="center">This is an home page</h1>
     <Loader v-if="isLoading"></Loader>
     <div class="section">
+      <CatalogBlock></CatalogBlock>
+    </div>
+    <div class="section">
       <CategoryBlock></CategoryBlock>
       <CategoryBlock></CategoryBlock>
       <CategoryBlock></CategoryBlock>
@@ -41,6 +44,7 @@
 
 <script>
 import CategoryBlock from '@/components/CategoryBlock/CategoryBlock.vue'
+import CatalogBlock from '@/components/CatalogBlock/CatalogBlock.vue'
 import BTN from '@/components/Buttons/ButtonBorderHiden.vue'
 
 export default {
@@ -53,6 +57,7 @@ export default {
   components: {
     CategoryBlock,
     BTN,
+    CatalogBlock,
   }
 }
 
