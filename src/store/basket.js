@@ -22,7 +22,6 @@ export default {
           ...data,
           count: 1,
         }
-        console.log(product, 'product')
         basket.push(product)
         commit('SET_PRODUCT_TO_BASKET', basket)
       }

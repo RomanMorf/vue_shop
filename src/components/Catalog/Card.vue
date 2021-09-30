@@ -1,6 +1,6 @@
 <template>
   <div class="card" @mouseover="flag = false" @mouseleave="flag = true" >
-    <div class="card_category_favorite" @click="addToFavorite(product.id)"></div>
+    <div class="card_category_favorite" @click="addToFavorite(product)" :style="isFvorite"></div>
     <div class="card_category_check"></div>
 
     <div class="card_body" @click="$router.push(`/product/${product.id}`)">
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   props: ['product'],
@@ -40,11 +41,12 @@ export default {
       this.$store.dispatch('ADD_TO_BASKET', id)
     },
     addToFavorite(id) {
-      console.log(id, ' - добавлен в список избранное');
+      console.log(id, 'id from card');
+      this.$store.dispatch('FAVORITE_TOGGLE', id)
     }
   },
   computed: {
-    styleObject: function() { // вычисляемое свойство
+    styleObject() { // вычисляемое свойство
       if (this.product.img) { // если есть ссылки на изображения товара
         if (this.product.img.length >= 2) { // если 2 картинки и больше - используй две
           return this.flag
@@ -61,6 +63,14 @@ export default {
         return { backgroundImage: `url("https://i.stack.imgur.com/y9DpT.jpg")` }
       }
     },
+    isFvorite() { // вычисляемое свойство
+    const id = this.product.id
+        const index = this.FAVORITE.findIndex((el) => el.id === id)
+        if (index !== -1) {
+          return { backgroundImage: `url("${require('@/assets/img/favorite_black_24dp.svg')}")` }
+        }
+    },
+    ...mapGetters(['BASKET', 'FAVORITE']),
   },
 }
 </script>
@@ -96,11 +106,14 @@ p {
       width: 30px;
       right: 10px;
       top: 10px;
-      transition: all 0.3s ease-in;
+      transition: transform 0.3s ease;
+      & img {
+        width: 100%;
+      }
 
       &:hover {
         transform: scale(1.2);
-        transition: all 0.3s ease-in;
+        transition: transform 0.3s ease-in;
       }
     }
 

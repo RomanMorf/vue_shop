@@ -38,6 +38,8 @@ export default {
       flagEdit: false,
     }
   },
+  watch: {
+  },
   async mounted() {
     const id = this.$route.params.id
     const product = await this.$store.dispatch('FETCH_PRODUCT_BY_ID', id)
@@ -52,7 +54,7 @@ export default {
       const {title} = this.categories.find(c => c.id === catId)
       this.selectedCategoryTitle = title
       this.selectedCategoryId = catId
-    }
+    },
   },
 
 }

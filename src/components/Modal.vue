@@ -67,10 +67,11 @@ export default {
 
     &_container {
       min-width: 230px;
-      max-width: 600px;
+      max-width: 100vw;
       min-height: 150px;
+      max-height: 100vh;
       padding: 20px;
-      margin: 25px;
+      margin: 15px;
       position: relative;
       background-color: white;
       border-radius: 10px;
@@ -82,7 +83,7 @@ export default {
       align-items: stretch;
     }
     
-    &_footer {
+    &_header, &_footer {
       display: flex;
       justify-content: space-around;
     }

@@ -6,6 +6,7 @@ import products from './products.js'
 import categories from './categories.js'
 import info from './info.js'
 import basket from './basket.js'
+import favorite from './favorite.js'
 
 Vue.use(Vuex)
 
@@ -31,5 +32,6 @@ export default new Vuex.Store({
     auth,
     info,
     basket,
+    favorite,
   },
 })
