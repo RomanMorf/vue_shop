@@ -13,6 +13,10 @@ export default {
     },
   },
   actions: {
+    BASKET_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) {
+      const basket = localStorage.getItem('basket') || []
+      commit('SET_PRODUCT_TO_BASKET', JSON.parse(basket))
+    },
     ADD_TO_BASKET({ dispatch, commit, getters }, data) {
       const id = data.id
       const basket = getters.BASKET
@@ -24,10 +28,13 @@ export default {
         }
         basket.push(product)
         commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
+
       }
       if (index !== -1) {
         basket[index].count++
         commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
     DELETE_FROM_BASKET({ dispatch, commit, getters }, id) {
@@ -36,6 +43,7 @@ export default {
       if (index !== -1) {
         basket.splice(index, 1)
         commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
   },

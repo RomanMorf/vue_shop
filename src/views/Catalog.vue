@@ -28,7 +28,7 @@ export default {
     }
   },
   async mounted() {
-    this.$store.dispatch('FETCH_PRODUCTS')
+    await this.$store.dispatch('FETCH_PRODUCTS')
     this.isLoding = false
   },
   components: {

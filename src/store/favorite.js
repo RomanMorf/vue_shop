@@ -13,6 +13,10 @@ export default {
     },
   },
   actions: {
+    FAVORITE_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) {
+      const favorite = localStorage.getItem('favorite') || []
+      commit('SET_TO_FAVORITE', JSON.parse(favorite))
+    },
     FAVORITE_TOGGLE({ dispatch, commit, getters }, data) {
       const id = data.id || data
       const favorite = getters.FAVORITE
@@ -23,10 +27,12 @@ export default {
         }
         favorite.push(product)
         commit('SET_TO_FAVORITE', favorite)
+        localStorage.setItem('favorite', JSON.stringify(favorite))
       }
       if (index !== -1) {
         favorite.splice(index, 1)
         commit('SET_TO_FAVORITE', favorite)
+        localStorage.setItem('favorite', JSON.stringify(favorite))
       }
     },
   },

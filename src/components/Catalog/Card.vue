@@ -41,7 +41,6 @@ export default {
       this.$store.dispatch('ADD_TO_BASKET', id)
     },
     addToFavorite(id) {
-      console.log(id, 'id from card');
       this.$store.dispatch('FAVORITE_TOGGLE', id)
     }
   },
