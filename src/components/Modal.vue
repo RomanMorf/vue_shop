@@ -11,6 +11,10 @@
           <slot name="content"></slot>
         </section>
 
+        <section class="window_bottom">
+          <slot name="bottom"></slot>
+        </section>
+
         <section class="window_footer footer">
           <slot name="footer"></slot>
         </section>
@@ -88,8 +92,13 @@ export default {
       justify-content: space-around;
     }
 
-    &_header, &_content {
+    &_header, &_content, &_bottom {
       margin-bottom: 20px;
+    }
+
+    &_content {
+      max-height: 500px;
+      overflow: auto;
     }
 
     &_close {

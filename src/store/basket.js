@@ -1,5 +1,3 @@
-import firebase from 'firebase/app'
-
 export default {
   state: {
     basket: [],
@@ -18,7 +16,7 @@ export default {
       commit('SET_PRODUCT_TO_BASKET', JSON.parse(basket))
     },
     ADD_TO_BASKET({ dispatch, commit, getters }, data) {
-      const id = data.id
+      const id = data.id || data
       const basket = getters.BASKET
       const index = basket.findIndex((el) => el.id === id)
       if (index === -1) {
@@ -46,6 +44,30 @@ export default {
         localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
+    BASKET_PRODUCT_INCREMENT({ dispatch, commit, getters }, data) {
+      const id = data.id || data
+      const basket = getters.BASKET
+      const index = basket.findIndex((el) => el.id === id)
+      basket[index].count++
+      commit('SET_PRODUCT_TO_BASKET', basket)
+      localStorage.setItem('basket', JSON.stringify(basket))
+    },
+    BASKET_PRODUCT_DECREMENT({ dispatch, commit, getters }, data) {
+      const id = data.id || data
+      const basket = getters.BASKET
+      const index = basket.findIndex((el) => el.id === id)
+      if (basket[index].count == 1) {
+        basket.splice(index, 1)
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
+      } else {
+        basket[index].count--
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
+      }
+    },
+
+
   },
   getters: {
     BASKET: (s) => s.basket,

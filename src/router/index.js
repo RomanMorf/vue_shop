@@ -59,6 +59,12 @@ const routes = [
     component: () => import('@/views/Product.vue'),
   },
   {
+    path: '/compare/',
+    name: 'Compare',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Compare.vue'),
+  },
+  {
     path: '/cabinet',
     name: 'Cabinet',
     meta: { layout: 'main', auth: true },
