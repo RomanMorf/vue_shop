@@ -37,14 +37,13 @@
       v-show="showModal"
       @close="closeModal"
     >
-      <template v-slot:content>
+      <template v-slot:header>
         <h5 class="center">ВНИМАНИЕ !!!</h5>
         <p class="big_title">Вы уверенны, что хотите удалить товар - {{ titleForDel }} ?!</p>
+      </template>
+      <template v-slot:footer>
         <button @click="Confirm">Confirm</button>
         <button @click="closeModal">Decline</button>
-      </template>
-      <template v-slot:confirm>
-
       </template>
     </Modal>
 
@@ -132,7 +131,5 @@ export default {
     top: 10px;
   }
 }
-.big_title {
-  font-size: 30px;
-}
+
 </style>

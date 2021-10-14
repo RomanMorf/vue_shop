@@ -5,6 +5,9 @@ import auth from './auth.js'
 import products from './products.js'
 import categories from './categories.js'
 import info from './info.js'
+import basket from './basket.js'
+import favorite from './favorite.js'
+import compare from './compare.js'
 
 Vue.use(Vuex)
 
@@ -29,5 +32,8 @@ export default new Vuex.Store({
     categories,
     auth,
     info,
+    basket,
+    favorite,
+    compare,
   },
 })

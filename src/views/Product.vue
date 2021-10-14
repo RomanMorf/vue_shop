@@ -1,14 +1,21 @@
 <template>
   <div class="center">
     <Loader class="center" v-if="loading"/>
+    
+    <div v-else>
+    <Carusel 
+        v-show="product.img" 
+        :caruselData="product.img"
+        :caruselWidth="450"
+        :caruselHeiht="600"
 
-    <form v-else>
+      />
+    <form>
       <p>ID: {{ id }}</p>
       <h1>{{ product.title }}</h1>
       <p>Price: {{ product.price }} UAH</p>
       <p>Category: {{ product.categoryName }} </p>
-      <p></p>
-      <div class="img_container">
+      <div v-show="product.img" class="img_container">
         <div
           class="img_wrapper"
           v-for="(img, index) in product.img" 
@@ -18,10 +25,12 @@
         </div>
       </div>
     </form>
+    </div>
   </div>
 </template>
 
 <script>
+import Carusel from '@/components/Carusel/Carusel.vue'
 
 export default {
   data() {
@@ -46,16 +55,17 @@ export default {
     this.product = product
     this.categories = categories
     this.loading = false
-    console.log(product, 'product');
-    console.log(categories, 'categories');
   },
   watch: {  // следим за обновлениями в данном объекте
     currentCategory(catId) {
       const {title} = this.categories.find(c => c.id === catId)
       this.selectedCategoryTitle = title
       this.selectedCategoryId = catId
-    }
+    },
   },
+  components: {
+    Carusel,
+  }
 
 }
 </script>
@@ -76,6 +86,7 @@ export default {
       margin: 5px
     }
   }
+
   .img_btn {
     width: 40px;
     height: 30px;

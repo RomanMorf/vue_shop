@@ -1,7 +1,7 @@
 <template>
   <div class="card" @mouseover="flag = false" @mouseleave="flag = true" >
-    <div class="card_category_favorite" @click="addToFavorite(product.id)"></div>
-    <div class="card_category_check"></div>
+    <div class="card_favorite" @click="favoriteToggle(product)" :style="isFvorite"></div>
+    <div class="card_compare" @click="compareToggle(product)"><span class="card_active" :style="inCompare"></span></div>
 
     <div class="card_body" @click="$router.push(`/product/${product.id}`)">
       <div class="card_img" :style="styleObject">
@@ -19,13 +19,17 @@
     </div>
 
     <div class="card_info" >
-      <div class="card_busket" @click="addToBasket(product.id)">Busket</div>
+      <div class="card_busket" @click="addToBasket(product)">
+        <span class="card_active" :style="inBasket"></span>
+        Busket
+      </div>
     </div> 
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   props: ['product'],
@@ -37,14 +41,17 @@ export default {
   },
   methods: {
     addToBasket(id) {
-      console.log(id, ' - добавлен в корзину');
+      this.$store.dispatch('ADD_TO_BASKET', id)
     },
-    addToFavorite(id) {
-      console.log(id, ' - добавлен в список избранное');
-    }
+    favoriteToggle(id) {
+      this.$store.dispatch('FAVORITE_TOGGLE', id)
+    },
+    compareToggle(id) {
+      this.$store.dispatch('COMPARE_TOGGLE', id)
+    },
   },
   computed: {
-    styleObject: function() { // вычисляемое свойство
+    styleObject() { // вычисляемое свойство
       if (this.product.img) { // если есть ссылки на изображения товара
         if (this.product.img.length >= 2) { // если 2 картинки и больше - используй две
           return this.flag
@@ -61,6 +68,29 @@ export default {
         return { backgroundImage: `url("https://i.stack.imgur.com/y9DpT.jpg")` }
       }
     },
+    isFvorite() { // вычисляемое свойство
+    const id = this.product.id
+        const index = this.FAVORITE.findIndex((el) => el.id === id)
+        if (index !== -1) {
+          return { backgroundImage: `url("${require('@/assets/img/favorite_black_24dp.svg')}")` }
+        }
+    },
+    inBasket() { // вычисляемое свойство
+    const id = this.product.id
+        const index = this.BASKET.findIndex((el) => el.id === id)
+        if (index !== -1) {
+          return { display: `block` }
+        }
+    },
+    inCompare() { // вычисляемое свойство
+    const id = this.product.id
+        const index = this.COMPARE.findIndex((el) => el.id === id)
+        if (index !== -1) {
+          return { display: `block` }
+        }
+    },
+
+    ...mapGetters(['BASKET', 'FAVORITE' , 'COMPARE']),
   },
 }
 </script>
@@ -70,6 +100,7 @@ p {
   padding: 0;
   margin: 0;
 }
+
 .card {
   margin: 10px;
   width: 250px;
@@ -77,6 +108,7 @@ p {
   border-radius: 5px;
   position: relative;
   overflow: hidden;
+
   &:hover {
     box-shadow: 0 0 2px 3px rgba(206, 201, 201, 0.425);
   }
@@ -87,44 +119,65 @@ p {
     background-color: #fff;
     top: 10px;
     left: 10px;
-
-    &_favorite {
-      position: absolute;
-      background-image: url(../../assets/favorite_border_black_24dp.svg);
-      background-size: cover;
-      height: 30px;
-      width: 30px;
-      right: 10px;
-      top: 10px;
-      transition: all 0.3s ease-in;
-
-      &:hover {
-        transform: scale(1.2);
-        transition: all 0.3s ease-in;
-      }
-    }
-
-    &_check {
-      position: absolute;
-      background-image: url(../../assets/sync_alt_black_24dp.svg);
-      background-size: cover;
-      height: 30px;
-      width: 30px;
-      right: 10px;
-      top: 50px;
-      transition: all 0.3s ease-in;
-
-      &:hover {
-        transform: scale(1.2);
-        transition: all 0.3s ease-in;
-      }
-    }
   }
 
   &_img {
     background-position: center;
     height: 350px;
     background-size: cover;
+  }
+
+  &_favorite {
+    position: absolute;
+    background-image: url(../../assets/favorite_border_black_24dp.svg);
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    right: 10px;
+    top: 10px;
+    transition: transform 0.3s ease;
+
+    & img {
+      width: 100%;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+      transition: transform 0.3s ease-in;
+    }
+  }
+
+  &_compare {
+    position: absolute;
+    background-image: url(../../assets/sync_alt_black_24dp.svg);
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    right: 10px;
+    top: 50px;
+    transition: all 0.3s ease-in;
+
+    &:hover {
+      transform: scale(1.2);
+      transition: all 0.3s ease-in;
+    }
+
+    & .card_active{
+      top: 15px;
+      right: 0px;
+      display: none;
+    }
+  }
+
+
+  &_active {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-image: url('./../../assets/img/checked.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
   }
 
   &_info {
@@ -174,6 +227,13 @@ p {
     margin: 10px 0;
     font-weight: bold;
     transition: all 0.2s ease-in;
+    position: relative;
+
+    & .card_active{
+      top: -5px;
+      right: -15px;
+      display: none;
+    }
 
     &:hover {
       color: rgb(165, 165, 165);

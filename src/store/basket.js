@@ -1,91 +1,75 @@
-import firebase from 'firebase/app'
-
 export default {
   state: {
     basket: [],
   },
   mutations: {
-    SET_PRODUCT_TO_BASKET(state, product) {
-      state.basket = product
+    SET_PRODUCT_TO_BASKET(state, products) {
+      state.basket = products
     },
     CLEAR_BSKET(state) {
       state.basket = []
     },
   },
   actions: {
+    BASKET_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) {
+      if (localStorage.basket) {
+        const basket = localStorage.getItem('basket') || []
+        commit('SET_PRODUCT_TO_BASKET', JSON.parse(basket))  
+      }
+    },
     ADD_TO_BASKET({ dispatch, commit, getters }, data) {
-      console.log(data, 'data from bastek')
-    },
-    async CREATE_PRODUCT({ dispatch, commit, getters }, data) {
-      try {
-        return await firebase
-          .database()
-          .ref(`/products/`)
-          .push(data)
-      } catch (error) {
-        console.log(error.message, 'error')
-        throw error
+      const id = data.id || data
+      const basket = getters.BASKET
+      const index = basket.findIndex((el) => el.id === id)
+      if (index === -1) {
+        const product = {
+          ...data,
+          count: 1,
+        }
+        basket.push(product)
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
+
+      }
+      if (index !== -1) {
+        basket[index].count++
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
-    async EDIT_PRODUCT({ dispatch, commit }, newInfo) {
-      try {
-        await firebase
-          .database()
-          .ref(`/products/`)
-          .child(newInfo.id)
-          .set(newInfo)
-      } catch (error) {
-        commit('setError', error)
-        throw error
+    DELETE_FROM_BASKET({ dispatch, commit, getters }, id) {
+      const basket = getters.BASKET
+      const index = basket.findIndex((el) => el.id === id)
+      if (index !== -1) {
+        basket.splice(index, 1)
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
-    async DELETE_PRODUCT({ dispatch, commit }, data) {
-      console.log(data.id, 'id')
-      try {
-        await firebase
-          .database()
-          .ref(`/products/`)
-          .child(data.id)
-          .remove()
-      } catch (error) {
-        commit('setError', error)
-        throw error
+    BASKET_PRODUCT_INCREMENT({ dispatch, commit, getters }, data) {
+      const id = data.id || data
+      const basket = getters.BASKET
+      const index = basket.findIndex((el) => el.id === id)
+      basket[index].count++
+      commit('SET_PRODUCT_TO_BASKET', basket)
+      localStorage.setItem('basket', JSON.stringify(basket))
+    },
+    BASKET_PRODUCT_DECREMENT({ dispatch, commit, getters }, data) {
+      const id = data.id || data
+      const basket = getters.BASKET
+      const index = basket.findIndex((el) => el.id === id)
+      if (basket[index].count == 1) {
+        basket.splice(index, 1)
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
+      } else {
+        basket[index].count--
+        commit('SET_PRODUCT_TO_BASKET', basket)
+        localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
-    async FETCH_PRODUCTS({ dispatch, commit }) {
-      try {
-        const products =
-          (
-            await firebase
-              .database()
-              .ref(`/products/`)
-              .once('value')
-          ).val() || {}
-        const newProducts = Object.keys(products).map((key) => ({
-          ...products[key],
-          id: key,
-        }))
-        commit('SET_PRODUCTS', newProducts)
-        return newProducts
-      } catch (error) {
-        throw error
-      }
-    },
-    async FETCH_PRODUCT_BY_ID({ dispatch, commit }, id) {
-      try {
-        const product =
-          (
-            await firebase
-              .database()
-              .ref(`/products/`)
-              .child(id)
-              .once('value')
-          ).val() || {}
-        return product
-      } catch (error) {
-        throw error
-      }
-    },
+
+
   },
   getters: {
     BASKET: (s) => s.basket,
