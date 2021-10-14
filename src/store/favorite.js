@@ -14,8 +14,10 @@ export default {
   },
   actions: {
     FAVORITE_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) {
-      const favorite = localStorage.getItem('favorite') || []
-      commit('SET_TO_FAVORITE', JSON.parse(favorite))
+      if (localStorage.favorite) {
+        const favorite = localStorage.getItem('favorite') || []
+        commit('SET_TO_FAVORITE', JSON.parse(favorite))
+      }
     },
     FAVORITE_TOGGLE({ dispatch, commit, getters }, data) {
       const id = data.id || data

@@ -12,8 +12,10 @@ export default {
   },
   actions: {
     COMPARE_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) {
-      const compare = localStorage.getItem('compare') || []
-      commit('SET_TO_COMPARE', JSON.parse(compare))
+      if (localStorage.compare) {
+        const compare = localStorage.getItem('compare') || []
+        commit('SET_TO_COMPARE', JSON.parse(compare))
+      }
     },
     COMPARE_TOGGLE({ dispatch, commit, getters }, data) {
       const id = data.id || data
