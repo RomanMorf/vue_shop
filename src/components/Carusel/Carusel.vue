@@ -16,11 +16,22 @@
     <div v-show="caruselData.length > 1">
       <button v-show="isImageBtn" class="btn left" @click="prevSlide">Prev</button>
       <button v-show="isImageBtn" class="btn right" @click="nextSlide">Next</button>
-      <div class="dotted_wrapper" :class="{black: dottegBg}" v-show="isDotteg">
+      <div class="dotted_wrapper" :class="{black: dottegBg}" v-show="isDotteg && !isImages">
         <div class="dotted_item" 
           v-for="(item, index) in caruselData" 
           :key="index"
           :class="{active: (currentSlideIndex === index)}"
+          @click="currentSlideIndex = index"
+        ></div>
+      </div>
+      <div class="image_wrapper" :class="{black: imageBg}" v-show="isImages">
+        <div class="image_item" 
+          v-for="(item, index) in caruselData" 
+          :key="index"
+          :class="{active: (currentSlideIndex === index)}"
+          :style="{
+            'background-image': 'url(' + item + ')',
+          }"          
           @click="currentSlideIndex = index"
         ></div>
       </div>
@@ -70,11 +81,19 @@ export default {
       type: Boolean,
       default: true,
     },
-    isDotteg: { // показывать кнопки киартинок
+    isImages: { // показать кнопки "изображения" на карусели
+      type: Boolean,
+      default: false,
+    },
+    imageBg: { // показываеть затемнынный фон у кнопок "изображения"
       type: Boolean,
       default: true,
     },
-    dottegBg: { // показываеть затемнынный фон у кнопок
+    isDotteg: { // показывать кнопки "точки" картинок
+      type: Boolean,
+      default: true,
+    },
+    dottegBg: { // показываеть затемнынный фон у кнопок "точки"
       type: Boolean,
       default: true,
     },
@@ -108,6 +127,7 @@ export default {
     position: relative;
   }
 }
+
 .btn {
   position: absolute;
   top: 50%;
@@ -131,6 +151,7 @@ export default {
     left: 10px;
   }
 }
+
 .dotted {
   &_wrapper {
     width: 100%;
@@ -159,6 +180,43 @@ export default {
     }
     &.active {
       background-color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+.image {
+  &_wrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.black {
+      background-color: rgba(5, 5, 5, 0.37);
+    }
+  }
+
+  &_item {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    opacity: 0.7;
+    background-size: cover;
+    transition: all ease .5s;
+    border-radius: 10px;
+
+    &:hover {
+      opacity: 1;
+      transition: all ease .5s;
+    }
+
+    &.active {
+      opacity: 1;
+      transition: all ease .5s;
     }
   }
 }

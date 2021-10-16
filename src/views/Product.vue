@@ -1,30 +1,25 @@
 <template>
-  <div class="center">
+  <div>
     <Loader class="center" v-if="loading"/>
     
     <div v-else>
-    <Carusel 
-        v-show="product.img" 
-        :caruselData="product.img"
-        :caruselWidth="450"
-        :caruselHeiht="600"
+      <h1 class="center">{{ product.title }}</h1>
+      <div class="product_body">
+        <Carusel 
+          v-show="product.img" 
+          :caruselData="product.img"
+          :caruselWidth="450"
+          :caruselHeiht="600"
+          :isImages="true"
+          class="inline"
+        />
 
-      />
-    <form>
-      <p>ID: {{ id }}</p>
-      <h1>{{ product.title }}</h1>
-      <p>Price: {{ product.price }} UAH</p>
-      <p>Category: {{ product.categoryName }} </p>
-      <div v-show="product.img" class="img_container">
-        <div
-          class="img_wrapper"
-          v-for="(img, index) in product.img" 
-          :key="index"
-        >
-          <img class="img_item" :src="img" :alt="product.title">
+        <div class="product_description inline">
+          <p v-if="product.categoryName"><strong>Категория:</strong> {{ product.categoryName }}</p>
+          <p v-if="product.price"><strong>Цена:</strong> {{ product.price }} UAH</p>
+          <p v-if="product.description"><strong>Описание:</strong> {{ product.description }}</p>
         </div>
       </div>
-    </form>
     </div>
   </div>
 </template>
@@ -71,37 +66,20 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  .img_container {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    flex-wrap: wrap;
-    
-    & .img_item {
-      max-width: 300px;
-      margin: 5px
-    }
-    & .img_item:hover {
-      width: 300px;
-      margin: 5px
-    }
-  }
+.product {
+  &_description {
+    margin-left: 20px;
+    max-width: 50%;
+    display: inline-block;
 
-  .img_btn {
-    width: 40px;
-    height: 30px;
-    &.delete {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-    }
-    &.edit {
-      position: absolute;
-      top: 10px;
-      left: 20px;
+    & p {
+      padding: 10px 0;
     }
   }
-  .img_wrapper{
-    position: relative;
-  }
+}
+.inline {
+  display: inline-block;
+  text-align: top;
+  vertical-align: top;
+}
 </style> 
