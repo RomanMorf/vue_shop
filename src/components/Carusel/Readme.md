@@ -32,6 +32,14 @@ If false - hide dots buttons in carusel
 type: Boolean
 If false - clear beckground of dots in carusel
 
+------ isImages ------ 
+type: Boolean
+If false - hide dots buttons with small images in carusel
+
+------ imageBg ------ 
+type: Boolean
+If false - clear beckground of small images in carusel
+
 ------ isTransition ------ 
 type: Boolean
 If false - cancel transition in carusel
