@@ -73,7 +73,7 @@ const routes = [
   {
     path: '/edit/:id',
     name: 'Edit',
-    meta: { layout: 'main' },
+    meta: { layout: 'admin' },
     component: () => import('@/views/Edit.vue'),
   },
 

@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <transition>
+      <transition name="translate">
         <div v-if="showAsCards" class="card-wrapper" :class="{list: !showAsCards}">
           <Card 
             v-for="product in products.slice(0, maxProdOnPage)" 
@@ -47,7 +47,7 @@
           />
         </div>
       </transition>
-      <transition>
+      <transition name="translate">
         <div v-if="!showAsCards" class="card-wrapper" :class="{list: !showAsCards}">
           <CardWide 
             v-for="product in products.slice(0, maxProdOnPage)" 

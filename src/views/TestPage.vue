@@ -1,6 +1,14 @@
 <template>
   <div>
     <div class="product_container">
+      <button class="product_btn" @click="fetchUsersList">
+        Загрузить список пользоватлей
+      </button>
+      <p>{{ usersList }}</p>
+      <FormAddProduct></FormAddProduct>
+
+      <FormAddCategory></FormAddCategory>
+
       <h2 class="product_title">Товары</h2>
       <button class="product_btn" @click="fetchProducts">
         Загрузить список товаров
@@ -47,9 +55,6 @@
       </template>
     </Modal>
 
-    <FormAddProduct></FormAddProduct>
-
-    <FormAddCategory></FormAddCategory>
   </div>
 </template>
 
@@ -57,6 +62,7 @@
 import FormAddProduct from '@/components/Admin/FormAddProduct'
 import FormAddCategory from '@/components/Admin/FormAddCategory'
 import { mapGetters } from 'vuex'
+import firebase from 'firebase/app'
 
 export default {
   data() {
@@ -64,11 +70,13 @@ export default {
       showModal: false,
       idForDel: '',
       titleForDel: '',
+      usersList: [],
     }
   },
   components: {
     FormAddProduct,
     FormAddCategory,
+    firebase,
   },
   methods: {
     Confirm() {
@@ -92,6 +100,17 @@ export default {
     },
     productDelete(id) {
       console.log(id, 'id for delete')
+    },
+    async fetchUsersList() {
+      const products =
+          (
+            await firebase
+              .database()
+              .ref(`/users/`)
+              .once('value')
+          ).val() || {}
+          console.log(JSON.parse(products), 'users');
+          this.usersList = products
     },
   },
   computed: {

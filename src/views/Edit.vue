@@ -1,9 +1,8 @@
 <template>
-  <div class="center">
+  <div >
     <Loader class="center" v-if="loading"/>
 
-    <form v-else>
-      <p>ID: {{ id }}</p>
+    <div v-else>
       <p>Title: {{ product.title }}</p>
       <p>Price: {{ product.price }} UAH</p>
       <p>Category: <span>{{selectedCategoryTitle}}</span></p>
@@ -18,7 +17,6 @@
           </option>
         </select>
       </p>
-      <p></p>
       <div class="img_container">
         <div
           class="img_wrapper"
@@ -35,7 +33,7 @@
         </div>
 
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -84,12 +82,15 @@ export default {
     flex-wrap: wrap;
     
     & .img_item {
-      max-width: 300px;
-      margin: 5px
+      max-width: 200px;
+      max-height: 250px;
+      margin: 5px;
+      transition: all ease .5s;
     }
     & .img_item:hover {
-      width: 300px;
-      margin: 5px
+      transition: all ease .5s;
+      box-shadow: 0 0 5px 5px rgba(194, 194, 194, 0.671);
+      transform: scale(1.1);
     }
   }
   .img_btn {
