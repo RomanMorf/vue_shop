@@ -228,7 +228,7 @@ export default {
       bottom: -15px;
       left: -10px;
       border-radius: 50%;
-      background-color: rgb(230, 230, 230);
+      background-color: $main_bg_color;
     }
   }
 }

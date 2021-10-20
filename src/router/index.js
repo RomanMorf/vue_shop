@@ -32,25 +32,8 @@ const routes = [
   {
     path: '/contacts',
     name: 'Contacts',
+    meta: { layout: 'main' },
     component: () => import('@/views/Contacts.vue'),
-  },
-  {
-    path: '/testpage',
-    name: 'TestPage',
-    meta: { layout: 'admin' },
-    component: () => import('@/views/TestPage.vue'),
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    meta: { layout: 'main' },
-    component: () => import('@/views/Login.vue'),
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    meta: { layout: 'main' },
-    component: () => import('@/views/Register.vue'),
   },
   {
     path: '/product/:id',
@@ -71,18 +54,65 @@ const routes = [
     component: () => import('@/views/Cabinet.vue'),
   },
   {
-    path: '/edit/:id',
-    name: 'Edit',
-    meta: { layout: 'admin' },
-    component: () => import('@/views/Edit.vue'),
-  },
-
-  {
     path: '*',
     name: 'NotFound',
     meta: { layout: 'main' },
     component: () => import('@/views/NotFound.vue'),
   },
+  //=============== LOGIN REGISTER ===============
+  {
+    path: '/login',
+    name: 'Login',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Login.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Register.vue'),
+  }, 
+  // =============================================
+
+  // =============== ADMIN ===============
+  {
+    path: '/admin/main',
+    name: 'Main',
+    meta: { layout: 'admin' },
+    component: () => import('@/views/admin/Main.vue'),
+  },
+  {
+    path: '/admin/orders',
+    name: 'Orders',
+    meta: { layout: 'admin' },
+    component: () => import('@/views/admin/Orders.vue'),
+  },
+  {
+    path: '/admin/editor',
+    name: 'Editor',
+    meta: { layout: 'admin' },
+    component: () => import('@/views/admin/Editor.vue'),
+  },
+  {
+    path: '/admin/testpage',
+    name: 'TestPage',
+    meta: { layout: 'admin' },
+    component: () => import('@/views/TestPage.vue'),
+  },
+  {
+    path: '/admin/edit/:id',
+    name: 'Edit',
+    meta: { layout: 'admin' },
+    component: () => import('@/views/admin/Edit.vue'),
+  },
+  {
+    path: '/admin/*',
+    name: 'NotFound',
+    meta: { layout: 'admin' },
+    component: () => import('@/views/NotFound.vue'),
+  },
+
+// =============================================
 ]
 
 

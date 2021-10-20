@@ -129,6 +129,7 @@ export default {
     margin: 10px;
   }
   &_card {
+    z-index: 10;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid grey;

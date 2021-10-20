@@ -8,6 +8,7 @@ import info from './info.js'
 import basket from './basket.js'
 import favorite from './favorite.js'
 import compare from './compare.js'
+import interfaceInfo from './interfaceInfo'
 
 Vue.use(Vuex)
 
@@ -35,5 +36,6 @@ export default new Vuex.Store({
     basket,
     favorite,
     compare,
+    interfaceInfo,
   },
 })

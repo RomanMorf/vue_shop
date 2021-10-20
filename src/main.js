@@ -12,6 +12,7 @@ import Modal from '@/components/Modal'
 import Vuelidate from 'vuelidate'
 
 import '@/assets/scss/style.scss'
+import '@/assets/scss/_colors.scss'
 
 
 Vue.config.productionTip = false
