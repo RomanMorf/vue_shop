@@ -6,7 +6,6 @@ import store from './store'
 import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
-import 'firebase-admin'
 
 import Loader from '@/components/Loader'
 import Modal from '@/components/Modal'
