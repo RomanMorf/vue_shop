@@ -71,44 +71,44 @@ const routes = [
     name: 'Register',
     meta: { layout: 'main' },
     component: () => import('@/views/Register.vue'),
-  }, 
+  },
   // =============================================
 
   // =============== ADMIN ===============
   {
-    path: '/admin/main',
+    path: '/admin',
     name: 'Main',
-    meta: { layout: 'admin' },
+    meta: { layout: 'admin', auth: true },
     component: () => import('@/views/admin/Main.vue'),
   },
   {
     path: '/admin/orders',
     name: 'Orders',
-    meta: { layout: 'admin' },
+    meta: { layout: 'admin', auth: true },
     component: () => import('@/views/admin/Orders.vue'),
   },
   {
     path: '/admin/editor',
     name: 'Editor',
-    meta: { layout: 'admin' },
+    meta: { layout: 'admin', auth: true },
     component: () => import('@/views/admin/Editor.vue'),
   },
   {
     path: '/admin/testpage',
     name: 'TestPage',
-    meta: { layout: 'admin' },
-    component: () => import('@/views/TestPage.vue'),
+    meta: { layout: 'admin', auth: true },
+    component: () => import('@/views/admin/TestPage.vue'),
   },
   {
     path: '/admin/edit/:id',
     name: 'Edit',
-    meta: { layout: 'admin' },
+    meta: { layout: 'admin', auth: true },
     component: () => import('@/views/admin/Edit.vue'),
   },
   {
     path: '/admin/*',
     name: 'NotFound',
-    meta: { layout: 'admin' },
+    meta: { layout: 'admin', auth: true },
     component: () => import('@/views/NotFound.vue'),
   },
 

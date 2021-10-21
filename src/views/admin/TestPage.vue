@@ -35,13 +35,13 @@
           <p class="card_text">Category: {{ pruduct.categoryName }}</p>
         </section>
         <div class="card_buttons">
-          <button @click.prevent="$router.push(`/edit/${pruduct.id}`)">Edit</button>
+          <button @click.prevent="$router.push(`/admin/edit/${pruduct.id}`)">Edit</button>
           <button @click.prevent="confirmDelete(pruduct.id, pruduct.title)">Delete</button>
         </div>
       </div>
     </div>
 
-    <Modal 
+    <Modal
       v-show="showModal"
       @close="closeModal"
     >

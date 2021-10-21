@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       menu: [
-        {title: 'Главная', path: '/admin/main', icon: 'home'},
+        {title: 'Главная', path: '/admin', icon: 'home'},
         {title: 'Заказы', path: '/admin/orders', icon: 'list_alt'},
         {title: 'Редактор', path: '/admin/editor', icon: 'edit_note'},
         {title: 'Профиль', path: '/admin/profile', icon: 'account_circle'},

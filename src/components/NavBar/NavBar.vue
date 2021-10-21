@@ -20,9 +20,10 @@
         </ul>
       </nav>
       <div class="tests_btn">
-        <a @click="$router.push('/login')">Login | </a> 
+        <a @click="$router.push('/login')">Login | </a>
         <a @click="$store.dispatch('LOGOUT')">Logout | </a>
-        <a @click="$router.push('/cabinet')">Cabinet</a>
+        <a @click="$router.push('/cabinet')">Cabinet | </a>
+        <a @click="$router.push('/admin')">ADMIN</a>
       </div>
     </div>
   </div>
@@ -39,7 +40,6 @@ export default {
         { title: 'Catalog', url: '/catalog' },
         { title: 'Delivery', url: '/delivery' },
         { title: 'Contacts', url: '/contacts' },
-        { title: 'TestPage', url: '/testpage' },
       ],
     }
   },

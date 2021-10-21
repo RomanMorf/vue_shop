@@ -2,14 +2,14 @@
   <div>
     <AdminTopBar />
 
-    <AdminSideBar 
-      :class="{close: !INTERFACE.sideBarIsOpen}" 
+    <AdminSideBar
+      :class="{close: !INTERFACE.sideBarIsOpen}"
     />
 
     <div class="content" :class="{full: !INTERFACE.sideBarIsOpen}">
-      <!-- <NavBar></NavBar> -->
-
-      <router-view />
+      <transition name="translate">
+        <router-view />
+      </transition>
     </div>
 
   </div>
@@ -55,7 +55,6 @@ export default {
   .content {
     margin-left: 300px;
     transition: all ease 0.5s;
-    margin-top: 50px;
     padding: 10px;
     z-index: 100000;
 
@@ -64,4 +63,4 @@ export default {
       transition: all ease 0.5s;
     }
   }
-</style> 
+</style>

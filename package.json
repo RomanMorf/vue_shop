@@ -7,6 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@tiptap/extension-color": "*",
+    "@tiptap/extension-text-align": "*",
+    "@tiptap/extension-text-style": "*",
     "@tiptap/starter-kit": "*",
     "@tiptap/vue-2": "*",
     "core-js": "^3.6.5",
