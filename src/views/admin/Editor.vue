@@ -1,75 +1,95 @@
 <template>
   <div>
-    <h1 class="center">Редактор текста</h1>
-    <div v-html="contacts">
+    <!-- <div class="wrapper">
+      <Tiptap></Tiptap>
+    </div> -->
 
-    </div>
-    <div class="wrapper">
-      <Tiptap
-      :modelValue="contacts"
-      @newContent="showNewContent"
-      @update="changeValue"
-      />
+    <div class="wrapper">Выберите текст для редактирования:
+      <select v-model="currentSelect">
+        <option v-for="(item, index) in PAGES" :key="index" :value="item.forselect">{{item.forselect}}</option>
+      </select>
+
+      <EditorForVue :content="content" @update:content="getUpdatedContent"/>
+
+      <button @click="seveChanges">Сохранить изменения</button>
+      <button @click="openPreview = !openPreview">Предварительный просмотр</button>
+      <transition name="scale">
+        <div v-show="openPreview" class="preview">
+          <h4 class="center">Preview</h4>
+          <span v-html="content"></span>
+        </div>
+      </transition>
+
     </div>
   </div>
 </template>
 
 <script>
+import EditorForVue from '@/components/Admin/EditorForVue'
 import Tiptap from '@/components/Admin/Tiptap'
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
     return {
-      contacts: `
-        <p>ДОСТАВКА
-          Разместите на этой странице информацию с описанием способов доставки, которые использует ваш интернет-магазин.
-
-          Например:
-
-          Наш интернет-магазин осуществляет доставку по Москве и регионам России:
-
-          Курьерская доставка по Москве — 200 руб.
-          Самовывоз из нашего пункта выдачи или розничного магазина – бесплатно!
-          Почтовая доставка по России — от 150 руб. в зависимости от адреса доставки.
-          Сроки доставки:
-
-          Курьерская доставка по Москве – на следующий день
-          Самовывоз – на следующий день
-          Почтовая доставка по России – от 3 до 14 дней в зависимости от региона
-          Доставка осуществляется бесплатно при сумме заказа более 7000 рублей.
-
-          ----
-
-          Эту страницу можно отредактировать в бэк-офисе сайта в разделе Меню и страницы.
-
-          Подробнее о создании текстовых страниц и меню, читайте в документации:
-
-          Настроить расчёт стоимости доставки при оформлении заказа можно настроить в разделе
-
-          Подробнее о настройке способов доставки, читайте в документации:
-        </p>
-      `
+      content: '',
+      current: '',
+      currentSelect: null,
+      openPreview: false,
     }
   },
+
   methods: {
-    showNewContent(content) {
-      console.log(content, 'content');
+    seveChanges() {
+      if (this.content.trim() && this.current.trim()) {
+        const data = {...this.PAGES}
+        const newData = {
+          forselect: this.current,
+          html: this.content
+        }
+        data[this.current] = newData
+        console.log(data, 'data');
+        // this.$store.dispatch('UPDATE_PAGES', data)
+      }
     },
-    changeValue(value) {
-      console.log('есть изменения');
-      this.contacts = value
+    getUpdatedContent(content) {
+      this.content = content
+    },
+  },
+
+  computed: {
+    ...mapGetters(['PAGES']),
+  },
+
+  watch: {
+    currentSelect(current) {
+      this.current = current
+      this.content = this.PAGES[current].html
     }
   },
+
   components: {
-    Tiptap,
-  }
+    EditorForVue,
+    Tiptap
+  },
+
+  async mounted() {
+    await this.$store.dispatch('FETCH_TEXTS')
+  },
 }
 </script>
+
 <style lang="scss">
 .wrapper {
-  padding: 20px;
-  margin: 10px;
+  padding: 5px;
+  margin: 5px;
   border-bottom: 1xp solid black;
+}
+.preview {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid grey;
+  border-radius: 3px;
 }
 </style>
 

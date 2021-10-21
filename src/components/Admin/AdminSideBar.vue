@@ -35,8 +35,7 @@ export default {
         {title: 'Главная', path: '/admin', icon: 'home'},
         {title: 'Заказы', path: '/admin/orders', icon: 'list_alt'},
         {title: 'Редактор', path: '/admin/editor', icon: 'edit_note'},
-        {title: 'Профиль', path: '/admin/profile', icon: 'account_circle'},
-        {title: 'Контакты', path: '/admin/contacts', icon: 'contacts'},
+        {title: 'Профили', path: '/admin/profiles', icon: 'account_circle'},
         {title: '!!! Test !!!', path: '/admin/testpage', icon: 'contacts'},
       ]
     }

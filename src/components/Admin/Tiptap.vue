@@ -134,14 +134,14 @@
 import { Editor, EditorContent } from '@tiptap/vue-2'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
+import Document from '@tiptap/extension-document'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+import TextStyle from '@tiptap/extension-text-style'
 import { Color } from '@tiptap/extension-color'
 
 export default {
   props: {
-    placeholder: {
-      type: String,
-      default: ''
-    },
     modelValue: {
       type: String,
       default: '',
@@ -184,16 +184,16 @@ export default {
         TextAlign.configure({
           types: ['heading', 'paragraph'],
         }),
+        Document,
+        Paragraph,
+        Text,
+        TextStyle,
         Color,
       ],
       onUpdate: () => {
         this.$emit('update', this.editor.getHTML())
       },
     })
-    console.log(this.editor.commands);
-    // this.editor.commands.forEach((item) => {
-    //   console.log(item, 'item')
-    // })
   },
 
   beforeDestroy() {
@@ -201,7 +201,7 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 button {
   padding: 0;
   outline: none;

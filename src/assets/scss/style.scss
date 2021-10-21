@@ -98,9 +98,19 @@ ul {
     bottom: -15px;
     left: 0;
   }
-
 }
 
+.content {
+  img {
+    max-width: 100%;
+  }
+  iframe {
+    min-width: 600px;
+    min-height: 400px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
 .unselectable {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -109,4 +119,11 @@ ul {
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
+}
+
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-right {
+  text-align: right;
 }

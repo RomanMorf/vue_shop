@@ -1,13 +1,22 @@
 <template>
   <div class="center">
-    <h1>This is an a parsonal cabinet page</h1>
-    <h2>Under development</h2>
-    <p>{{ INFO.name }}</p>
-    <p>{{ INFO.email }}</p>
-    <p>{{ INFO.tel }}</p>
-    <p>{{ INFO.role }}</p>
-    <br>
-    <button @click="showInfo">showInfo</button>
+
+    <Loader v-if="loading"/>
+    
+    <div v-if="!loading">
+      <h1>This is an a parsonal cabinet page</h1>
+      <h2>Under development</h2>
+      <p>{{ INFO.name }}</p>
+      <p>{{ INFO.email }}</p>
+      <p>{{ INFO.tel }}</p>
+      <p>Role: {{ INFO.role }}</p>
+      <br>
+
+      <div class="center" v-if="INFO.role === 'admin'" >
+        <p>Вашу ровень доступа {{ INFO.role  }}</p>
+        <button @click="$router.push('/admin')">Войти в дамин панель</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,29 +27,17 @@ export default {
   name: 'Cabinet',
   data() {
     return {
-      userInfo: null,
-
-    }
-  },
-  methods: {
-    showInfo() {
-      console.log(this.INFO, 'this.INFO from cabinete');
-    },
-    fetchProducts() {
-      this.$store.dispatch('FETCH_PRODUCTS')
+      loading: true
     }
   },
   computed: {
     ...mapGetters([
       'INFO',
-      'PRODUCTS'
     ]),
   },
-  mounted() {
-    this.$store.dispatch('FETCH_INFO')
+  async mounted() {
+    await this.$store.dispatch('FETCH_INFO')
+    this.loading = false
   },
 }
 </script>
-
-<style scoped lang='scss'>
-</style> 

@@ -1,8 +1,37 @@
-// translate
+// == translate ==
 .translate-enter-active {
+  transition: all 0.5s;
+}
+.translate-leave-active {
   transition: all 0.5s;
 }
 .translate-enter, .translate-leave-to {
   opacity: 0;
   transform: translateX(200px);
+}
+
+// == slide ==
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+// == scale ==
+.scale-enter-active {
+  transition: all .3s ease;
+}
+.scale-leave-active {
+  transition: all .3s ease;
+}
+.scale-enter, .scale-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: scale(0.6);
+  opacity: 0;
 }

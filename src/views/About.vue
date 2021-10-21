@@ -1,20 +1,24 @@
 <template>
   <div>
-    <h1 class="center">This is an about page</h1>
-
+      <div v-if="PAGES.about.html" v-html="PAGES.about.html" class="content"></div>
+      <div v-else class="center">
+        <h2>Нет информации</h2>
+        <p>Внесите данные через админ панель</p>
+      </div>
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
     return {
-      showModal: true,
+      loading: true,
     }
   },
-  components: {
+  computed: {
+    ...mapGetters(['PAGES'])
   }
 }
 </script>

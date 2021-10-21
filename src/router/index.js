@@ -49,7 +49,7 @@ const routes = [
   },
   {
     path: '/cabinet',
-    name: 'Cabinet',
+    name: 'cabinet',
     meta: { layout: 'main', auth: true },
     component: () => import('@/views/Cabinet.vue'),
   },
@@ -92,6 +92,12 @@ const routes = [
     name: 'Editor',
     meta: { layout: 'admin', auth: true },
     component: () => import('@/views/admin/Editor.vue'),
+  },
+  {
+    path: '/admin/profiles',
+    name: 'Profiles',
+    meta: { layout: 'admin', auth: true },
+    component: () => import('@/views/admin/Profiles.vue'),
   },
   {
     path: '/admin/testpage',

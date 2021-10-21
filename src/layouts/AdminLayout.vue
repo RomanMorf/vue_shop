@@ -7,7 +7,7 @@
     />
 
     <div class="content" :class="{full: !INTERFACE.sideBarIsOpen}">
-      <transition name="translate">
+      <transition name="translate" mode="out-in">
         <router-view />
       </transition>
     </div>

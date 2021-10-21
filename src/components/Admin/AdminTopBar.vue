@@ -1,14 +1,19 @@
 <template>
   <div class="top-bar">
-    ADMIN PANEL
+    <span v-if="INFO">Здравствуйте, {{ INFO.name }}</span>
     <button class="top-bar_btn" @click="$router.push('/')">Назад в магазин</button>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 
 export default {
-
+  computed: {
+    ...mapGetters([
+      'INFO',
+    ]),
+  },
 }
 </script>
 
