@@ -2,18 +2,18 @@
   <div class="side-bar">
     <button class="side-bar_btn" @click="toggleSideBar">
       <span class="material-icons-outlined" v-show="!INTERFACE.sideBarIsOpen">
-        menu  
+        menu
       </span>
       <span class="material-icons-outlined" v-show="INTERFACE.sideBarIsOpen">
         menu_open
       </span>
     </button>
     <ul class="menu">
-      <li v-for="(item, index) in menu" 
-        :key="index" class="menu_item" 
+      <li v-for="(item, index) in menu"
+        :key="index" class="menu_item"
         @click="$router.push(item.path)"
       >
-        <span class="menu_item-text">{{ item.title }}</span>  
+        <span class="menu_item-text">{{ item.title }}</span>
         <span class="menu_item-btn material-icons-outlined">
           {{ item.icon }}
         </span>
@@ -64,7 +64,7 @@ export default {
     padding-top: 50px;
     width: 300px;
     min-height: 100vh;
-    background-color: $main_bg_color;
+    background-color: rgb(201, 201, 201);
     transition: all ease 0.5s;
 
     &.close {
@@ -83,7 +83,7 @@ export default {
           right: 15px;
         }
       }
-      
+
     }
 
     &_btn{
@@ -120,4 +120,4 @@ export default {
     }
   }
 
-</style> 
+</style>

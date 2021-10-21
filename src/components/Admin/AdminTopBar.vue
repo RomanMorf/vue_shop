@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  
+
 }
 </script>
 
@@ -19,7 +19,7 @@ export default {
     text-align: center;
     width: 100%;
     height: 50px;
-    background-color: $main_bg_color;
+    background-color: rgb(201, 201, 201);
     z-index: 10;
   }
-</style> 
+</style>

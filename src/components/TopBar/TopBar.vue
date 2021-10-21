@@ -35,8 +35,8 @@
             <p class="text">{{ product.title }} </p>
             <p >{{ product.price }} UAH</p>
             <p class="unselectable">
-              <span class="btn" @click="productDecrement(product.id)">-</span> 
-                {{ product.count }} 
+              <span class="btn" @click="productDecrement(product.id)">-</span>
+                {{ product.count }}
               <span class="btn" @click="productIncrement(product.id)">+</span>
             </p>
           <button class="unselectable" @click="confrimDelete(product)">
@@ -47,7 +47,7 @@
           <p>Корзина пока пуста</p>
         </div>
       </template>
-      
+
       <template v-if="BASKET.length > 0" v-slot:bottom>
           <p>Итого: {{ totalSum }} UAH</p>
       </template>
@@ -79,7 +79,7 @@
           <p>Списоку пуст</p>
         </div>
       </template>
-    
+
     </Modal>
 
     <Modal v-show="showModalConfirmDelete" @close="showModalConfirmDelete = !showModalConfirmDelete">
@@ -228,7 +228,7 @@ export default {
       bottom: -15px;
       left: -10px;
       border-radius: 50%;
-      background-color: $main_bg_color;
+      background-color: rgb(201, 201, 201);
     }
   }
 }

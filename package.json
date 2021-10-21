@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@tiptap/starter-kit": "*",
+    "@tiptap/vue-2": "*",
     "core-js": "^3.6.5",
     "firebase": "^8.6.7",
     "material-design-icons": "^3.0.1",

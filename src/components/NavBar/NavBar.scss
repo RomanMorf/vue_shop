@@ -1,5 +1,5 @@
 .nav-bar {
-  background-color: $main_bg_color;
+  background-color: rgb(201, 201, 201);
 
   .container {
     display: flex;
@@ -15,7 +15,7 @@
 
   &:hover {
     cursor: pointer;
-    color: $hover_color;
+    color: grey;
     transition: color ease-in .3s;
   }
   &.active {
