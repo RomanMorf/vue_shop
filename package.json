@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "@tiptap/extension-color": "*",
+    "@tiptap/extension-document": "*",
+    "@tiptap/extension-paragraph": "*",
+    "@tiptap/extension-text": "*",
     "@tiptap/extension-text-align": "*",
     "@tiptap/extension-text-style": "*",
     "@tiptap/starter-kit": "*",
@@ -17,6 +20,7 @@
     "material-design-icons": "^3.0.1",
     "vue": "^2.6.14",
     "vue-router": "^3.2.0",
+    "vue2-editor": "^2.10.3",
     "vuelidate": "^0.7.6",
     "vuex": "^3.4.0"
   },
