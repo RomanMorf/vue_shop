@@ -10,6 +10,7 @@ import favorite from './favorite.js'
 import compare from './compare.js'
 import interfaceInfo from './interfaceInfo'
 import pages from './pages'
+import admin from './admin'
 
 Vue.use(Vuex)
 
@@ -39,5 +40,6 @@ export default new Vuex.Store({
     compare,
     interfaceInfo,
     pages,
+    admin,
   },
 })
