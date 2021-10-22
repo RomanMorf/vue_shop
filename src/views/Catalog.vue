@@ -79,6 +79,7 @@ export default {
   },
   async mounted() {
     this.products = await this.$store.dispatch('FETCH_PRODUCTS')
+    if (localStorage.getItem('maxProdOnPage')) this.maxProdOnPage = JSON.parse(localStorage.getItem('maxProdOnPage'))
     this.isLoding = false
   },
   components: {
@@ -123,6 +124,10 @@ export default {
           return 0;
         })
       }
+    },
+    maxProdOnPage(value){
+      console.log(value, 'maxProdOnPage');
+      localStorage.setItem('maxProdOnPage', JSON.stringify(value))
     }
   }
 }

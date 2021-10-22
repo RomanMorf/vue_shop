@@ -8,8 +8,8 @@
         <Carusel 
           v-show="product.img" 
           :caruselData="product.img"
-          :caruselWidth="450"
-          :caruselHeiht="600"
+          :caruselWidth="350"
+          :caruselHeiht="500"
           :isImages="true"
           class="inline"
         />
