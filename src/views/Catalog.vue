@@ -4,6 +4,7 @@
 
     <Loader class="center" v-if="isLoding"></Loader>
     <div v-else>
+      <ToTop />
       <div class="catalog_bar">
         <div class="filter">
           Filter
@@ -20,7 +21,7 @@
         </div>
 
         <div class="number">
-          Показывать по 
+          Показывать по
           <select name="number" id="number" v-model="maxProdOnPage">
             <option value="8">8</option>
             <option value="16">16</option>
@@ -40,8 +41,8 @@
       </div>
       <transition name="translate">
         <div v-if="showAsCards" class="card-wrapper" :class="{list: !showAsCards}">
-          <Card 
-            v-for="product in products.slice(0, maxProdOnPage)" 
+          <Card
+            v-for="product in products.slice(0, maxProdOnPage)"
             :key="product.id"
             :product="product"
           />
@@ -49,8 +50,8 @@
       </transition>
       <transition name="translate">
         <div v-if="!showAsCards" class="card-wrapper" :class="{list: !showAsCards}">
-          <CardWide 
-            v-for="product in products.slice(0, maxProdOnPage)" 
+          <CardWide
+            v-for="product in products.slice(0, maxProdOnPage)"
             :key="product.id"
             :product="product"
           />
@@ -74,7 +75,7 @@ export default {
       isLoding: true,
       showAsCards: true,
       sorting: 'default',
-      maxProdOnPage: 8, 
+      maxProdOnPage: 8,
     }
   },
   async mounted() {
@@ -154,7 +155,7 @@ export default {
     margin-right: auto;
   }
 
-  & 
+  &
   .sorting,
   .number {
     margin-right: 10px;
@@ -165,7 +166,7 @@ export default {
 .views {
   display: flex;
 
-  & 
+  &
   .cards,
   .list {
     width: 30px;

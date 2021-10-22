@@ -5,7 +5,9 @@
     <div class="container">
       <TopBar />
 
-      <router-view/>
+      <transition name="translate2" mode="out-in">
+        <router-view />
+      </transition>
     </div>
 
     <Footer />
@@ -28,5 +30,5 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  
-</style> 
+
+</style>

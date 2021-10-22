@@ -1,6 +1,6 @@
 <template>
   <transition name="translate">
-    <div class="totop" v-show="scY > 300">
+    <div class="totop" v-show="scY > 300 && scX > 600">
       <button class="totop_btn"  @click="toTop">To top</button>
     </div>
   </transition>
@@ -15,6 +15,7 @@ export default {
     return {
       scTimer: null,
       scY: 0,
+      scX: 0,
     }
   },
 
@@ -27,6 +28,7 @@ export default {
       if (this.scTimer) return;
       this.scTimer = setTimeout(() => {
         this.scY = window.scrollY;
+        this.scX = window.innerWidth;
         clearTimeout(this.scTimer);
         this.scTimer = null;
       }, 500);

@@ -10,6 +10,22 @@
   transform: translateX(200px);
 }
 
+// == translate ==
+.translate2-enter-active {
+  transition: all 0.5s;
+}
+.translate2-leave-active {
+  transition: all 0.5s;
+}
+.translate2-enter {
+  opacity: 0;
+  transform: translateX(-300px);
+}
+.translate2-leave-to {
+  opacity: 0;
+  transform: translateX(300px);
+}
+
 // == slide ==
 .slide-fade-enter-active {
   transition: all .3s ease;
