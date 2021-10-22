@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- <div class="wrapper">
-      <Tiptap></Tiptap>
-    </div> -->
 
     <div class="wrapper">Выберите текст для редактирования:
       <select v-model="currentSelect">
@@ -26,7 +23,6 @@
 
 <script>
 import EditorForVue from '@/components/Admin/EditorForVue'
-import Tiptap from '@/components/Admin/Tiptap'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -70,7 +66,6 @@ export default {
 
   components: {
     EditorForVue,
-    Tiptap
   },
 
   async mounted() {
