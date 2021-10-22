@@ -1,10 +1,10 @@
 <template>
   <div>
+    <ToTop />
+
     <div v-if="PAGES.contacts.html" v-html="PAGES.contacts.html"></div>
 
     <div v-else class="center">
-      <ToTop />
-
       <h2>Нет информации</h2>
       <p>Внесите данные через админ панель</p>
     </div>
