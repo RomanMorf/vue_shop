@@ -49,7 +49,7 @@ export default {
         }
         data[this.current] = newData
         console.log(data, 'data');
-        // this.$store.dispatch('UPDATE_PAGES', data)
+        this.$store.dispatch('UPDATE_PAGES', data)
       }
     },
     getUpdatedContent(content) {

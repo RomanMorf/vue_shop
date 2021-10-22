@@ -8,6 +8,7 @@ import 'firebase/database'
 import 'firebase/auth'
 
 import Loader from '@/components/Loader'
+import ToTop from '@/components/ToTop'
 import Modal from '@/components/Modal'
 import Vuelidate from 'vuelidate'
 
@@ -18,6 +19,7 @@ import '@/assets/scss/style.scss'
 Vue.config.productionTip = false
 
 Vue.component('Loader', Loader)
+Vue.component('ToTop', ToTop)
 Vue.component('Modal', Modal)
 
 firebase.initializeApp({

@@ -19,8 +19,6 @@
         </span>
       </li>
     </ul>
-    <!-- <button @click="toggleSideBar" v-show="INTERFACE.sideBarIsOpen">close</button>
-    <button @click="toggleSideBar" v-show="!INTERFACE.sideBarIsOpen">open</button> -->
   </div>
 </template>
 
@@ -56,11 +54,10 @@ export default {
 <style scoped lang='scss'>
   .side-bar {
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
     z-index: 11;
 
-    padding-top: 50px;
     width: 300px;
     min-height: 100vh;
     background-color: rgb(201, 201, 201);
@@ -70,15 +67,15 @@ export default {
       width: 50px;
       transition: all ease 0.5s;
       .menu_item {
-        margin: 10px 1px;
-        padding: 0;
         border-bottom: none;
+        margin: 10px 0;
 
         &-text{
-          display: none;
+          transition: all ease 0.5s;
+          left: -250px;
         }
         &-btn {
-          top: -1px;
+          top: 10px;
           right: 15px;
         }
       }
@@ -89,14 +86,13 @@ export default {
       background-color: transparent;
       border: none;
       position: absolute;
-      top: 15px;
+      top: -40px;
       left: 5px;
     }
   }
 
   .menu {
     padding: 0;
-    margin: 10px 0;
     list-style: none;
 
     &_item {
@@ -115,6 +111,17 @@ export default {
         position: absolute;
         top: 10px;
         right: 5px;
+      }
+
+      &-text{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        transition: all ease 0.5s;
+        width: 230px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

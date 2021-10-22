@@ -21,16 +21,17 @@ export default {
   actions: {
     async UPDATE_PAGES({dispatch, commit, getters}, toUpdate) {
       const updatedData = {...getters.PAGES, ...toUpdate}
-      try {
-        commit('SET_PAGES', updatedData)
-        return await firebase
-          .database()
-          .ref(`/texts/`)
-          .set(updatedData)
-      } catch (error) {
-        console.log(error.message, 'error')
-        throw error
-      }
+      console.log(updatedData, 'updatedData from store');
+      // try {
+      //   commit('SET_PAGES', updatedData)
+      //   return await firebase
+      //     .database()
+      //     .ref(`/texts/`)
+      //     .set(updatedData)
+      // } catch (error) {
+      //   console.log(error.message, 'error')
+      //   throw error
+      // }
     },
     async FETCH_TEXTS({ dispatch, commit }) {
       try {

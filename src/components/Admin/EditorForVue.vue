@@ -1,6 +1,6 @@
 <template>
   <div class="editor-wrapper">
-    <vue-editor v-model="editorContent"></vue-editor>
+    <vue-editor v-model="editorContent" :editorToolbar="customToolbar"></vue-editor>
   </div>
 </template>
 
@@ -9,6 +9,21 @@ import { VueEditor } from 'vue2-editor';
 
 export default {
   name: "Editor",
+  data() {
+    return {
+      customToolbar: [
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [
+            { align: "" },
+            { align: "center" },
+            { align: "right" },
+            { align: "justify" }
+        ],
+        [{ color: [] }]
+      ],
+    }
+  },
   props: {
     content: String
   },

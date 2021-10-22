@@ -56,7 +56,7 @@ export default {
     margin-left: 300px;
     transition: all ease 0.5s;
     padding: 10px;
-    z-index: 100000;
+    min-height: calc(100vh - 70px);
 
     &.full {
       margin-left: 50px;
