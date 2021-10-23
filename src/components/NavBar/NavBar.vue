@@ -35,11 +35,11 @@ export default {
   data() {
     return {
       links: [
-        { title: 'Home', url: '/', exact: true }, //исключить "/"
-        { title: 'About', url: '/about' },
-        { title: 'Catalog', url: '/catalog' },
-        { title: 'Delivery', url: '/delivery' },
-        { title: 'Contacts', url: '/contacts' },
+        { title: 'Главная', url: '/', exact: true }, //исключить "/"
+        { title: 'Каталог', url: '/catalog' },
+        { title: 'Доставка', url: '/delivery' },
+        { title: 'О нас', url: '/about' },
+        { title: 'Контакты', url: '/contacts' },
       ],
     }
   },

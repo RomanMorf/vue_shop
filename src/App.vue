@@ -21,6 +21,10 @@ export default {
     MainLayout,
     AdminLayout
   },
+  beforeMount() {
+    document.querySelector('.preload').style.display = 'none'
+  },
+
   async mounted() {
     await this.$store.dispatch('FETCH_INFO')
     await this.$store.dispatch('FETCH_TEXTS')

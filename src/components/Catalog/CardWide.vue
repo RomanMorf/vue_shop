@@ -31,7 +31,7 @@ export default {
   props: ['product'],
   data() {
     return {
-      flag: true, 
+      flag: true,
     }
   },
   methods: {
@@ -181,7 +181,7 @@ p {
 
   &_favorite {
     position: absolute;
-    background-image: url(../../assets/favorite_border_black_24dp.svg);
+    background-image: url(../../assets/img/favorite_border_black_24dp.svg);
     background-size: cover;
     height: 30px;
     width: 30px;
@@ -201,7 +201,7 @@ p {
 
   &_compare {
     position: absolute;
-    background-image: url(../../assets/sync_alt_black_24dp.svg);
+    background-image: url(../../assets/img/sync_alt_black_24dp.svg);
     background-size: cover;
     height: 30px;
     width: 30px;

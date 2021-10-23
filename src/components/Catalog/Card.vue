@@ -23,7 +23,7 @@
         <span class="card_active" :style="inBasket"></span>
         Busket
       </div>
-    </div> 
+    </div>
 
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       // флаг для опеределния наведения мыши. используется для динамического изменения фона
-      flag: true, 
+      flag: true,
 
     }
   },
@@ -130,7 +130,7 @@ p {
 
   &_favorite {
     position: absolute;
-    background-image: url(../../assets/favorite_border_black_24dp.svg);
+    background-image: url(../../assets/img/favorite_border_black_24dp.svg);
     background-size: cover;
     height: 30px;
     width: 30px;
@@ -150,7 +150,7 @@ p {
 
   &_compare {
     position: absolute;
-    background-image: url(../../assets/sync_alt_black_24dp.svg);
+    background-image: url(../../assets/img/sync_alt_black_24dp.svg);
     background-size: cover;
     height: 30px;
     width: 30px;
@@ -327,7 +327,7 @@ p {
 
   &_favorite {
     position: absolute;
-    background-image: url(../../assets/favorite_border_black_24dp.svg);
+    background-image: url(../../assets/img/favorite_border_black_24dp.svg);
     background-size: cover;
     height: 30px;
     width: 30px;
@@ -347,7 +347,7 @@ p {
 
   &_compare {
     position: absolute;
-    background-image: url(../../assets/sync_alt_black_24dp.svg);
+    background-image: url(../../assets/img/sync_alt_black_24dp.svg);
     background-size: cover;
     height: 30px;
     width: 30px;
