@@ -3,6 +3,14 @@
     <h1 class="center">This is an home page</h1>
     <Loader v-if="isLoading"></Loader>
     <div class="section">
+
+      <CaruselLarge
+        :caruselData="carusel"
+        :caruselWidth="1100"
+        :caruselHeiht="400"
+      />
+    </div>
+    <div class="section">
       <CatalogBlock></CatalogBlock>
     </div>
     <div class="section">
@@ -36,6 +44,7 @@
           <h3 class="card_title">УДОБНЫЕ СПОСОБЫ ОПЛАТЫ</h3>
           <p class="card_description">Твои кроссы долетят даже до Антарктиды</p>
           <BTN></BTN>
+          <span></span>
         </div>
       </div>
     </div>
@@ -46,18 +55,40 @@
 import CategoryBlock from '@/components/CategoryBlock/CategoryBlock.vue'
 import CatalogBlock from '@/components/CatalogBlock/CatalogBlock.vue'
 import BTN from '@/components/Buttons/ButtonBorderHiden.vue'
+import CaruselLarge from '@/components/CaruselLarge/CaruselLarge.vue'
 
 export default {
   name: 'Home',
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      carusel:[
+        { img:'https://static-sl.insales.ru/files/1/7093/11598773/original/slide1_2048x800_crop_top.webp',
+          title: 'Title for post',
+          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere minima aspernatur ducimus suscipit nesciunt laborum consequuntur repudiandae nemo? Doloremque nulla totam iusto corrupti voluptas adipisci sunt consequuntur, et inventore vero!',
+          btnTitle: 'В каталог',
+          btnUrl: '/catalog',
+        },
+        { img:'https://static-sl.insales.ru/files/1/7101/11598781/original/slide2_2048x800_crop_top.webp',
+          title: 'Title for post',
+          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere minima aspernatur ducimus suscipit nesciunt laborum consequuntur repudiandae nemo? Doloremque nulla totam iusto corrupti voluptas adipisci sunt consequuntur, et inventore vero!',
+          btnTitle: 'В каталог',
+          btnUrl: '/catalog',
+        },
+        { img:'https://static-sl.insales.ru/files/1/7231/11598911/original/slide3_2048x800_crop_top.webp',
+          title: 'Title for post',
+          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere minima aspernatur ducimus suscipit nesciunt laborum consequuntur repudiandae nemo? Doloremque nulla totam iusto corrupti voluptas adipisci sunt consequuntur, et inventore vero!',
+          btnTitle: 'В каталог',
+          btnUrl: '/catalog',
+        },
+      ],
     }
   },
   components: {
     CategoryBlock,
     BTN,
     CatalogBlock,
+    CaruselLarge,
   }
 }
 
