@@ -103,6 +103,7 @@ export default {
       }, this.interval)
     }
     window.addEventListener('resize', this.handleResize);
+    this.computedWidth = this.caruselWidth;
   },
 
   components: {
