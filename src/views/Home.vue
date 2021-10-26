@@ -2,8 +2,12 @@
   <div class="home">
     <h1 class="center">This is an home page</h1>
     <Loader v-if="isLoading"></Loader>
-    <div class="section">
 
+    <div class="section">
+      <SwiperPromo  :itemData="carusel"/>
+    </div>
+
+    <div class="section">
       <CaruselLarge
         :caruselData="carusel"
         :caruselWidth="1100"
@@ -57,6 +61,12 @@ import CatalogBlock from '@/components/CatalogBlock/CatalogBlock.vue'
 import BTN from '@/components/Buttons/ButtonBorderHiden.vue'
 import CaruselLarge from '@/components/CaruselLarge/CaruselLarge.vue'
 
+import SwiperPromo from '@/components/Swiper/SwiperPromo.vue'
+
+import 'swiper/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
+
 export default {
   name: 'Home',
   data() {
@@ -82,6 +92,16 @@ export default {
           btnUrl: '/catalog',
         },
       ],
+      swiperOptions : {
+        slidesPerView: 3,
+        spaceBetween: 0,
+        freeMode: true,
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+      },
     }
   },
   components: {
@@ -89,6 +109,11 @@ export default {
     BTN,
     CatalogBlock,
     CaruselLarge,
+
+    SwiperPromo,
+    swiper,
+    swiperSlide,
+
   }
 }
 

@@ -18,7 +18,7 @@
 <script>
 
 export default {
-  name: 'CaruselItem',
+  name: 'PromoSlide',
   props: ['itemData', 'caruselHeiht', 'caruselWidth'],
 }
 </script>
@@ -46,7 +46,7 @@ export default {
     padding-bottom: 5px;
     border-bottom: 2px solid rgb(224, 146, 132);
     transition: all ease .5s;
-    
+
     &:hover {
       color: rgb(197, 109, 94);
       transition: all ease .5s;
