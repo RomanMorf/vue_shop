@@ -7,7 +7,7 @@
       <CaruselLarge
         :caruselData="carusel"
         :caruselWidth="1100"
-        :caruselHeiht="400"
+        :caruselHeiht="500"
       />
     </div>
     <div class="section">
