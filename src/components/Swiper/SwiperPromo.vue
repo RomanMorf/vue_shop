@@ -48,6 +48,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+h2 {
+  margin: 0;
+}
 .slide {
   &_body {
     position: relative;
@@ -74,6 +77,20 @@ export default {
     &:hover {
       color: rgb(197, 109, 94);
       transition: all ease .5s;
+    }
+  }
+}
+@media (max-width: 800px) {
+  .slide {
+    &_body {
+      p {
+        display: none;
+      }
+    }
+    &_promo {
+      position: absolute;
+      top: 15%;
+      left: 40%;
     }
   }
 }

@@ -1,9 +1,13 @@
 @import './animations';
 @import './variables.scss';
 @import './colors';
+@import '@/assets/scss/variables';
 
 * {
   box-sizing: border-box;
+}
+body {
+  min-width: 350px;
 }
 
 p {
@@ -101,6 +105,34 @@ ul {
   }
 }
 
+.btn.bottom-swipe {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+  transition: all 600ms ease;
+
+  .btn_text:hover {
+    transition: all 600ms ease;
+    color: $hover_color_main;
+  }
+  .btn_text::after {
+    content: "";
+    border: 1px solid $hover_color_main;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    left: 0;
+    transition: all 600ms ease;
+    z-index: -1;
+  }
+  .btn_text:hover::after {
+    left: 100px;
+    transition: all 800ms ease;
+  }
+}
+
+
 .content {
   padding: 5px;
   img {
@@ -147,5 +179,11 @@ ul {
 
   .swiper-pagination-bullet-active {
     background: #e09284;
+  }
+}
+
+@media (max-width: 580px){
+  body {
+    font-size: 12px;
   }
 }

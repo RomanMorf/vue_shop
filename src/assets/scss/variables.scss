@@ -1,8 +1,18 @@
-$bg_color_main: rgb(201, 201, 201);
-$bg_color_secondary: rgb(201, 201, 201);
+// $bg_color_main: rgb(236, 133, 108);
+$bg_color_main: #ff8883;
+$bg_color_secondary: #c25c59;
+$bg_color_third: #2EE59D;
 
-$color_main: rgb(197, 109, 94);
-$color_secondary: rgb(197, 109, 94);
+$bg_color_main_05: rgba(236, 134, 108, 0.5);
 
-$hover_color_main: rgb(197, 109, 94);
-$hover_color_secondary: grey;
+
+// $color_main: rgb(236, 133, 108);
+$color_main: #ffc2bb;
+$color_secondary: rgb(236, 133, 108);
+$color_third: #2EE59D;
+
+$hover_color_main: rgb(143, 89, 77);
+$hover_color_secondary: rgba(202, 202, 202, 0.719);
+$hover_color_third: #2EE59D;
+
+$box_shadow_main: 1px 2px 8px 2px grey;

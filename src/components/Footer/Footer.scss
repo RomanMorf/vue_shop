@@ -1,8 +1,11 @@
+@import '@/assets/scss/variables.scss';
+
 .footer {
   margin-top: 80px;
 
   &_wrapper {
-    background-color: rgba(121, 116, 92, 0.445);
+    background-color: $bg_color_main;
+    padding: 0 5px;
   }
   
   .container {
@@ -59,5 +62,19 @@
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer {
+    .section, 
+    .copiright, 
+    .logo {
+      display: none;
+    }
+    .container {
+      justify-content: space-around;
+      padding: 0 5px;
+    }
   }
 }

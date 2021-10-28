@@ -74,9 +74,12 @@ export default {
 }
 table {
   margin: 0 auto;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 tr {
   margin-bottom: 10px;
+  white-space: break-spaces;
   td {
     padding: 10px;
     margin-right: 50px;
@@ -86,23 +89,54 @@ tr {
     font-weight: 700;
   }
 }
-  tr {
-    position: relative;
-    background-color: rgba(194, 193, 193, 0.1);
-    transition: all ease .5s
-  }
-  tr:nth-child(odd) {
-    background-color: rgba(194, 193, 193, 0.25);
-    transition: all ease .5s
-  }
-  tr:hover,
-  tr:nth-child(odd):hover {
-    background-color: rgba(194, 193, 193, 0.55);
-    transition: all ease .5s
-  }
-
+tr {
+  position: relative;
+  background-color: rgba(194, 193, 193, 0.1);
+  transition: all ease .5s
+}
+tr:nth-child(odd) {
+  background-color: rgba(194, 193, 193, 0.25);
+  transition: all ease .5s
+}
+tr:hover,
+tr:nth-child(odd):hover {
+  background-color: rgba(194, 193, 193, 0.55);
+  transition: all ease .5s
+}
 img {
   max-width: 150px;
 }
 
-</style> 
+@media screen and (max-width: 900px){
+  img {
+    max-width: 100px;
+  }
+  tr {
+    td:first-child {
+      padding-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 580px){
+  tr {
+    font-size: 12px;
+
+    td {
+      padding: 5px;
+      font-size: 10px;
+    }
+    td:first-child {
+      padding-right: 5px;
+      font-weight: 700;
+    }
+
+  }
+  img {
+    max-width: 50px;
+  }
+
+}
+
+
+</style>

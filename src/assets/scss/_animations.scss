@@ -51,3 +51,35 @@
   transform: scale(0.6);
   opacity: 0;
 }
+
+// == scale ==
+.table-enter-active, .table-leave-active {
+transition: all 1s;
+}
+.table-enter, .table-leave-to{
+opacity: 0;
+transform: translateY(-30px);
+}
+.table-move {
+  opacity: 0;
+}
+
+
+// == bounce ==
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

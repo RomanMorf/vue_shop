@@ -97,6 +97,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/variables.scss';
+
 p {
   padding: 0;
   margin: 0;
@@ -111,7 +113,7 @@ p {
   overflow: hidden;
 
   &:hover {
-    box-shadow: 0 0 2px 3px rgba(206, 201, 201, 0.425);
+    box-shadow: 0 0 2px 3px $bg_color_main;
   }
   &_category {
     position: absolute;
@@ -195,6 +197,7 @@ p {
       padding: 5px 10px;
       display: inline-block;
       border-radius: 3px;
+      transition: all .5s ease;
 
       &.white {
         background-color: white;
@@ -212,7 +215,8 @@ p {
       }
 
       &:hover {
-        box-shadow: 0 0 3px 5px rgba(206, 201, 201, 0.425);
+        transition: all .5s ease;
+        box-shadow: 0 0 3px 3px $hover_color_main;
       }
     }
 
@@ -223,7 +227,7 @@ p {
   }
 
   &_busket {
-    border-bottom: 2px solid rgb(165, 165, 165);
+    border-bottom: 2px solid black;
     width: 50px;
     margin: 10px 0;
     font-weight: bold;
@@ -237,146 +241,11 @@ p {
     }
 
     &:hover {
-      color: rgb(165, 165, 165);
+      color: $hover_color_main;
       transition: all 0.2s ease-in;
+      border-bottom: 2px solid $hover_color_main;
     }
   }
-}
-.wide {
-  margin: 10px 20px 10px 0;
-  width: 100%;
-  min-height: 100px;
-  border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-
-  &:hover {
-    box-shadow: 0 0 2px 3px rgba(206, 201, 201, 0.425);
-  }
-
-  &_img {
-    background-position: center;
-    height: 200px;
-    width: 150px;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-  &_info {
-    padding: 10px;
-
-    &_color {
-      font-weight: 300;
-      font-size: 13px;
-    }
-
-    &_btn {
-      border: 1px solid gray;
-      margin-right: 5px;
-      padding: 5px 10px;
-      display: inline-block;
-      border-radius: 3px;
-
-      &.white {
-        background-color: white;
-        color: black;
-      }
-
-      &.black {
-        background-color: black;
-        color: white;
-      }
-
-      &.brown {
-        background-color: rgb(131, 64, 1);
-        color: black;
-      }
-
-      &:hover {
-        box-shadow: 0 0 3px 5px rgba(206, 201, 201, 0.425);
-      }
-    }
-
-    &_price {
-      font-weight: bold;
-      margin-top: 15px;
-    }
-  }
-
-  &_busket {
-    border-bottom: 2px solid rgb(165, 165, 165);
-    width: 50px;
-    font-weight: bold;
-    transition: all 0.2s ease-in;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-
-    & .wide_active{
-      top: -5px;
-      right: -15px;
-      display: none;
-    }
-
-    &:hover {
-      color: rgb(165, 165, 165);
-      transition: all 0.2s ease-in;
-    }
-  }
-
-  &_favorite {
-    position: absolute;
-    background-image: url(../../assets/img/favorite_border_black_24dp.svg);
-    background-size: cover;
-    height: 30px;
-    width: 30px;
-    right: 10px;
-    top: 10px;
-    transition: transform 0.3s ease;
-
-    & img {
-      width: 100%;
-    }
-
-    &:hover {
-      transform: scale(1.2);
-      transition: transform 0.3s ease-in;
-    }
-  }
-
-  &_compare {
-    position: absolute;
-    background-image: url(../../assets/img/sync_alt_black_24dp.svg);
-    background-size: cover;
-    height: 30px;
-    width: 30px;
-    right: 10px;
-    top: 50px;
-    transition: all 0.3s ease-in;
-
-    &:hover {
-      transform: scale(1.2);
-      transition: all 0.3s ease-in;
-    }
-
-    & .wide_active{
-      top: 15px;
-      right: 0px;
-      display: none;
-    }
-  }
-
-  &_active {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-image: url('./../../assets/img/checked.png');
-    background-size: cover;
-    width: 15px;
-    height: 15px;
-  }
-
 }
 
 </style>

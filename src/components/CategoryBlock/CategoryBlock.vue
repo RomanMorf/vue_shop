@@ -1,15 +1,26 @@
 <template>
-  <div class="category">
-    <img src="https://static-sl.insales.ru/images/products/1/1891/300566371/large_13258025-1-black.jpeg" alt="">
-    <h2 class="h2">Название категории</h2>
-    <p>Текст блока на главной 1</p>
-    <span>Смотреть</span>
+  <div class="category" :style="styleObject">
+    <h2>{{ data.title }}</h2>
+    <p>{{ data.text }}</p>
+    <button @click.prevent="$router.push(data.btnUrl)">{{ data.btnTitle }}</button>
   </div>
 </template>
 
 <script>
 export default {
-  
+  props: ['data'],
+  computed: {
+    isFvorite() {
+      const id = this.product.id
+        const index = this.FAVORITE.findIndex((el) => el.id === id)
+        if (index !== -1) {
+          return { backgroundImage: `url("${require('@/assets/img/favorite_black_24dp.svg')}")` }
+        }
+    },
+    styleObject() {
+      return `background-image: linear-gradient(rgba(255, 255, 255, 0.45) 0%, rgba(255, 247, 247, 0.15) 50%, rgba(255, 255, 255, 0.45) 100%), url('${this.data.img}')`
+    },
+  }
 }
 </script>
 

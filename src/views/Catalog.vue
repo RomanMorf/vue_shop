@@ -12,7 +12,7 @@
 
         <div class="sorting">
           Сортировка
-          <select name="sorting" id="sorting" v-model="sorting">
+          <select name="sorting" class="sorting_select" id="sorting" v-model="sorting">
             <option disabled value="default">по умолчанию</option>
             <option value="minToMax">по возростанию цены</option>
             <option value="maxToMin">по убыванию цены</option>
@@ -135,6 +135,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/variables.scss';
+
 .card-wrapper {
   display: flex;
   justify-content: space-around;
@@ -161,6 +163,10 @@ export default {
     margin-right: 10px;
   }
 
+  select {
+    border: none;
+    border-bottom: 1px solid #000;
+  }
 }
 
 .views {
@@ -175,14 +181,14 @@ export default {
     padding: 3px;
 
     &.active {
-      background-color:rgb(201, 201, 201);
+      background-color:$bg_color_main;
       & .cards_icon {
         &.vertical {
           &::before {
-            background-color: rgb(201, 201, 201);
+            background-color: $bg_color_main;
           }
           &::after {
-            background-color: rgb(201, 201, 201);
+            background-color: $bg_color_main;
           }
         }
       }
@@ -268,5 +274,6 @@ export default {
     }
   }
 }
+
 
 </style>

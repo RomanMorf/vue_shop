@@ -3,10 +3,11 @@
     <div class="window_inner" @click="catchEvent">
       <div class="window_container">
 
+
         <section class="window_header header">
           <slot name="header"></slot>
         </section>
-        
+
         <section class="window_content content">
           <slot name="content"></slot>
         </section>
@@ -16,7 +17,7 @@
         </section>
 
         <section class="window_footer footer">
-          <slot name="footer"></slot>
+            <slot name="footer"></slot>
         </section>
 
         <section>
@@ -26,7 +27,6 @@
             </span>
           </slot>
         </section>
-        
       </div>
     </div>
   </div>
@@ -52,6 +52,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/variables.scss';
+
   .window {
     position: fixed;
     left: 0px;
@@ -60,7 +62,7 @@ export default {
     bottom: 0px;
     z-index: 1000;
     background-color: rgba(0, 0, 0, .4);
-    
+
     &_inner {
       width: 100%;
       height: 100%;
@@ -85,8 +87,9 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       align-items: stretch;
+
     }
-    
+
     &_header, &_footer {
       display: flex;
       justify-content: space-around;
@@ -99,6 +102,15 @@ export default {
     &_content {
       max-height: 500px;
       overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        background-color: #f9f9fd;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: $bg_color_secondary;
+      }
     }
 
     &_close {
@@ -108,14 +120,14 @@ export default {
       right: -10px;
       top: -10px;
       transition: all .5s;
-      background-color: rgb(128, 128, 128);
+      background-color: $bg_color_main;
       border-radius: 10px;
       padding: 10px 10px 0 0;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
       &:active,
       &:hover {
-        background-color: rgb(155, 155, 155);
+        background-color: $hover_color_main;
         box-shadow: -5px 6px 9px 3px rgb(122 122 122 / 48%);
       }
     }

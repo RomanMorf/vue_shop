@@ -29,20 +29,23 @@
       </template>
 
       <template  v-slot:content>
-        <div class="content" v-for="product in BASKET" :key="product.id">
-          <img v-if="product.img" :src="product.img[0]" alt="product.title" @click="goToProduct(product.id)">
-          <img v-if="!product.img" :src="'https://i.stack.imgur.com/y9DpT.jpg'" alt="product.title" @click="goToProduct(product.id)">
-            <p class="text">{{ product.title }} </p>
-            <p >{{ product.price }} UAH</p>
-            <p class="unselectable">
-              <span class="btn" @click="productDecrement(product.id)">-</span>
-                {{ product.count }}
-              <span class="btn" @click="productIncrement(product.id)">+</span>
-            </p>
-          <button class="unselectable" @click="confrimDelete(product)">
-            <span class="material-icons-outlined md-30">delete</span>
-          </button>
-        </div>
+        <transition-group name="translate">
+          <div class="content" v-for="product in BASKET" :key="product.id">
+            <img v-if="product.img" :src="product.img[0]" alt="product.title" @click="goToProduct(product.id)">
+            <img v-if="!product.img" :src="'https://i.stack.imgur.com/y9DpT.jpg'" alt="product.title" @click="goToProduct(product.id)">
+              <p class="text">{{ product.title }} </p>
+              <p >{{ product.price }} UAH</p>
+              <p class="unselectable">
+                <span class="btn" @click="productDecrement(product.id)">-</span>
+                  {{ product.count }}
+                <span class="btn" @click="productIncrement(product.id)">+</span>
+              </p>
+            <button class="unselectable" @click="confirmDelete(product)">
+              <span class="material-icons-outlined md-30">delete</span>
+            </button>
+          </div>
+        </transition-group>
+
         <div v-if="BASKET.length === 0">
           <p>Корзина пока пуста</p>
         </div>
@@ -53,11 +56,10 @@
       </template>
 
       <template v-if="BASKET.length > 0" v-slot:footer>
-        <button>Продолжить покупки</button>
-        <button>Оформить заказ</button>
-        <button>Очистить корзину</button>
+        <button class="modal_btn" @click="closeModalBasket">Продолжить покупки</button>
+        <button class="modal_btn">Оформить заказ</button>
+        <button class="modal_btn" @click="confirmClearBasket">Очистить корзину</button>
       </template>
-
     </Modal>
 
     <Modal v-show="showModalFavorite" @close="showModalFavorite = !showModalFavorite">
@@ -66,18 +68,23 @@
       </template>
 
       <template  v-slot:content>
-        <div class="content" v-for="product in FAVORITE" :key="product.id">
-          <img v-if="product.img" :src="product.img[0]" alt="product.title" @click="goToProduct(product.id)">
-            <p class="text">{{ product.title }}</p>
-          <button @click="deleteProductFromFavorite(product.id)">
-            <span class="material-icons-outlined md-30">delete</span>
-          </button>
-
-        </div>
-
+        <transition-group name="translate">
+          <div class="content" v-for="product in FAVORITE" :key="product.id">
+            <img v-if="product.img" :src="product.img[0]" alt="product.title" @click="goToProduct(product.id)">
+              <p class="text">{{ product.title }}</p>
+            <button @click="deleteProductFromFavorite(product.id)">
+              <span class="material-icons-outlined md-30">delete</span>
+            </button>
+          </div>
+        </transition-group>
         <div v-if="FAVORITE.length === 0">
           <p>Списоку пуст</p>
         </div>
+      </template>
+
+      <template v-if="BASKET.length > 0" v-slot:footer>
+        <button class="modal_btn" @click="closeModalFavorite">Продолжить покупки</button>
+        <button class="modal_btn">Добавить <span v-if="FAVORITE.length > 1">всё</span> в корзину</button>
       </template>
 
     </Modal>
@@ -88,10 +95,20 @@
         <p class="center"> что хотите удалить товар <span class="bold">{{ productNameForDelete }}</span> из корзины ?</p>
       </template>
       <template v-slot:footer>
-        <button @click="deleteProductFromBasket(productIdForDelete)">Да</button>
-        <button @click="showModalConfirmDelete = !showModalConfirmDelete">Отмена</button>
+        <button class="modal_btn" @click="deleteProductFromBasket(productIdForDelete)">Да</button>
+        <button class="modal_btn" @click="showModalConfirmDelete = !showModalConfirmDelete">Отмена</button>
       </template>
+    </Modal>
 
+    <Modal v-show="showConfirmClearBasket" @close="showConfirmClearBasket = !showConfirmClearBasket">
+      <template v-slot:content>
+        <h3 class="center">Вы уверенны,</h3>
+        <p class="center"> что хотите очистить корзину ?</p>
+      </template>
+      <template v-slot:footer>
+        <button v-show="showConfirmClearBasket" class="modal_btn" @click="cleareBasket">Очистить корзину</button>
+        <button v-show="showConfirmClearBasket" class="modal_btn" @click="showConfirmClearBasket = !showConfirmClearBasket">Отмена</button>
+      </template>
     </Modal>
 
   </div>
@@ -106,6 +123,7 @@ export default {
       showModalBasket: false,
       showModalFavorite: false,
       showModalConfirmDelete: false,
+      showConfirmClearBasket: false,
       productNameForDelete: '',
       productIdForDelete: '',
     }
@@ -117,10 +135,14 @@ export default {
     closeModalFavorite() {
       this.showModalFavorite = false
     },
-    confrimDelete(product) {
+    confirmDelete(product) {
       this.productNameForDelete = product.title
       this.productIdForDelete = product.id
       this.showModalConfirmDelete = true
+    },
+    confirmClearBasket() {
+      this.closeModalBasket()
+      this.showConfirmClearBasket = true
     },
     deleteProductFromBasket(id) {
       this.$store.dispatch('DELETE_FROM_BASKET', id)
@@ -141,8 +163,11 @@ export default {
     },
     productDecrement(id) {
       this.$store.dispatch('BASKET_PRODUCT_DECREMENT', id)
-    }
-
+    },
+    cleareBasket() {
+      this.$store.dispatch('CLEARE_BASKET')
+      this.showConfirmClearBasket = false
+    },
   },
   computed: {
     ...mapGetters(['BASKET', 'FAVORITE', 'COMPARE']),
@@ -158,6 +183,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/variables.scss';
+
 .btn {
   cursor: pointer;
 }
@@ -195,7 +222,7 @@ export default {
 }
 
 .bar {
-  border-bottom: 1px solid rgba(146, 146, 146, 0.5);
+  border-bottom: 1px solid $bg_color_main;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -228,7 +255,8 @@ export default {
       bottom: -15px;
       left: -10px;
       border-radius: 50%;
-      background-color: rgb(201, 201, 201);
+      background-color: $bg_color_main;
+      box-shadow: $box-shadow_main;
     }
   }
 }
@@ -241,4 +269,38 @@ export default {
 .material-icons-outlined.md-30 {
   font-size: 30px;
 }
+
+.modal_btn {
+  background-color: $bg_color_main;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 5px 5px  rgba(0,0,0,0.12), 3px 5px 5px rgba(0,0,0,0.24);
+  transition: all .5s ease;
+  &:hover {
+    transition: all .5s ease;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 10px  rgba(0,0,0,0.12), 5px 10px 10px rgba(0,0,0,0.24);
+  }
+}
+
+@media (max-width: 580px){
+  .material-icons.md-40 {
+    font-size: 30px;
+  }
+  .material-icons-outlined.md-40 {
+    font-size: 30px;
+  }
+  .material-icons-outlined.md-30 {
+    font-size: 30px;
+  }
+  .bar_logo {
+    display: none;
+  }
+  .bar_btn_number {
+    bottom: -12px;
+    left: 0px;
+  }
+}
+
 </style>

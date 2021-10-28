@@ -4,11 +4,11 @@
       <div class="section">
         <h2>Shoes</h2>
         <p>
-          Если вы ищете изысканную обувь, 
-          которая бы нравилась вам по дизайну 
-          и отвечала функциональным требованиям, 
-          и в то же время вы готовы сэкономить 
-          свое время, то наш интернет-магазин - 
+          Если вы ищете изысканную обувь,
+          которая бы нравилась вам по дизайну
+          и отвечала функциональным требованиям,
+          и в то же время вы готовы сэкономить
+          свое время, то наш интернет-магазин -
           это идеальный вариант для вас.
         </p>
       </div>
@@ -52,7 +52,7 @@
           <img class="social-img" src="@/assets/img/social/005-telegram.svg" alt="telegram">
         </div>
         <div class="copiright">
-          <a href="http://www.copyright.ru/ru/documents/zashita_avtorskih_prav/znak_ohrani_avtorskih_i_smegnih_prav/">Copiright ©</a>
+          <a href="http://www.copyright.ru/ru/documents/zashita_avtorskih_prav/znak_ohrani_avtorskih_i_smegnih_prav/">Copiright © Romario inc. 2021</a>
         </div>
       </div>
     </div>
@@ -68,4 +68,4 @@ export default {
 
 <style scoped lang='scss'>
   @import 'Footer.scss';
-</style> 
+</style>

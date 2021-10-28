@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  
+
 }
 </script>
 
@@ -31,5 +31,5 @@ export default {
     left: 100px;
     transition: all 800ms ease;
   }
-}  
+}
 </style>

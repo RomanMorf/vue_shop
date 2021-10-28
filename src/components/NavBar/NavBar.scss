@@ -1,5 +1,7 @@
+@import '@/assets/scss/variables.scss';
+
 .nav-bar {
-  background-color: rgb(201, 201, 201);
+  background-color: $bg_color_main;
 
   .container {
     display: flex;
@@ -15,7 +17,7 @@
 
   &:hover {
     cursor: pointer;
-    color: grey;
+    color: $hover_color_main;
     transition: color ease-in .3s;
   }
   &.active {
@@ -33,5 +35,11 @@
 
   &_img {
     max-width: 70px;
+  }
+}
+
+@media (max-width: 580px){
+  .logo {
+    display: none;
   }
 }

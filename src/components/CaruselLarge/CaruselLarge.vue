@@ -62,7 +62,7 @@ export default {
           this.computedWidth =  window.innerWidth
         }
 
-        console.log(this.computedWidth, 'this.computedWidth');
+        // console.log(this.computedWidth, 'this.computedWidth');
 
         clearTimeout(this.sizeTimer);
         this.sizeTimer = null;

@@ -91,6 +91,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/variables.scss';
+
 p {
   padding: 0;
   margin: 0;
@@ -106,7 +108,7 @@ p {
   display: flex;
 
   &:hover {
-    box-shadow: 0 0 2px 3px rgba(206, 201, 201, 0.425);
+    box-shadow: 0 0 2px 3px $bg_color_main;
   }
 
   &_img {
@@ -148,7 +150,7 @@ p {
       }
 
       &:hover {
-        box-shadow: 0 0 3px 5px rgba(206, 201, 201, 0.425);
+        box-shadow: 0 0 3px 5px $hover_color_main;
       }
     }
 
@@ -174,8 +176,10 @@ p {
     }
 
     &:hover {
-      color: rgb(165, 165, 165);
+      color: $hover_color_main;
       transition: all 0.2s ease-in;
+        border-bottom: 2px solid $hover_color_main;
+
     }
   }
 

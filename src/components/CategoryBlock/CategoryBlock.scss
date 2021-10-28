@@ -1,40 +1,79 @@
+@import '@/assets/scss/variables';
+
 .category {
-  display: flex;
-  flex-direction: column;
-  background-color: blanchedalmond;
-  border: 1px solid black;
-  width: 32%;
-  min-height: 250px;
-  position: relative;
+  max-width: 95%;
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+  padding: 10px;
+  margin: 5px;
+  width: 100%;
+  font-size: 20px;
+  transition: all .5s ease;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.45) 0%, rgba(255, 247, 247, 0.15) 50%, rgba(255, 255, 255, 0.45) 100%), url('https://static-sl.insales.ru/images/products/1/1891/300566371/large_13258025-1-black.jpeg');
   
   &:hover {
-      color: rgb(53, 43, 26);
-      box-shadow: 0 14px 28px rgba(170, 47, 47, 0.363), 0 10px 10px rgba(0, 0, 0, 0.22);
+    transition: all .5s ease;
+    color: $hover_color_main;
+    & button {
+      transition: all .5s ease;
+      color: $hover_color_main;
+      border-bottom: 3px solid $hover_color_main;
     }
-  
-  img {
-    filter: alpha(Opacity=75); 
-    opacity: 0.75; 
   }
-
   h2 {
-    position: absolute;
-    top: 20px;
-    left: 30px;
+    margin: 10px 0;
   }
 
-  p {
-    position: absolute;
-    top: 80px;
-    left: 30px;
-  }
-
-  span {
-    position: absolute;
-    top: 110px;
-    left: 30px;
-    border-bottom: 1px solid #000;
+  button {
+    border: none;
+    background-color: transparent;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all .5s ease;
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #000;
 
   }
 }
+
+// .category {
+//   display: flex;
+//   flex-direction: column;
+//   background-color: blanchedalmond;
+//   border: 1px solid black;
+//   width: 32%;
+//   min-height: 250px;
+//   position: relative;
+  
+//   &:hover {
+//       color: rgb(53, 43, 26);
+//       box-shadow: 0 14px 28px rgba(170, 47, 47, 0.363), 0 10px 10px rgba(0, 0, 0, 0.22);
+//     }
+  
+//   img {
+//     filter: alpha(Opacity=75); 
+//     opacity: 0.75; 
+//   }
+
+//   h2 {
+//     position: absolute;
+//     top: 20px;
+//     left: 30px;
+//   }
+
+//   p {
+//     position: absolute;
+//     top: 80px;
+//     left: 30px;
+//   }
+
+//   span {
+//     position: absolute;
+//     top: 110px;
+//     left: 30px;
+//     border-bottom: 1px solid #000;
+//   }
+// }
   
