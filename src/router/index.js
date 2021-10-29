@@ -42,7 +42,13 @@ const routes = [
     component: () => import('@/views/Product.vue'),
   },
   {
-    path: '/compare/',
+    path: '/order',
+    name: 'Order',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Order.vue'),
+  },
+  {
+    path: '/compare',
     name: 'Compare',
     meta: { layout: 'main' },
     component: () => import('@/views/Compare.vue'),

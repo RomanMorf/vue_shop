@@ -37,6 +37,10 @@ export default {
         localStorage.setItem('favorite', JSON.stringify(favorite))
       }
     },
+    FAVORITE_CLEAR({ dispatch, commit, getters }) {
+      commit('CLEAR_FAVORITE')
+      localStorage.removeItem('favorite')
+    }
   },
   getters: {
     FAVORITE: (s) => s.favorite,

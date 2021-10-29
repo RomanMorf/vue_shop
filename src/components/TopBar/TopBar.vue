@@ -35,7 +35,7 @@
             <img v-if="!product.img" :src="'https://i.stack.imgur.com/y9DpT.jpg'" alt="product.title" @click="goToProduct(product.id)">
               <p class="text">{{ product.title }} </p>
               <p >{{ product.price }} UAH</p>
-              <p class="unselectable">
+              <p class="unselectable nowrap">
                 <span class="btn" @click="productDecrement(product.id)">-</span>
                   {{ product.count }}
                 <span class="btn" @click="productIncrement(product.id)">+</span>
@@ -57,7 +57,7 @@
 
       <template v-if="BASKET.length > 0" v-slot:footer>
         <button class="modal_btn" @click="closeModalBasket">Продолжить покупки</button>
-        <button class="modal_btn">Оформить заказ</button>
+        <button class="modal_btn" @click="createNewOrder">Оформить заказ</button>
         <button class="modal_btn" @click="confirmClearBasket">Очистить корзину</button>
       </template>
     </Modal>
@@ -82,9 +82,9 @@
         </div>
       </template>
 
-      <template v-if="BASKET.length > 0" v-slot:footer>
+      <template v-if="FAVORITE.length > 0" v-slot:footer>
         <button class="modal_btn" @click="closeModalFavorite">Продолжить покупки</button>
-        <button class="modal_btn">Добавить <span v-if="FAVORITE.length > 1">всё</span> в корзину</button>
+        <button class="modal_btn" v-show="FAVORITE.length > 0" @click="addAllToBasket">Добавить <span v-if="FAVORITE.length > 1">всё</span> в корзину</button>
       </template>
 
     </Modal>
@@ -168,6 +168,24 @@ export default {
       this.$store.dispatch('CLEARE_BASKET')
       this.showConfirmClearBasket = false
     },
+    addAllToBasket() {
+      if (this.FAVORITE.length === 1) {
+        this.$store.dispatch('ADD_TO_BASKET', this.FAVORITE[0])
+        this.$store.dispatch('FAVORITE_CLEAR')
+      }
+
+      if (this.FAVORITE.length > 1) {
+        this.FAVORITE.forEach(el => {
+          this.$store.dispatch('ADD_TO_BASKET', el)
+        })
+        this.$store.dispatch('FAVORITE_CLEAR')
+      }
+    },
+    createNewOrder() {
+      this.$store.dispatch('CREATE_NEW_ORDER', this.BASKET)
+      this.$router.push('/order')
+      this.closeModalBasket()
+    }
   },
   computed: {
     ...mapGetters(['BASKET', 'FAVORITE', 'COMPARE']),
@@ -188,6 +206,7 @@ export default {
 .btn {
   cursor: pointer;
 }
+
 .content {
   min-width: 40vw;
   max-width: 90vw;
@@ -305,6 +324,11 @@ export default {
   .bar_btn_number {
     bottom: -12px;
     left: 0px;
+  }
+  .content {
+    & img {
+      max-width: 50px;
+    }
   }
 }
 

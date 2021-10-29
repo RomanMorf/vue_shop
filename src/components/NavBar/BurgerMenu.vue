@@ -34,7 +34,7 @@ export default {
 
 .burger {
   position: absolute;
-  min-width: 300px;
+  min-width: 250px;
   max-width: 500px;
   min-height: 300px;
   top: 0;
@@ -47,6 +47,7 @@ export default {
   &_list {
     margin-top: 50px;
     list-style: none;
+    padding-inline-start: 20px;
   }
 
   &_link {
@@ -71,11 +72,17 @@ export default {
     top: 10px;
     right: 10px;
     cursor: pointer;
+    opacity: 0;
   }
+
 
   &.active {
     left: 0;
     transition: all .5s ease;
+    & .burger_btn {
+      transition: 1.5s all .5s ease;
+      opacity: 1;
+    }
   }
 }
 </style>

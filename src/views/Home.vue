@@ -16,6 +16,8 @@
         <swiper-slide v-for="(item, index) in PRODUCTS" :key="index">
           <Card :product="item" />
         </swiper-slide>
+        <div class="swiper-button-prev color" slot="button-prev"></div>
+        <div class="swiper-button-next color" slot="button-next"></div>
       </swiper>
     </div>
 
@@ -109,7 +111,7 @@ export default {
       swiperOptionsCards : {
         slidesPerView: 4,
         spaceBetween: 10,
-        freeMode: true,
+        freeMode: false,
         loop: true,
         breakpoints: {
           400: {
@@ -128,7 +130,12 @@ export default {
             slidesPerView: 4,
             spaceBetween: 20
           },
-        }
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+
       },
       dataForCatalogBlock: [
         { img: 'https://img.joomcdn.net/de0b6cef2a42d2cab9db6641426b3c26452ac793_original.jpeg',
@@ -225,6 +232,10 @@ export default {
     width: 100%;
     margin: 10px;
     flex-direction: row;
+  }
+  .swiper-button-next.color,
+  .swiper-button-prev.color {
+    color: $bg_color_main;
   }
 
 @media screen and (max-width: 700px) {

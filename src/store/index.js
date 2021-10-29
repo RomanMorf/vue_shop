@@ -11,6 +11,7 @@ import compare from './compare.js'
 import interfaceInfo from './interfaceInfo'
 import pages from './pages'
 import admin from './admin'
+import orders from './orders'
 
 Vue.use(Vuex)
 
@@ -41,5 +42,6 @@ export default new Vuex.Store({
     interfaceInfo,
     pages,
     admin,
+    orders,
   },
 })
