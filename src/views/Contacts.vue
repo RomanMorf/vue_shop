@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <ToTop />
 
     <div v-if="PAGES.contacts.html" v-html="PAGES.contacts.html"></div>

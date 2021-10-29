@@ -1,5 +1,5 @@
 <template>
-  <div class="delivery">
+  <div class="page">
     <ToTop />
 
     <div v-if="PAGES.delivery.html" v-html="PAGES.delivery.html" class="content"></div>

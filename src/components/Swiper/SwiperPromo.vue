@@ -51,28 +51,36 @@ export default {
 h2 {
   margin: 0;
 }
+
 .slide {
   &_body {
     position: relative;
+    width: 100%;
+
     p {
       margin: 20px 0;
       padding: 0 10px 0 0;
     }
   }
+
   &_img {
+    display: block;
     max-width: 100%;
   }
+
   &_promo {
     position: absolute;
     top: 15%;
     left: 50%;
   }
+
   &_btn {
     margin-top: 20px;
     display: inline-block;
     padding-bottom: 5px;
     border-bottom: 2px solid rgb(224, 146, 132);
     transition: all ease .5s;
+    cursor: pointer;
 
     &:hover {
       color: rgb(197, 109, 94);
@@ -80,6 +88,7 @@ h2 {
     }
   }
 }
+
 @media (max-width: 800px) {
   .slide {
     &_body {
