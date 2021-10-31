@@ -65,6 +65,12 @@ const routes = [
     meta: { layout: 'main' },
     component: () => import('@/views/NotFound.vue'),
   },
+  {
+    path: '/photo',
+    name: 'PhotoDownload',
+    meta: { layout: 'main' },
+    component: () => import('@/views/PhotoDownload.vue'),
+  },
   //=============== LOGIN REGISTER ===============
   {
     path: '/login',
