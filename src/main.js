@@ -15,7 +15,6 @@ import Vuelidate from 'vuelidate'
 import '@/assets/scss/style.scss'
 // import '@/assets/scss/_colors.scss'
 
-import vuetify from './plugins/vuetify.js'
 
 
 Vue.config.productionTip = false
@@ -40,7 +39,6 @@ Vue.use(Vuelidate)
 new Vue({
   router,
   store,
-  vuetify,
   render: (h) => h(App),
 }).$mount('#app')
 

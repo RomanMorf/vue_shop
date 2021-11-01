@@ -101,6 +101,30 @@ ul {
     bottom: -15px;
     left: 0;
   }
+
+
+  &_select {
+    height: 50px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    color: grey;
+
+  }
+
+  &_option {
+    border: none;
+    outline: none;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+
 }
 
 .btn.bottom-swipe {
@@ -129,6 +153,26 @@ ul {
     transition: all 800ms ease;
   }
 }
+
+.modal_btn {
+  background-color: $bg_color_main;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 5px 5px  rgba(0,0,0,0.12), 3px 5px 5px rgba(0,0,0,0.24);
+  transition: all .5s ease;
+
+  &:hover {
+    transition: all .5s ease;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 10px  rgba(0,0,0,0.12), 5px 10px 10px rgba(0,0,0,0.24);
+  }
+}
+
+.modal_btn:not(:last-child) {
+  margin-right: 5px;
+}
+
 
 .page {
   padding: 5px;

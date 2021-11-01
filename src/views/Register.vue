@@ -6,7 +6,7 @@
         <div class="form_section">
           <input id="email" class="form_input" v-model.trim="userEmail" type="text"  required="">
           <label for="email" class="form_label">Введите ваш Email</label>
-          <small 
+          <small
             class="form_helper invalid"
             v-if="($v.userEmail.$dirty && !$v.userEmail.required) || ($v.userEmail.$dirty && !$v.userEmail.email) "
             >Введите корректный Email
@@ -19,12 +19,12 @@
         <div class="form_section">
           <input id='name' class="form_input" v-model.trim="$v.userName.$model" type="text" required="">
           <label for='name' class="form_label">Введите имя</label>
-          <small 
+          <small
             class="form_helper invalid"
             v-if="$v.userName.$dirty && !$v.userName.required"
           >Введите имя пользователя
           </small>
-          <small 
+          <small
             class="form_helper invalid"
             v-if="$v.userName.$dirty && !$v.userName.minLength"
           >Имя должно содержать не меньше {{ this.$v.userName.$params.minLength.min }} символов
@@ -33,12 +33,12 @@
         <div class="form_section">
           <input id="pass" class="form_input" v-model.trim="$v.userPass.$model" type="password" required="" >
           <label for="pass" class="form_label">Введите пароль</label>
-          <small 
+          <small
             class="form_helper invalid"
             v-if="$v.userPass.$dirty && !$v.userPass.required"
           >Введите имя пользователя
           </small>
-          <small 
+          <small
             class="form_helper invalid"
             v-if="$v.userPass.$dirty && !$v.userPass.minLength"
           >Имя должно содержать не меньше {{ this.$v.userPass.$params.minLength.min }} символов
@@ -47,7 +47,7 @@
         <div class="form_section">
           <input id="pass2" class="form_input" v-model.trim="userPassRepeat" type="password" required="" >
           <label for="pass2" class="form_label">Введите пароль повторно</label>
-          <small 
+          <small
             class="form_helper invalid"
             v-if="userPass !== userPassRepeat"
           >Пароли должны совпадать
@@ -96,7 +96,7 @@ export default {
         this.$v.$touch()
         return
       }
-      
+
       await this.$store.dispatch('REGISTER', userInfo)
       this.$router.push('/login')
     }

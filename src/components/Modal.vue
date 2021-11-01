@@ -73,9 +73,9 @@ export default {
 
   &_container {
     min-width: 230px;
-    max-width: 100vw;
+    max-width: 90vw;
     min-height: 150px;
-    max-height: 100vh;
+    max-height: 90vh;
     padding: 20px;
     margin: 15px;
     position: relative;

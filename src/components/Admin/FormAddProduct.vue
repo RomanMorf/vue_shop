@@ -8,14 +8,14 @@
       </div>
 
       <div>
-        <p>Title: 
+        <p>Title:
           <input v-model="title" type="text" placeholder="Enter product title">
         </p>
         <div>Category
           <select v-model="currentCategory">
-            <option 
-              v-for="cat in categories" 
-              :key="cat.id" 
+            <option
+              v-for="cat in categories"
+              :key="cat.id"
               :value="cat.id"
             >
               {{ cat.title }}
@@ -23,13 +23,13 @@
           </select>
           <p>Category name: {{ category }}</p>
         </div>
-        <p>Price: 
+        <p>Price:
           <input v-model="price" type="number" placeholder="Enter price">
-        </p> 
-        <p>Product info: 
+        </p>
+        <p>Product info:
           <textarea v-model="description" cols="30" rows="10"></textarea>
-        </p> 
-        <p>URL : 
+        </p>
+        <p>URL :
           <input v-model="imgUrl" type="text" placeholder="Enter img URL"  @keyup.enter="addImgUlr">
         </p>
         <button class="btn" @click="addImgUlr">Add url</button>
@@ -38,11 +38,11 @@
           <span class="cursor" @click="deleteImgUlr(index)">X</span>
         </div>
       </div>
-      <p>Colors : 
+      <p>Colors :
         <select v-model="currentColor">
-          <option 
-            v-for="color in colorNames" 
-            :key="color.colorHex" 
+          <option
+            v-for="color in colorNames"
+            :key="color.colorHex"
             :value="color.colorHex"
           >
             <span>
@@ -53,10 +53,10 @@
         <button class="btn" @click="addColor">Add</button>
       </p>
       <div class="color_preview">
-        <div class="color_cube" 
-          :style="{'background-color': color.colorHex}" 
-          v-for="(color, index) in colors" 
-          :key="color.colorName" 
+        <div class="color_cube"
+          :style="{'background-color': color.colorHex}"
+          v-for="(color, index) in colors"
+          :key="color.colorName"
           @click="deleteColor(index)">
         </div>
       </div>
@@ -64,7 +64,7 @@
         <button class="btn" @click="createProduct">Create</button>
         <button class="btn" type="reset">Reset form</button>
       </div>
-      
+
     </form>
   </div>
 </template>
@@ -80,7 +80,7 @@ export default {
       category: '',
       categoryId: '',
       price: '',
-      imgUrl: '',      
+      imgUrl: '',
       colorName: '',
       colorHex: '',
       img: [],
@@ -150,7 +150,7 @@ export default {
       return { backgroundColor: this.colorHex }
     },
   },
-  watch: {  
+  watch: {
     currentCategory(catId) { // следим за обновлениями - выбранная категория
       const {title} = this.categories.find(c => c.id === catId)
       this.category = title
@@ -182,12 +182,12 @@ export default {
     border: 1px solid black;
     border-radius: 2px;
     background: linear-gradient(#84848a, #d6d6d6, #5f5068);
-    
+
     &:hover {
       box-shadow: 0 0 2px 3px rgba(194, 194, 194, 0.425);
       transition: all .1s ease-in-out;
     }
-    
+
   }
   button {
     margin: 5px;
