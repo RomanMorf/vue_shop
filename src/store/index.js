@@ -12,6 +12,7 @@ import interfaceInfo from './interfaceInfo'
 import pages from './pages'
 import admin from './admin'
 import orders from './orders'
+import storage from './storage'
 
 Vue.use(Vuex)
 
@@ -43,5 +44,6 @@ export default new Vuex.Store({
     pages,
     admin,
     orders,
+    storage,
   },
 })

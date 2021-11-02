@@ -1,15 +1,15 @@
 <template>
   <div>
-    <form >
-      <div class="form_section">
+    <form class="form">
+      <div class="form_section"> <!-- Title -->
         <h2>Создание продукта</h2>
       </div>
-      <div class="form_section">
+      <div class="form_section"> <!-- ID -->
         <h4>ID: {{ id }}</h4>
       </div>
       <div class="form_section">
         <input id='name' class="form_input" v-model.trim="$v.title.$model" type="text" required="">
-        <label for='name' class="form_label">Введите Название товара</label>
+        <label for='name' class="form_label">Название товара</label>
         <small
           class="form_helper invalid"
           v-if="$v.title.$dirty && !$v.title.required"
@@ -21,40 +21,42 @@
         >Поле должно содержать не меньше {{ this.$v.title.$params.minLength.min }} символов
         </small>
       </div>
-      <div class="form_section">
-        <input id='price' class="form_input" v-model.trim="$v.price.$model" type="number" required="">
-        <label for='price' class="form_label">Введите Цену товара</label>
-        <small
-          class="form_helper invalid"
-          v-if="$v.price.$dirty && !$v.price.required"
-        >Введите Название товара
-        </small>
-        <small
-          class="form_helper invalid"
-          v-if="$v.price.$dirty && !$v.price.minValue"
-        >Цена не может быть меньше <strong>{{ this.$v.price.$params.minValue.min }}</strong>, или отрицательной
-        </small>
-      </div>
-      <div class="form_section">
-        <select class="form_select" v-model="currentCategory">
-          <!-- <option value="" selected>Выберите категоию</option> -->
-          <option class="form_option"
-            v-for="cat in categories"
-            :key="cat.id"
-            :value="cat.id"
-          >
-            {{ cat.title }}
-          </option>
-        </select>
-        <small
-          class="form_helper invalid"
-          v-if="$v.category.$dirty && !$v.category.required"
-        >Выберите категорию
-        </small>
+      <div class="form_section flex">
+        <div class="form_cell">
+          <input id='price' class="form_input" v-model.trim="$v.price.$model" type="number" required="">
+          <label for='price' class="form_label">Укажите цену</label>
+          <small
+            class="form_helper invalid"
+            v-if="$v.price.$dirty && !$v.price.required"
+          >Введите Название товара
+          </small>
+          <small
+            class="form_helper invalid"
+            v-if="$v.price.$dirty && !$v.price.minValue"
+          >Цена не может быть меньше <strong>{{ this.$v.price.$params.minValue.min }}</strong>, или отрицательной
+          </small>
+        </div>
+        <div class="form_cell">
+          <select id="form_category" class="form_select" v-model="currentCategory" required="">
+            <option class="form_option"
+              v-for="cat in categories"
+              :key="cat.id"
+              :value="cat.id"
+            >
+              {{ cat.title }}
+            </option>
+          </select>
+          <label for='form_category' class="form_label">Выберите категорию товара</label>
+          <small
+            class="form_helper invalid"
+            v-if="$v.category.$dirty && !$v.category.required"
+          >Выберите категорию
+          </small>
+        </div>
       </div>
       <div class="form_section">
         <input id='description' class="form_input" v-model.trim="$v.description.$model" type="text" required="">
-        <label for='description' class="form_label">Введите описание товара</label>
+        <label for='description' class="form_label">Оисание товара</label>
         <small
           class="form_helper invalid"
           v-if="$v.description.$dirty && !$v.description.required"
@@ -66,8 +68,9 @@
         >Поле должно содержать не меньше {{ this.$v.description.$params.minLength.min }} символов, сейчас {{ description.length }}
         </small>
       </div>
-      <div class="form_section">
+      <div class="form_section flex">
         <button class="modal_btn" @click.prevent="click1">Выберите фото</button>
+        <button class="modal_btn  ml-auto" @click.prevent="cleareImagesOnServer">Удалить все фото</button>
         <input
           multiple
           type="file"
@@ -77,15 +80,17 @@
         >
       </div>
       <div class="form_section">
-        <img
-          v-for="(image, index) in img"
-          :key="index"
-          class="preview"
-          :src="image"
-          @click.prevent="showIndex(index)"
-        >
         <div class="progress" >
           <div class="progress_line" :style="'width: ' + progress + '%'"></div>
+        </div>
+        <div class="form_preview">
+          <img
+            v-for="(image, index) in img"
+            :key="index"
+            class="form_preview-img"
+            :src="image"
+            @click.prevent="showIndex(index)"
+          >
         </div>
       </div>
       <div class="form_section">
@@ -94,6 +99,14 @@
 
 
     </form>
+    <Modal v-show="showModal" @close="showModal = !showModal">
+      <template v-slot:content>
+        <h4 class="center">Заполните все обязательные поля формы</h4>
+      </template>
+      <template v-slot:footer>
+        <button class="modal_btn" @click="showModal = !showModal">Ок</button>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -117,6 +130,7 @@ export default {
 
       img: [],
       imageData: null,
+      imageDataArr: [],
       progress: 0,
       photoData: null,
       photoDataList: null,
@@ -124,6 +138,7 @@ export default {
       currentCategory: null,
       currentColor: null,
 
+      showModal: false,
     }
   },
   validations: {
@@ -133,48 +148,23 @@ export default {
     category: {required}
   },
   methods: {
-    // async download() {
-    //   console.log('download');
-    //   const storageRef = firebase.storage().ref();
-
-    //     // [START storage_list_all]
-    //     // Create a reference under which you want to list
-    //     var listRef = storageRef.child('products/'+this.id);
-
-    //     // Find all the prefixes and items.
-    //     listRef.listAll()
-    //       .then((res) => {
-    //         console.log(res, 'res');
-    //         console.log(res.items, 'res.items');
-    //         res.prefixes.forEach((folderRef) => {
-    //           console.log(folderRef, 'folderRef');
-    //           // All the prefixes under listRef.
-    //           // You may call listAll() recursively on them.
-    //         });
-    //         res.items.forEach((itemRef) => {
-    //           console.log(itemRef.fullPath, 'itemRef');
-    //           // All the items under listRef.
-    //         });
-    //       }).catch((error) => {
-    //         // Uh-oh, an error occurred!
-    //       });
-    //     // [END storage_list_all]
-
-
-    // },
+    async cleareImagesOnServer() {
+      await this.$store.dispatch('DELETE_ALL_ITEMS_IN_FOLDER', this.id)
+    },
     showIndex(imageIndex) { // показать инфо
       console.log(imageIndex, 'imageIndex');
-      console.log(this.imageData[imageIndex].name, 'this.imageData[imageIndex].name');
-      this.deleteImage(this.imageData[imageIndex].name)
+      console.log(this.imageDataArr[imageIndex].name, 'name');
+      // this.deleteImage(this.imageDataArr[imageIndex].name)
       this.img.splice(imageIndex, 1)
     },
-    async deleteImage(name) {
-      await firebase.storage().ref(`products/${this.id}/`).child(`${name}`).delete()
-    },
+    // async deleteImage(name) {
+    //   await firebase.storage().ref(`products/${this.id}/`).child(`${name}`).delete()
+    // },
 
     create () { // создать продукт
       if (this.$v.$invalid) { // проверка на валидность формы
         this.$v.$touch()
+        this.showModal = true
         return
       }
 
@@ -202,12 +192,16 @@ export default {
     previewImage(event) { // предпоказ фото
       this.uploadValue=0;
       this.imageData = event.target.files;
+      this.imageDataArr.push(...event.target.files)
       console.log(event.target.files, 'event.target.files');
+      console.log(this.imageDataArr, 'imageDataArr');
       this.onUpload()
     },
     async onUpload(){ // загрузка на сервер и ипрогресс бар
-      this.imageData.forEach(image => {
-        const storageRef=firebase.storage().ref(`products/${this.id}/${image.name}`).put(image);
+      this.imageData.forEach((image, imgIndex) => {
+        const extension = image.name.split('.')
+        // даем имя файлу - как ID продукта + порядковый номер
+        const storageRef=firebase.storage().ref(`products/${this.id}/${this.id}-img-${imgIndex}.${extension[extension.length - 1]}`).put(image);
         storageRef.on(`state_changed`,
           snapshot=>{
             this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
@@ -250,17 +244,14 @@ export default {
 .progress {
   width: 100%;
   height: 5px;
+  margin: 5px 0;
 
   &_line {
     background-color: green;
     width: 0;
     height: 5px;
+    border-radius: 5px;
   }
-}
-.preview {
-  max-width: 200px;
-  max-height: 200px;
-  margin-right: 10px;
 }
 
 </style>

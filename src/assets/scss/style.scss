@@ -35,6 +35,23 @@ ul {
   font-weight: bold;
 }
 
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -50,7 +67,7 @@ ul {
   &_label {
     position: absolute;
     bottom: 10px;
-    left: 0;
+    left: 1px;
     color: grey;
     transition: all 200ms ease;
     z-index: 100;
@@ -65,8 +82,11 @@ ul {
     font-size: 16px;
     font-weight: 400;
     outline: hidden;
+    color: grey;
   }  
 
+  &_select:focus ~ .form_label,
+  &_select:not(:invalid) ~ .form_label,
   &_input:focus ~ .form_label ,
   &_input:valid ~ .form_label {
     bottom: 40px;
@@ -99,9 +119,8 @@ ul {
   &_helper {
     position: absolute;
     bottom: -15px;
-    left: 0;
+    left: 0px;
   }
-
 
   &_select {
     height: 50px;
@@ -114,7 +133,6 @@ ul {
     font-weight: 400;
     font-size: 16px;
     color: grey;
-
   }
 
   &_option {
@@ -124,7 +142,34 @@ ul {
     font-size: 16px;
   }
 
+  &_cell {
+    width: 50%;
+    height: 50px;
+    position: relative;
+    &:not(:last-child) {
+      margin-right: 5%;
+    }
+  }
 
+  &_preview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &-img{
+      max-width: 200px;
+      max-height: 200px;
+      margin-right: 10px;
+      margin: 5px;
+      transition: all .5s ease;
+      &:hover {
+        transition: all .5s ease;
+        box-shadow: $box_shadow_main;
+        transform: translateY(-5px);
+      }
+    }
+  }
 }
 
 .btn.bottom-swipe {
@@ -155,6 +200,7 @@ ul {
 }
 
 .modal_btn {
+  min-width: 50px;
   background-color: $bg_color_main;
   padding: 8px;
   border: none;

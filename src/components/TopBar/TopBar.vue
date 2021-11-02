@@ -289,24 +289,6 @@ export default {
   font-size: 30px;
 }
 
-.modal_btn {
-  background-color: $bg_color_main;
-  padding: 8px;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 5px 5px  rgba(0,0,0,0.12), 3px 5px 5px rgba(0,0,0,0.24);
-  transition: all .5s ease;
-
-  &:hover {
-    transition: all .5s ease;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 10px  rgba(0,0,0,0.12), 5px 10px 10px rgba(0,0,0,0.24);
-  }
-}
-
-.modal_btn:not(:last-child) {
-  margin-right: 5px;
-}
 
 @media (max-width: 580px){
   .material-icons.md-40 {
