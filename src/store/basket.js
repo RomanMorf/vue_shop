@@ -6,7 +6,7 @@ export default {
     SET_PRODUCT_TO_BASKET(state, products) {
       state.basket = products
     },
-    CLEAR_BSKET(state) {
+    CLEAR_BASKET(state) {
       state.basket = []
     },
   },
@@ -73,8 +73,11 @@ export default {
         localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
-
-
+    CLEARE_BASKET({ dispatch, commit, getters }, id) {
+      const basket = []
+      commit('CLEAR_BASKET')
+      localStorage.removeItem('basket')
+    },
   },
   getters: {
     BASKET: (s) => s.basket,

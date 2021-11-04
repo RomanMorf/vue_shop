@@ -15,9 +15,17 @@ export default {
   },
 
   actions: {
+    SIDE_BAR_GET_FROM_LOCAL_STORE({dispatch, commit, getters}) {
+      // console.log(localStorage.interface, 'localStorage.interface');
+      if (localStorage.interface) {
+        const interfaceInfo = localStorage.getItem('interface')
+        commit('SET_INTERFACE', JSON.parse(interfaceInfo))
+      }
+    },
     SIDE_BAR_INTERFACE_TOGGLE({dispatch, commit, getters}) {
       const data = {...getters.INTERFACE}
       data.sideBarIsOpen = !data.sideBarIsOpen
+      localStorage.setItem('interface', JSON.stringify(data))
       commit('SET_INTERFACE', data)
     }
   },

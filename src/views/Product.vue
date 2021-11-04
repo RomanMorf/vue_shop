@@ -1,12 +1,12 @@
 <template>
   <div>
     <Loader class="center" v-if="loading"/>
-    
+
     <div v-else>
       <h1 class="center">{{ product.title }}</h1>
       <div class="product_body">
-        <Carusel 
-          v-show="product.img" 
+        <Carusel
+          v-show="product.img"
           :caruselData="product.img"
           :caruselWidth="350"
           :caruselHeiht="500"
@@ -15,9 +15,11 @@
         />
 
         <div class="product_description inline">
+          <p v-if="product.id"><strong>Id:</strong> {{ product.id }}</p>
           <p v-if="product.categoryName"><strong>Категория:</strong> {{ product.categoryName }}</p>
           <p v-if="product.price"><strong>Цена:</strong> {{ product.price }} UAH</p>
-          <p v-if="product.description"><strong>Описание:</strong> {{ product.description }}</p>
+          <p v-if="product.description"><strong>Описание:</strong></p>
+          <div v-html="product.description"></div>
         </div>
       </div>
     </div>
@@ -82,4 +84,4 @@ export default {
   text-align: top;
   vertical-align: top;
 }
-</style> 
+</style>

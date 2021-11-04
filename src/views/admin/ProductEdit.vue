@@ -3,8 +3,8 @@
     <Loader v-if="loading"/>
     <form class="form">
       <div class="form_section"> <!-- Title -->
-        <h2 v-if="$route.params.id">Редактирование карточки товара </h2>
-        <h2 v-else>Создание продукта </h2>
+        <h2 v-if="$route.params.id">Редактирование продукта </h2>
+        <h2 v-else>Создание продукта</h2>
       </div>
       <div class="form_section"> <!-- ID -->
         <p>ID: {{ id }}</p>
@@ -72,8 +72,8 @@
         </small>
       </div> -->
       <div class="form_section flex"> <!-- Photo -->
-        <button class="modal_btn" @click.prevent="click1">Выберите фото <span class="material-icons">image</span></button>
-        <button class="modal_btn  ml-auto" @click.prevent="cleareAllImagesOnServer">Удалить все фото <span class="material-icons">delete</span></button>
+        <button class="modal_btn admin_bg" @click.prevent="click1">Выберите фото <span class="material-icons">image</span></button>
+        <button class="modal_btn admin_bg ml-auto" @click.prevent="cleareAllImagesOnServer">Удалить все фото <span class="material-icons">delete</span></button>
         <input
           multiple
           type="file"
@@ -103,7 +103,7 @@
         <EditorForVue :content="description" @update:content="getUpdatedContent"/>
       </div>
       <div class="form_section"> <!-- Botton section -->
-        <button class="modal_btn"  @click.prevent="createProduct">
+        <button class="modal_btn admin_bg"  @click.prevent="createProduct">
           Сохранить карту товара
           <span class="material-icons">save</span>
         </button>
@@ -114,7 +114,7 @@
         <h4 class="center">Заполните все обязательные поля формы</h4>
       </template>
       <template v-slot:footer>
-        <button class="modal_btn" @click="showModal = !showModal">Ок</button>
+        <button class="modal_btn admin_bg admin_bg" @click="showModal = !showModal">Ок</button>
       </template>
     </Modal>
   </div>

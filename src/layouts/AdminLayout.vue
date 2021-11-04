@@ -23,23 +23,6 @@ import {mapGetters} from 'vuex'
 
 export default {
   name: 'main-layout',
-  data() {
-    return {
-      sideBarIsOpen: true
-    }
-  },
-  methods: {
-    sideBarToggle() {
-      console.log('sideBarToggle');
-      this.sideBarIsOpen = !this.sideBarIsOpen
-    },
-    doSomething(){
-      console.log('doSomething');
-      console.log(this.sideBarIsOpen, 'sideBarIsOpen');
-      console.log(this.$store.state.interfaceInfo.interface.sideBarIsOpen, 'this.$store');
-      console.log(this.INTERFACE.sideBarIsOpen);
-    }
-  },
   components: {
     AdminTopBar,
     AdminSideBar,

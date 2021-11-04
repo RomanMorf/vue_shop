@@ -51,11 +51,11 @@
         </small>
       </div>
       <div class="form_section">
-        <input id="tel" class="form_input" v-model.trim="userComment" type="text"  required="">
-        <label for="tel" class="form_label">Оставьте комментарий, если необходимо</label>
+        <input id="comment" class="form_input" v-model.trim="userComment" type="text"  required="">
+        <label for="comment" class="form_label">Оставьте комментарий, если необходимо</label>
       </div>
       <div class="form_section btn">
-        <button class="btn bottom-swipe" @click.prevent="createOrder">Создать заказ</button>
+        <button class="modal_btn" @click.prevent="createOrder">Создать заказ</button>
       </div>
     </form>
   </div>
@@ -99,6 +99,9 @@ export default {
         dateCreated: new Date()
       }
       await this.$store.dispatch('CREATE_NEW_ORDER', newOrder)
+      await this.$store.dispatch('CLEARE_BASKET')
+      console.log('new order created', newOrder);
+      this.$router.push('/thanks')
     },
 
   },

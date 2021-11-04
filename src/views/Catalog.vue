@@ -127,7 +127,6 @@ export default {
       }
     },
     maxProdOnPage(value){
-      console.log(value, 'maxProdOnPage');
       localStorage.setItem('maxProdOnPage', JSON.stringify(value))
     }
   }

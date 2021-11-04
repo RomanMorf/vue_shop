@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Profiles page</h1>
-    <button @click="fetchUsers">FetchUsers</button>
+    <button class="modal_btn admin_bg" @click="fetchUsers">FetchUsers</button>
     <table v-if="users">
       <tbody>
         <tr>

@@ -1,6 +1,6 @@
 <template>
   <div class="side-bar">
-    <button class="side-bar_btn" @click="toggleSideBar">
+    <button v-tooltip="'Изменить размер меню'" class="side-bar_btn" @click="toggleSideBar">
       <span class="material-icons-outlined" v-show="!INTERFACE.sideBarIsOpen">
         menu
       </span>
@@ -14,7 +14,7 @@
         @click="$router.push(item.path)"
       >
         <span class="menu_item-text">{{ item.title }}</span>
-        <span class="menu_item-btn material-icons-outlined">
+        <span v-tooltip="item.title" class="menu_item-btn material-icons-outlined">
           {{ item.icon }}
         </span>
       </li>
@@ -32,8 +32,10 @@ export default {
       menu: [
         {title: 'Главная', path: '/admin', icon: 'home'},
         {title: 'Заказы', path: '/admin/orders', icon: 'list_alt'},
-        {title: 'Редактор', path: '/admin/editor', icon: 'edit_note'},
-        {title: 'Профили', path: '/admin/profiles', icon: 'account_circle'},
+        {title: 'Товары', path: '/admin/products', icon: 'format_list_bulleted'},
+        {title: 'Создать продутк', path: '/admin/create', icon: 'create_new_folder'},
+        {title: 'Редактор контента', path: '/admin/editor', icon: 'edit_note'},
+        {title: 'Пользователи', path: '/admin/profiles', icon: 'account_circle'},
         {title: '!!! Test !!!', path: '/admin/testpage', icon: 'contacts'},
       ]
     }
@@ -52,6 +54,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+@import '@/assets/scss/variables.scss';
+
   .side-bar {
     position: fixed;
     top: 0;
@@ -61,7 +65,7 @@ export default {
 
     width: 300px;
     min-height: 100vh;
-    background-color: rgb(201, 201, 201);
+    background-color: $bg_color_admin;
     transition: all ease 0.5s;
 
     &.close {
@@ -89,6 +93,7 @@ export default {
       position: absolute;
       top: 20px;
       left: 5px;
+      cursor: pointer;
     }
   }
 
@@ -106,12 +111,13 @@ export default {
       border-bottom: 1px solid grey;
 
       &:hover {
-        background-color: grey;
+        background-color: $hover_color_admin;
       }
       &-btn {
         position: absolute;
         top: 10px;
         right: 5px;
+        cursor: pointer;
       }
 
       &-text{

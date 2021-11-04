@@ -1,7 +1,7 @@
 <template>
   <div class="top-bar">
     <span v-if="INFO">Здравствуйте, {{ INFO.name }}</span>
-    <button class="top-bar_btn" @click="$router.push('/')">Назад в магазин</button>
+    <button class="top-bar_btn modal_btn " @click="$router.push('/')">Назад в магазин</button>
   </div>
 </template>
 
@@ -18,6 +18,8 @@ export default {
 </script>
 
 <style lang='scss'>
+@import '@/assets/scss/variables.scss';
+
   .top-bar {
     position: fixed;
     top: 0px;
@@ -25,7 +27,7 @@ export default {
     text-align: center;
     width: 100%;
     height: 50px;
-    background-color: rgb(201, 201, 201);
+    background-color: $bg_color_admin;
     z-index: 10;
     position: relative;
     &_btn {

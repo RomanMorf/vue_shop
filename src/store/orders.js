@@ -45,7 +45,6 @@ export default {
           ...orders[key],
           id: key,
         }))
-        console.log(ordersWithId, 'FETCH_NEW_ORDERS from store');
         commit('SET_NEW_ORDERS', ordersWithId)
         return ordersWithId
       } catch (error) {

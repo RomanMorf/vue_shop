@@ -31,6 +31,7 @@ export default {
     await this.$store.dispatch('BASKET_GET_FROM_LOCAL_STORE')
     await this.$store.dispatch('FAVORITE_GET_FROM_LOCAL_STORE')
     await this.$store.dispatch('COMPARE_GET_FROM_LOCAL_STORE')
+    await this.$store.dispatch('SIDE_BAR_GET_FROM_LOCAL_STORE')
   },
 }
 </script>

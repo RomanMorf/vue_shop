@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VTooltip from 'v-tooltip'
 
 import firebase from 'firebase/app'
 import 'firebase/database'
@@ -20,8 +21,9 @@ Vue.component('Loader', Loader)
 Vue.component('ToTop', ToTop)
 Vue.component('Modal', Modal)
 
+const key = process.env.VUE_APP_API_KEY;
 firebase.initializeApp({
-  apiKey: "AIzaSyBe-uq9ugjQF0p3Ga7GVdk8Jc0rpRzcSkw",
+  apiKey: key,
   authDomain: "romario-vue-shop.firebaseapp.com",
   databaseURL: "https://romario-vue-shop-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "romario-vue-shop",
@@ -31,6 +33,7 @@ firebase.initializeApp({
   measurementId: "G-VZ87V7G0CH"
 })
 
+Vue.use(VTooltip)
 Vue.use(Vuelidate)
 
 new Vue({

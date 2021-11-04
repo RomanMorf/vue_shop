@@ -54,6 +54,12 @@ const routes = [
     component: () => import('@/views/Compare.vue'),
   },
   {
+    path: '/thanks',
+    name: 'Thanks',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Thanks.vue'),
+  },
+  {
     path: '/cabinet',
     name: 'cabinet',
     meta: { layout: 'main', auth: true },
@@ -64,18 +70,6 @@ const routes = [
     name: 'NotFound',
     meta: { layout: 'main' },
     component: () => import('@/views/NotFound.vue'),
-  },
-  {
-    path: '/create',
-    name: 'ProductCreate',
-    meta: { layout: 'main' },
-    component: () => import('@/views/ProductCreate.vue'),
-  },
-  {
-    path: '/edit/:id',
-    name: 'ProductCreate',
-    meta: { layout: 'main' },
-    component: () => import('@/views/ProductCreate.vue'),
   },
   //=============== LOGIN REGISTER ===============
   {
@@ -118,16 +112,28 @@ const routes = [
     component: () => import('@/views/admin/Profiles.vue'),
   },
   {
-    path: '/admin/testpage',
-    name: 'TestPage',
+    path: '/admin/products',
+    name: 'Products',
     meta: { layout: 'admin', auth: true },
-    component: () => import('@/views/admin/TestPage.vue'),
+    component: () => import('@/views/admin/Products.vue'),
+  },
+  {
+    path: '/admin/create',
+    name: 'ProductEdit',
+    meta: { layout: 'admin', auth: true },
+    component: () => import('@/views/admin/ProductEdit.vue'),
   },
   {
     path: '/admin/edit/:id',
     name: 'Edit',
     meta: { layout: 'admin', auth: true },
-    component: () => import('@/views/admin/Edit.vue'),
+    component: () => import('@/views/admin/ProductEdit.vue'),
+  },
+  {
+    path: '/admin/testpage',
+    name: 'TestPage',
+    meta: { layout: 'admin', auth: true },
+    component: () => import('@/views/admin/TestPage.vue'),
   },
   {
     path: '/admin/*',
@@ -135,7 +141,6 @@ const routes = [
     meta: { layout: 'admin', auth: true },
     component: () => import('@/views/NotFound.vue'),
   },
-
 // =============================================
 ]
 

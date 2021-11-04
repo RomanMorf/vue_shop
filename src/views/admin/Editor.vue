@@ -6,10 +6,11 @@
         <option v-for="(item, index) in PAGES" :key="index" :value="item.forselect">{{item.forselect}}</option>
       </select>
 
-      <EditorForVue :content="content" @update:content="getUpdatedContent"/>
-
-      <button @click="seveChanges">Сохранить изменения</button>
-      <button @click="openPreview = !openPreview">Предварительный просмотр</button>
+      <EditorForVue :content="content" @update:content="getUpdatedContent" class="mb-10"/>
+      <div class="flex">
+        <button class="modal_btn admin_bg" @click="seveChanges">Сохранить изменения</button>
+        <button class="modal_btn admin_bg" @click="openPreview = !openPreview">Предварительный просмотр</button>
+      </div>
       <transition name="scale">
         <div v-show="openPreview" class="preview">
           <h4 class="center">Preview</h4>
