@@ -54,9 +54,10 @@ export default {
 <style scoped lang='scss'>
   .side-bar {
     position: fixed;
-    top: 50px;
+    top: 0;
     left: 0;
     z-index: 11;
+    padding-top: 50px;
 
     width: 300px;
     min-height: 100vh;
@@ -86,7 +87,7 @@ export default {
       background-color: transparent;
       border: none;
       position: absolute;
-      top: -40px;
+      top: 20px;
       left: 5px;
     }
   }

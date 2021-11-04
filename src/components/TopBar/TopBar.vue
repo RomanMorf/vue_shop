@@ -84,7 +84,7 @@
 
       <template v-if="FAVORITE.length > 0" v-slot:footer>
         <button class="modal_btn" @click="closeModalFavorite">Продолжить покупки</button>
-        <button class="modal_btn" v-show="FAVORITE.length > 0" @click="addAllToBasket">Добавить <span v-if="FAVORITE.length > 1">всё</span> в корзину</button>
+        <button class="modal_btn" v-show="FAVORITE.length > 0" @click="addAllToBasket">Добавить в корзину</button>
       </template>
 
     </Modal>

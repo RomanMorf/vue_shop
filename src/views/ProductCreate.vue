@@ -1,11 +1,12 @@
 <template>
   <div>
+    <Loader v-if="loading"/>
     <form class="form">
       <div class="form_section"> <!-- Title -->
-        <h2>Создание продукта</h2>
+        <h2>Создание продукта </h2>
       </div>
       <div class="form_section"> <!-- ID -->
-        <h4>ID: {{ id }}</h4>
+        <p>ID: {{ id }}</p>
       </div>
       <div class="form_section">
         <input id='name' class="form_input" v-model.trim="$v.title.$model" type="text" required="">
@@ -37,7 +38,7 @@
           </small>
         </div>
         <div class="form_cell">
-          <select id="form_category" class="form_select" v-model="currentCategory" required="">
+          <select id="123form_category" class="form_select" v-model="currentCategory" required="">
             <option class="form_option"
               v-for="cat in categories"
               :key="cat.id"
@@ -46,10 +47,10 @@
               {{ cat.title }}
             </option>
           </select>
-          <label for='form_category' class="form_label">Выберите категорию товара</label>
+          <label for='123form_category' class="form_label" @click.prevent="click2">Выберите категорию товара</label>
           <small
             class="form_helper invalid"
-            v-if="$v.category.$dirty && !$v.category.required"
+            v-if="$v.categoryName.$dirty && !$v.categoryName.required"
           >Выберите категорию
           </small>
         </div>
@@ -69,8 +70,8 @@
         </small>
       </div>
       <div class="form_section flex">
-        <button class="modal_btn" @click.prevent="click1">Выберите фото</button>
-        <button class="modal_btn  ml-auto" @click.prevent="cleareImagesOnServer">Удалить все фото</button>
+        <button class="modal_btn" @click.prevent="click1">Выберите фото <span class="material-icons">image</span></button>
+        <button class="modal_btn  ml-auto" @click.prevent="cleareAllImagesOnServer">Удалить все фото <span class="material-icons">delete</span></button>
         <input
           multiple
           type="file"
@@ -80,21 +81,27 @@
         >
       </div>
       <div class="form_section">
-        <div class="progress" >
-          <div class="progress_line" :style="'width: ' + progress + '%'"></div>
+        <div class="form_progress" >
+          <div class="form_progress-line" :style="'width: ' + progress + '%'"></div>
         </div>
         <div class="form_preview">
-          <img
-            v-for="(image, index) in img"
-            :key="index"
-            class="form_preview-img"
-            :src="image"
-            @click.prevent="showIndex(index)"
-          >
+          <transition-group name="table" mode="list">
+          <div class="form_preview-body" v-for="(image, index) in img" :key="index" >
+            <span
+              class="material-icons form_preview-btn"
+              @click.prevent="deleteImage(index)"
+            >clear
+            </span>
+            <img class="form_preview-img" :src="image">
+          </div>
+          </transition-group>
         </div>
       </div>
       <div class="form_section">
-        <button class="modal_btn"  @click.prevent="create">Загрузить на сервер</button>
+        <button class="modal_btn"  @click.prevent="createProduct">
+          Сохранить карту товара
+          <span class="material-icons">save</span>
+        </button>
       </div>
 
 
@@ -115,6 +122,7 @@
 import firebase from 'firebase'
 import "firebase/storage"
 import {required, minLength, minValue } from 'vuelidate/lib/validators'
+import Loader from '../components/Loader.vue'
 
 export default {
   data () {
@@ -128,40 +136,53 @@ export default {
       category: '',
       categories: [],
 
+      imgCounter: 0,
       img: [],
       imageData: null,
       imageDataArr: [],
+
+      product: null,
+
       progress: 0,
-      photoData: null,
-      photoDataList: null,
 
       currentCategory: null,
       currentColor: null,
 
       showModal: false,
+      loading: true,
     }
   },
   validations: {
     title: {required, minLength: minLength(4)},
     price: {required, minValue: minValue(1)},
     description: {required, minLength: minLength(20)},
-    category: {required}
+    categoryName: {required}
   },
   methods: {
-    async cleareImagesOnServer() {
+    generateId() {
+      this.id = 'p-' + Date.now()
+    },
+    async cleareAllImagesOnServer() {
       await this.$store.dispatch('DELETE_ALL_ITEMS_IN_FOLDER', this.id)
+      this.imageDataArr = []
+      this.imageData = null
+      this.img = []
     },
-    showIndex(imageIndex) { // показать инфо
+    deleteImage(imageIndex) { // показать инфо
       console.log(imageIndex, 'imageIndex');
-      console.log(this.imageDataArr[imageIndex].name, 'name');
-      // this.deleteImage(this.imageDataArr[imageIndex].name)
-      this.img.splice(imageIndex, 1)
-    },
-    // async deleteImage(name) {
-    //   await firebase.storage().ref(`products/${this.id}/`).child(`${name}`).delete()
-    // },
+      const tempArr = this.img[imageIndex].split('%2F')
+      const imgName = tempArr[tempArr.length - 1].split('?alt=media')
+      console.log(imgName, 'tempArr');
 
-    create () { // создать продукт
+      const fileForDelete = {
+        pathToFile: 'products/'+tempArr[1],
+        fileName: imgName[0],
+      }
+      this.img.splice(imageIndex, 1)
+      this.$store.dispatch('DELETE_ITEM', fileForDelete)
+    },
+
+    createProduct () { // создать продукт
       if (this.$v.$invalid) { // проверка на валидность формы
         this.$v.$touch()
         this.showModal = true
@@ -178,7 +199,7 @@ export default {
         categoryId: this.categoryId,
         categoryName: this.categoryName,
       }
-      firebase.database().ref(`products/${this.id}`).set(product)
+      this.$store.dispatch('CREATE_PRODUCT', product)
       .then((response) => {
         // console.log(response, 'response')
       })
@@ -190,18 +211,18 @@ export default {
       this.$refs.input1.click()
     },
     previewImage(event) { // предпоказ фото
+      this.imageData = null
       this.uploadValue=0;
       this.imageData = event.target.files;
       this.imageDataArr.push(...event.target.files)
-      console.log(event.target.files, 'event.target.files');
-      console.log(this.imageDataArr, 'imageDataArr');
       this.onUpload()
     },
     async onUpload(){ // загрузка на сервер и ипрогресс бар
       this.imageData.forEach((image, imgIndex) => {
+        this.imgCounter ++
         const extension = image.name.split('.')
         // даем имя файлу - как ID продукта + порядковый номер
-        const storageRef=firebase.storage().ref(`products/${this.id}/${this.id}-img-${imgIndex}.${extension[extension.length - 1]}`).put(image);
+        const storageRef=firebase.storage().ref(`products/${this.id}/${this.id}-img-${this.imgCounter}.${extension[extension.length - 1]}`).put(image);
         storageRef.on(`state_changed`,
           snapshot=>{
             this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
@@ -221,7 +242,7 @@ export default {
   watch: {
     currentCategory(catId) { // следим за обновлениями - выбранная категория
       const {title} = this.categories.find(c => c.id === catId)
-      this.category = title
+      this.categoryName = title
       this.categoryId = catId
     },
     currentColor(catId) { // следим за обновлениями - выбранный цвет
@@ -232,26 +253,24 @@ export default {
   },
 
   async mounted() {
-    // создать ID
-    this.id = 'p-' + Date.now()
     this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
+    const id = this.$route.params.id
+    if (id) {
+      this.product = await this.$store.dispatch('FETCH_PRODUCT_BY_ID', id)
+    }
+    if (this.product) {
+      this.id = this.product.id || 'this product do not have ID'
+      this.title = this.product.title || ''
+      this.price = this.product.price || ''
+      this.img = this.product.img || []
+    }
 
+    this.id = id ||'p-' + Date.now()
+
+    console.log(this.product, 'this.product');
+    this.loading = false
   },
+
 }
 </script>
 
-<style scoped lang="scss">
-.progress {
-  width: 100%;
-  height: 5px;
-  margin: 5px 0;
-
-  &_line {
-    background-color: green;
-    width: 0;
-    height: 5px;
-    border-radius: 5px;
-  }
-}
-
-</style>

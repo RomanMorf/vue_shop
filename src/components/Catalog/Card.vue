@@ -5,15 +5,10 @@
 
     <div class="card_body" @click="$router.push(`/product/${product.id}`)">
       <div class="card_img" :style="styleObject">
-        <p class="card_category">{{ product.categoryName }}</p>
+        <p v-if=" product.categoryName" class="card_category">{{ product.categoryName }}</p>
       </div>
       <div class="card_info">
         <h3 class="card_title">{{ product.title }}</h3>
-        <div >
-          <p class="card_info_color">Colors</p>
-          <span class="card_info_btn white">First</span>
-          <span class="card_info_btn black">Second</span>
-        </div>
         <p class="card_info_price">{{ product.price }} UAH</p>
       </div>
     </div>
@@ -185,40 +180,6 @@ p {
 
   &_info {
     padding: 10px;
-
-    &_color {
-      font-weight: 300;
-      font-size: 13px;
-    }
-
-    &_btn {
-      border: 1px solid gray;
-      margin-right: 5px;
-      padding: 5px 10px;
-      display: inline-block;
-      border-radius: 3px;
-      transition: all .5s ease;
-
-      &.white {
-        background-color: white;
-        color: black;
-      }
-
-      &.black {
-        background-color: black;
-        color: white;
-      }
-
-      &.brown {
-        background-color: rgb(131, 64, 1);
-        color: black;
-      }
-
-      &:hover {
-        transition: all .5s ease;
-        box-shadow: 0 0 3px 3px $hover_color_main;
-      }
-    }
 
     &_price {
       font-weight: bold;

@@ -1,22 +1,18 @@
 import firebase from 'firebase'
 import "firebase/storage"
+import ItemForStorageDelete from '../assets/class'
 
 export default {
   actions: {
     async DELETE_ALL_ITEMS_IN_FOLDER({ dispatch, commit, getters }, folderName) {
-      console.log('new request - from store');
       await firebase
         .storage()
         .ref(`products/${folderName}`)
         .listAll()
         .then(res => {
           res.items.forEach(item => {
-            const itemForDelete = {
-              pathToFile: item.parent.fullPath,
-              fileName: item.name
-            }
+            let itemForDelete = new ItemForStorageDelete(item.parent.fullPath, item.name)
             dispatch('DELETE_ITEM', itemForDelete )
-            // firebase.storage().ref(item.parent.fullPath).child(item.name).delete()
           })
         })
     },

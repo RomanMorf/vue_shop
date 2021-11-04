@@ -1,13 +1,28 @@
 <template>
   <div>
     <div class="product_container">
-      <button class="product_btn" @click="fetchUsersList">
-        Загрузить список пользоватлей
-      </button>
-      <p>{{ usersList }}</p>
-      <FormAddProduct></FormAddProduct>
 
-      <FormAddCategory></FormAddCategory>
+      <div class="search">
+        <p>{{ search }}</p> <br>
+        <div class="search-wrapper">
+          <input type="text" v-model="search" placeholder="Search title.."/>
+              <label>Search title:</label>
+        </div>
+        <div class="wrapper flex flex-wrap">
+          <div class="card" v-for="(product, index) in filteredList" :key="index">
+            <p> {{ product.id }} </p>
+            <p> {{ product.title }} </p>
+            <img v-if="product.img" class="card_img" :src="product.img[0]" :alt="product.title">
+            <!-- <p> {{ product.title }} </p> -->
+          </div>
+        </div>
+      </div> <br><br><br>
+
+
+
+      <!-- <FormAddProduct></FormAddProduct> -->
+
+      <!-- <FormAddCategory></FormAddCategory> -->
 
       <h2 class="product_title">Товары</h2>
       <button class="product_btn" @click="fetchProducts">
@@ -54,7 +69,6 @@
         <button @click="closeModal">Decline</button>
       </template>
     </Modal>
-
   </div>
 </template>
 
@@ -70,7 +84,8 @@ export default {
       showModal: false,
       idForDel: '',
       titleForDel: '',
-      usersList: [],
+
+      search: '',
     }
   },
   components: {
@@ -115,10 +130,18 @@ export default {
   },
   computed: {
     ...mapGetters(['INFO', 'PRODUCTS']),
+    filteredList() {
+      return this.PRODUCTS.filter(product => {
+        return product.title.toLowerCase().includes(this.search.toLowerCase()) ||
+                product.categoryName.toLowerCase().includes(this.search.toLowerCase()) ||
+                product.id.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
   },
-  mounted() {
-    this.$store.dispatch('FETCH_PRODUCTS')
+  async mounted() {
+    await this.$store.dispatch('FETCH_PRODUCTS')
   },
+
 }
 </script>
 
@@ -152,4 +175,10 @@ export default {
   }
 }
 
+.wrapper {
+  img {
+    max-height: 150px;
+    max-width: 150px;
+  }
+}
 </style>

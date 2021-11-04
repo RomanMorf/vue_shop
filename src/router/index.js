@@ -66,10 +66,16 @@ const routes = [
     component: () => import('@/views/NotFound.vue'),
   },
   {
-    path: '/photo',
-    name: 'PhotoDownload',
+    path: '/create',
+    name: 'ProductCreate',
     meta: { layout: 'main' },
-    component: () => import('@/views/PhotoDownload.vue'),
+    component: () => import('@/views/ProductCreate.vue'),
+  },
+  {
+    path: '/edit/:id',
+    name: 'ProductCreate',
+    meta: { layout: 'main' },
+    component: () => import('@/views/ProductCreate.vue'),
   },
   //=============== LOGIN REGISTER ===============
   {
@@ -140,10 +146,10 @@ const router = new VueRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser
-  to.meta.auth && !currentUser ? next('/login') : next()
-})
+// router.beforeEach((to, from, next) => {
+//   const currentUser = firebase.auth().currentUser
+//   to.meta.auth && !currentUser ? next('/login') : next()
+// })
 
 
 export default router

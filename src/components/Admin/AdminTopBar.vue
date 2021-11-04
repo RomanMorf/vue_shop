@@ -20,8 +20,8 @@ export default {
 <style lang='scss'>
   .top-bar {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     text-align: center;
     width: 100%;
     height: 50px;

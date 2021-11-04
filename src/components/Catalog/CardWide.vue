@@ -13,7 +13,7 @@
           <span class="wide_info_btn black">Second</span>
         </div>
         <p class="wide_info_price">{{ product.price }} UAH</p>
-        <p class="wide_category">{{ product.categoryName }}</p>
+        <p v-if="product.categoryName" class="wide_category">{{ product.categoryName }}</p>
       </div>
 
       <div class="wide_busket" @click="addToBasket(product)">
