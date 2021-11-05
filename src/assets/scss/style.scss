@@ -468,4 +468,9 @@ ul {
   body {
     font-size: 12px;
   }
+  .form {
+    &_section {
+      width: 95%;
+    }
+  }
 }

@@ -1,6 +1,20 @@
 {
   "rules": {
-    ".read": true,
-    ".write": "auth != null"
+    "orders": {
+      ".read": true,
+      ".write": true
+    },
+    "products": {
+      ".read": true,
+      ".write": "$uid === auth.uid"
+    },
+    "categories": {
+      ".read": true,
+      ".write": "$uid === auth.uid"
+    },
+    "texts": {
+      ".read": true,
+      ".write": "$uid === auth.uid"
+    }
   }
 }

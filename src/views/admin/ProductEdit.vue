@@ -271,6 +271,7 @@ export default {
       this.img = this.product.img || []
       this.description = this.product.description || ''
     }
+    console.log(this.$route, 'this.$route.');
 
     this.id = id ||'p-' + Date.now()
 

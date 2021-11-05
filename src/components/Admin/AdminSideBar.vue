@@ -8,6 +8,7 @@
         menu_open
       </span>
     </button>
+
     <ul class="menu">
       <li v-for="(item, index) in menu"
         :key="index" class="menu_item"
@@ -60,7 +61,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 11;
+    z-index: 200;
     padding-top: 50px;
 
     width: 300px;
@@ -88,7 +89,7 @@ export default {
     }
 
     &_btn{
-      background-color: transparent;
+      background-color: $bg_color_admin;
       border: none;
       position: absolute;
       top: 20px;
@@ -132,5 +133,30 @@ export default {
       }
     }
   }
+
+@media (max-width: 580px){
+  .side-bar {
+    left: -50px;
+    padding-left: 50px;
+    width: 350px;
+
+    &.close {
+      .menu_item {
+        &-btn {
+          right: 50px;
+        }
+      }
+    }
+    &_btn{
+      left: 60px;
+    }
+  }
+
+  .menu {
+    &_item {
+      padding: 10px 0px 10px 10px;
+    }
+  }
+}
 
 </style>

@@ -35,15 +35,27 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  .content {
-    margin-left: 300px;
+.content {
+  margin-left: 300px;
+  transition: all ease 0.5s;
+  padding: 10px;
+  min-height: calc(100vh - 70px);
+
+  &.full {
+    margin-left: 50px;
     transition: all ease 0.5s;
-    padding: 10px;
+  }
+}
+
+@media (max-width: 580px){
+  .content {
+    margin-left: 0px;
+    padding: 5px;
     min-height: calc(100vh - 70px);
 
     &.full {
-      margin-left: 50px;
-      transition: all ease 0.5s;
+      margin-left: 00px;
     }
   }
+}
 </style>
