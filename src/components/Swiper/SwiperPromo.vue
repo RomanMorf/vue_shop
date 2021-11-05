@@ -1,11 +1,11 @@
 <template>
   <swiper :options="swiperOptions">
-    <swiper-slide v-for="(item, index) in itemData" :key="index" class="slide_body">
-      <img class="slide_img" :src="item.img" alt="">
+    <swiper-slide v-for="(item, index) in itemData" :key="index" class="slide_body unselectable">
+      <img class="slide_img" :src="item.img" :alt="item.btnTitle" >
       <div class="slide_promo">
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.text }}</p>
-        <a class="slide_btn" @click.prevent="$router.push(item.btnUrl)">{{ item.btnTitle }}</a>
+        <h2 class="slide_title">{{ item.title }}</h2>
+        <p class="slide_text">{{ item.text }}</p>
+        <a class="slide_btn " @click.prevent="$router.push(item.btnUrl)">{{ item.btnTitle }}</a>
       </div>
     </swiper-slide>
 
@@ -48,24 +48,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h2 {
-  margin: 0;
-}
-
 .slide {
   &_body {
     position: relative;
     width: 100%;
-
-    p {
-      margin: 20px 0;
-      padding: 0 10px 0 0;
-    }
   }
 
   &_img {
-    display: block;
-    max-width: 100%;
+    max-width: 1500px;
+    min-height: 300px;
+    max-height: 70vh;
   }
 
   &_promo {
@@ -81,15 +73,42 @@ h2 {
     border-bottom: 2px solid rgb(224, 146, 132);
     transition: all ease .5s;
     cursor: pointer;
+    font-size: 20px;
 
     &:hover {
       color: rgb(197, 109, 94);
       transition: all ease .5s;
     }
   }
+
+  &_title {
+    margin: 0;
+    font-size: 40px;
+  }
+  
+  &_text {
+    margin: 20px 0;
+    padding: 0 10px 0 0;
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 800px) {
+  .slide {
+    &_text {
+      display: none;
+    }
+    &_promo {
+      position: absolute;
+      top: 25%;
+      left: 40%;
+    }
+    &_img {
+      max-height: 50vh;
+    }
+  }
+}
+@media screen and (max-width: 580px) {
   .slide {
     &_body {
       p {
@@ -98,9 +117,20 @@ h2 {
     }
     &_promo {
       position: absolute;
-      top: 15%;
-      left: 40%;
+      top: 25%;
+      left: 20%;
     }
+    &_img {
+      max-height: 40vh;
+    }
+    &_text {
+      font-size: 15px;
+    }
+    &_btn {
+      font-size: 20px;
+    }
+
   }
 }
+
 </style>

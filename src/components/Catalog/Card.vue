@@ -9,15 +9,15 @@
       </div>
       <div class="card_info">
         <h3 class="card_title">{{ product.title }}</h3>
-        <p class="card_info_price">{{ product.price }} UAH</p>
+        <p class="card_price">{{ product.price }} UAH</p>
       </div>
     </div>
 
     <div class="card_info" >
-      <div class="card_busket" @click="addToBasket(product)">
+      <span class="card_busket" @click="addToBasket(product)">
         <span class="card_active" :style="inBasket"></span>
         Busket
-      </div>
+      </span>
     </div>
 
   </div>
@@ -102,7 +102,7 @@ p {
 .card {
   margin: 10px;
   width: 250px;
-  min-height: 550px;
+  min-height: 450px;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
@@ -135,10 +135,6 @@ p {
     top: 10px;
     transition: transform 0.3s ease;
 
-    & img {
-      width: 100%;
-    }
-
     &:hover {
       transform: scale(1.2);
       transition: transform 0.3s ease-in;
@@ -167,7 +163,6 @@ p {
     }
   }
 
-
   &_active {
     position: absolute;
     top: 0px;
@@ -180,20 +175,40 @@ p {
 
   &_info {
     padding: 10px;
+  }
 
-    &_price {
-      font-weight: bold;
-      margin-top: 15px;
-    }
+  &_price {
+    font-weight: bold;
+    margin-top: 15px;
   }
 
   &_busket {
-    border-bottom: 2px solid black;
-    width: 50px;
+    // border-bottom: 2px solid black;
+    // width: 50px;
     margin: 10px 0;
     font-weight: bold;
     transition: all 0.2s ease-in;
     position: relative;
+    padding-bottom: 1px;
+    margin-top: 10px 0;
+
+    &::after {
+      content: '';
+      border-bottom: 2px solid black;
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      bottom: 0px;
+      left: 0;
+    }
+
+    &:hover {
+      color: $hover_color_main;
+      transition: all 0.2s ease-in;
+      &::after {
+        border-bottom: 2px solid $hover_color_main;
+      }
+    }
 
     & .card_active{
       top: -5px;
@@ -201,10 +216,26 @@ p {
       display: none;
     }
 
-    &:hover {
-      color: $hover_color_main;
-      transition: all 0.2s ease-in;
-      border-bottom: 2px solid $hover_color_main;
+  }
+}
+@media screen and (max-width: 580px) {
+  .card {
+    width: 150px;
+    min-height: 250px;
+    &_category {
+      display: none;
+    }
+    &_img {
+      height: 200px;
+    }
+    &_info {
+      padding: 5px;
+    }
+    &_title {
+      margin: 5px 0;
+    }
+    &_price {
+      margin-top: 5px;
     }
   }
 }

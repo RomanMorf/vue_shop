@@ -1,6 +1,6 @@
 <template>
   <div class="top-bar">
-    <span v-if="INFO">Здравствуйте, {{ INFO.name }}</span>
+    <span class="top-bar_greetings" v-if="INFO">Здравствуйте, {{ INFO.name }}</span>
     <button class="top-bar_btn modal_btn " @click="$router.push('/')">Назад в магазин</button>
   </div>
 </template>
@@ -24,12 +24,16 @@ export default {
     position: fixed;
     top: 0px;
     left: 0px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
     width: 100%;
     height: 50px;
     background-color: $bg_color_admin;
     z-index: 10;
     position: relative;
+
     &_btn {
       position: absolute;
       top: 10px;

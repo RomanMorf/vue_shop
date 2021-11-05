@@ -39,6 +39,7 @@ export default {
   min-height: 300px;
   top: 0;
   left: -100%;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4);
 
   background-color: $bg_color_main;
   z-index: 2;

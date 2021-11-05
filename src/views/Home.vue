@@ -114,13 +114,9 @@ export default {
         freeMode: false,
         loop: true,
         breakpoints: {
-          400: {
-            slidesPerView: 1,
-            spaceBetween: 5
-          },
           700: {
             slidesPerView: 2,
-            spaceBetween: 5
+            spaceBetween: 2
           },
           900: {
             slidesPerView: 3,
@@ -128,7 +124,7 @@ export default {
           },
           1000: {
             slidesPerView: 4,
-            spaceBetween: 20
+            spaceBetween: 10
           },
         },
         navigation: {

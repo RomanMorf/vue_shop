@@ -9,7 +9,7 @@
           <input class="form_input mw-50" type="text" v-model="search" required=""/>
           <label class="form_label">Поиск...</label>
         </div>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap flex-space">
           <div class="card" v-for="(product, index) in filteredList" :key="index" @click="$router.push(`/admin/edit/${product.id}`)">
             <p class="text"> {{ product.id }} </p>
             <p> {{ product.title }} </p>

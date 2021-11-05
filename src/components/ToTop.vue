@@ -1,6 +1,6 @@
 <template>
   <transition name="translate">
-    <div class="totop" v-show="scY > 300 && scX > 600">
+    <div class="totop" v-show="scY > 300 ">
       <button class="totop_btn"  @click="toTop">To top</button>
     </div>
   </transition>
@@ -72,4 +72,17 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 580px) {
+  .totop {
+    &_btn {
+      &:hover {
+        background-color: $bg_color_main;
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4);
+        color: #fff;
+      }
+    }
+  }
+}
+
 </style>

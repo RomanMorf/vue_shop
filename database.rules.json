@@ -6,15 +6,15 @@
     },
     "products": {
       ".read": true,
-      ".write": "$uid === auth.uid"
+      ".write": "auth != null"
     },
     "categories": {
       ".read": true,
-      ".write": "$uid === auth.uid"
+      ".write": "auth != null"
     },
     "texts": {
       ".read": true,
-      ".write": "$uid === auth.uid"
+      ".write": "auth != null"
     }
   }
 }
