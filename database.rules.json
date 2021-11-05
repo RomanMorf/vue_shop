@@ -12,6 +12,10 @@
       ".read": true,
       ".write": "auth != null"
     },
+    "users": {
+      ".read": true,
+      ".write": true
+    },
     "texts": {
       ".read": true,
       ".write": "auth != null"

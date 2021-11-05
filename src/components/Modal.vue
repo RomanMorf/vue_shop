@@ -109,7 +109,7 @@ export default {
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: $bg_color_secondary;
+      background-color: $bg_color_main;
     }
   }
 

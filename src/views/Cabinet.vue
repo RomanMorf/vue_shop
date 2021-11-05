@@ -2,7 +2,7 @@
   <div class="center">
 
     <Loader v-if="loading"/>
-    
+
     <div v-if="!loading">
       <h1>This is an a parsonal cabinet page</h1>
       <h2>Under development</h2>
