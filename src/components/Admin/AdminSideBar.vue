@@ -12,7 +12,7 @@
     <ul class="menu">
       <li v-for="(item, index) in menu"
         :key="index" class="menu_item"
-        @click="$router.push(item.path)"
+        @click="goTo(item.path)"
       >
         <span class="menu_item-text">{{ item.title }}</span>
         <span v-tooltip="item.title" class="menu_item-btn material-icons-outlined">
@@ -35,6 +35,7 @@ export default {
         {title: 'Заказы', path: '/admin/orders', icon: 'list_alt'},
         {title: 'Товары', path: '/admin/products', icon: 'format_list_bulleted'},
         {title: 'Создать продутк', path: '/admin/create', icon: 'create_new_folder'},
+        {title: 'Категории', path: '/admin/categories', icon: 'category'},
         {title: 'Редактор контента', path: '/admin/editor', icon: 'edit_note'},
         {title: 'Пользователи', path: '/admin/profiles', icon: 'account_circle'},
         {title: '!!! Test !!!', path: '/admin/testpage', icon: 'contacts'},
@@ -44,13 +45,18 @@ export default {
   methods: {
     toggleSideBar(){
       this.$store.dispatch('SIDE_BAR_INTERFACE_TOGGLE')
+    },
+    goTo(path) {
+      if (window.innerWidth < 900) {
+        this.$store.dispatch('SIDE_BAR_HIDE')
+      }
+      this.$router.push(path)
     }
   },
   props: ['sideBarIsOpen'],
   computed: {
     ...mapGetters(['INTERFACE'])
   }
-
 }
 </script>
 

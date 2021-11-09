@@ -22,6 +22,18 @@ export default {
         commit('SET_INTERFACE', JSON.parse(interfaceInfo))
       }
     },
+    SIDE_BAR_SHOW({dispatch, commit, getters}) {
+      const data = {...getters.INTERFACE}
+      data.sideBarIsOpen = true
+      localStorage.setItem('interface', JSON.stringify(data))
+      commit('SET_INTERFACE', data)
+    },
+    SIDE_BAR_HIDE({dispatch, commit, getters}) {
+      const data = {...getters.INTERFACE}
+      data.sideBarIsOpen = false
+      localStorage.setItem('interface', JSON.stringify(data))
+      commit('SET_INTERFACE', data)
+    },
     SIDE_BAR_INTERFACE_TOGGLE({dispatch, commit, getters}) {
       const data = {...getters.INTERFACE}
       data.sideBarIsOpen = !data.sideBarIsOpen

@@ -4,21 +4,21 @@
       ".read": true,
       ".write": true
     },
+    "users": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "products": {
       ".read": true,
-      ".write": "auth != null"
-    },
-    "categories": {
-      ".read": true,
-      ".write": "auth != null"
-    },
-    "users": {
-      ".read": true,
-      ".write": true
+      ".write": "root.child('users').child(auth.uid).child('userInfo').child('role').val() == 'moderator' || root.child('users').child(auth.uid).child('userInfo').child('role').val() == 'admin'"
     },
     "texts": {
       ".read": true,
-      ".write": "auth != null"
+      ".write": "root.child('users').child(auth.uid).child('userInfo').child('role').val() == 'moderator' || root.child('users').child(auth.uid).child('userInfo').child('role').val() == 'admin'"
+    },
+    "categories": {
+      ".read": true,
+      ".write": "root.child('users').child(auth.uid).child('userInfo').child('role').val() == 'admin'"
     }
   }
 }

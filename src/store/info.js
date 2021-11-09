@@ -34,6 +34,7 @@ export default {
         const uid = await dispatch('GET_UID')
         const info = (await firebase.database().ref(`/users/${uid}/userInfo`).once('value')).val();
         commit('SET_INFO', info)
+        return info
       } catch (error) {
         commit('setError', error)
         throw error

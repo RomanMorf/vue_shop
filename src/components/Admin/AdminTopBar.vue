@@ -14,6 +14,10 @@ export default {
       'INFO',
     ]),
   },
+  async mounted() {
+    this.$store.dispatch('FETCH_INFO')
+  },
+
 }
 </script>
 

@@ -22,7 +22,7 @@ export default {
           .ref(`/categories/`)
           .push(data)
       } catch (error) {
-        console.log(error.message, 'error')
+        console.log(error.message, 'error - message')
         throw error
       }
     },
@@ -47,7 +47,8 @@ export default {
           .child(data.id)
           .remove()
       } catch (error) {
-        commit('setError', error)
+        // commit('setError', error)
+        console.log('У вас не прав для даной операции. Обратитесь к администратору...');
         throw error
       }
     },
@@ -65,7 +66,7 @@ export default {
           id: key,
         }))
         commit('SET_CATEGORIES', newCategorise)
-        return newCategorise 
+        return newCategorise
       } catch (error) {
         throw error
       }

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <form class="form center">
+    <!-- <form class="form center">
       <div>
         <h3>Products categories</h3>
       </div>
       <div>
-        <!-- <p>Category title <input v-model="selectedTitle" type="text" placeholder="Enter category title"></p> -->
+        <p>Category title <input v-model="selectedTitle" type="text" placeholder="Enter category title"></p>
       </div>
 
       <div>
@@ -15,7 +15,7 @@
             :key="cat.id"
             :value="cat.id"
           >
-            <!-- {{ cat.title }} -->
+            {{ cat.title }}
           </option>
         </select>
       </div>
@@ -25,11 +25,49 @@
         <button @click.prevent="deleteCategory">Delete</button>
         <button type="reset">Reset form</button>
       </div>
+    </form> -->
+    <form class="form">
+      <div class="form_section flex">
+        <div class="form_cell"> <!-- Category name -->
+          <input id='name' class="form_input" v-model.trim="$v.selectedTitle.$model" type="text" required="">
+          <label for='name' class="form_label">Название товара</label>
+          <small
+            class="form_helper invalid"
+            v-if="$v.selectedTitle.$dirty && !$v.selectedTitle.required"
+          >Введите Название товара
+          </small>
+        </div>
+        <div class="form_cell"> <!-- Category select -->
+          <select id="form_category" class="form_select" v-model="currentCategory" required="">
+            <option class="form_option"
+              v-for="cat in categories"
+              :key="cat.id"
+              :value="cat.id"
+            >
+              {{ cat.title }}
+            </option>
+          </select>
+          <label for='form_category' class="form_label">Выберите категорию товара</label>
+          <small
+            class="form_helper invalid"
+            v-if="$v.selectedTitle.$dirty && !$v.selectedTitle.required"
+          >Выберите категорию
+          </small>
+        </div>
+      </div>
+      <div class="form_section flex">
+        <button class="modal_btn admin_bg" @click.prevent="createCategory">ADD</button>
+        <button class="modal_btn admin_bg" @click.prevent="editCategory">Edit</button>
+        <button class="modal_btn admin_bg" @click.prevent="deleteCategory">Delete</button>
+        <button class="modal_btn admin_bg" type="reset">Reset form</button>
+      </div>
+
     </form>
   </div>
 </template>
 
 <script>
+import {required} from 'vuelidate/lib/validators'
 
 export default {
   data() {
@@ -37,7 +75,7 @@ export default {
       selectedTitle: '',
       selectedId: '',
       categories: [],
-      current: null,
+      currentCategory: null,
     }
   },
 
@@ -75,12 +113,17 @@ export default {
   },
 
   watch: {  // следим за обновлениями в данном объекте
-    // current(catId) {
-    //   const {title} = this.categories.find(c => c.id === catId)
-    //   this.selectedTitle = title
-    //   this.selectedId = catId
-    // }
+    currentCategory(catId) {
+      const {title} = this.categories.find(c => c.id === catId)
+      this.selectedTitle = title
+      this.selectedId = catId
+    }
   },
+
+  validations: {
+    selectedTitle: {required}
+  },
+
   async mounted() { // запрашиваем категории при загрузке страницы
       this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
   },
@@ -89,18 +132,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .form {
-    padding: 10px;
-    margin: 10px auto;
-    max-width: 300px;
-    border: 1px solid black;
-
-    & div {
-    margin-bottom: 10px;
-    }
-
-    &-select {
-      width: 50%;
-    }
-  }
 </style>

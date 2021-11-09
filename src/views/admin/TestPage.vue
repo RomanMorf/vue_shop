@@ -22,7 +22,7 @@
 
       <!-- <FormAddProduct></FormAddProduct> -->
 
-      <!-- <FormAddCategory></FormAddCategory> -->
+      <FormAddCategory></FormAddCategory>
 
       <h2 class="product_title">Товары</h2>
       <button class="product_btn" @click="fetchProducts">

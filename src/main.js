@@ -13,6 +13,7 @@ import ToTop from '@/components/ToTop'
 import Modal from '@/components/Modal'
 import Vuelidate from 'vuelidate'
 
+import localizeFilter from '@/filters/localize.filter.js'
 import '@/assets/scss/style.scss'
 
 Vue.config.productionTip = false
@@ -33,6 +34,7 @@ firebase.initializeApp({
   measurementId: "G-VZ87V7G0CH"
 })
 
+Vue.filter('localize', localizeFilter)
 Vue.use(VTooltip)
 Vue.use(Vuelidate)
 

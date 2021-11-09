@@ -13,7 +13,7 @@
       <br>
 
       <div class="center" v-if="INFO.role === 'admin'" >
-        <p>Вашу ровень доступа {{ INFO.role  }}</p>
+        <p>Ваш уровень доступа {{ INFO.role  }}</p>
         <button @click="$router.push('/admin')">Войти в дамин панель</button>
       </div>
     </div>
