@@ -63,82 +63,82 @@ export default {
 <style scoped lang='scss'>
 @import '@/assets/scss/variables.scss';
 
-  .side-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 200;
-    padding-top: 50px;
+.side-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  padding-top: 50px;
 
-    width: 300px;
-    min-height: 100vh;
-    background-color: $bg_color_admin;
+  width: 300px;
+  min-height: 100vh;
+  background-color: $bg_color_admin;
+  transition: all ease 0.5s;
+
+  &.close {
+    width: 50px;
     transition: all ease 0.5s;
-
-    &.close {
-      width: 50px;
-      transition: all ease 0.5s;
-      .menu_item {
-        border-bottom: none;
-        margin: 10px 0;
-
-        &-text{
-          transition: all ease 0.5s;
-          left: -250px;
-        }
-        &-btn {
-          top: 10px;
-          right: 15px;
-        }
-      }
-
-    }
-
-    &_btn{
-      background-color: $bg_color_admin;
-      border: none;
-      position: absolute;
-      top: 20px;
-      left: 5px;
-      cursor: pointer;
-    }
-  }
-
-  .menu {
-    padding: 0;
-    list-style: none;
-
-    &_item {
-      margin: 10px;
-      padding: 10px 35px 10px 10px;
-      cursor: pointer;
-      transition: all ease .3s;
-      position: relative;
-      min-height: 40px;
-      border-bottom: 1px solid grey;
-
-      &:hover {
-        background-color: $hover_color_admin;
-      }
-      &-btn {
-        position: absolute;
-        top: 10px;
-        right: 5px;
-        cursor: pointer;
-      }
+    .menu_item {
+      border-bottom: none;
+      margin: 10px 0;
 
       &-text{
-        position: absolute;
-        top: 10px;
-        left: 10px;
         transition: all ease 0.5s;
-        width: 230px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        left: -250px;
+      }
+      &-btn {
+        top: 10px;
+        right: 15px;
       }
     }
+
   }
+
+  &_btn{
+    background-color: $bg_color_admin;
+    border: none;
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    cursor: pointer;
+  }
+}
+
+.menu {
+  padding: 0;
+  list-style: none;
+
+  &_item {
+    margin: 10px;
+    padding: 10px 35px 10px 10px;
+    cursor: pointer;
+    transition: all ease .3s;
+    position: relative;
+    min-height: 40px;
+    border-bottom: 1px solid grey;
+
+    &:hover {
+      background-color: $hover_color_admin;
+    }
+    &-btn {
+      position: absolute;
+      top: 10px;
+      right: 5px;
+      cursor: pointer;
+    }
+
+    &-text{
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      transition: all ease 0.5s;
+      width: 230px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
 
 @media (max-width: 580px){
   .side-bar {
@@ -160,7 +160,7 @@ export default {
 
   .menu {
     &_item {
-      padding: 10px 0px 10px 10px;
+      padding: 10px 0px;
     }
   }
 }

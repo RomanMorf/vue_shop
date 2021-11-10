@@ -100,16 +100,17 @@ p {
 }
 
 .card {
-  margin: 10px;
   width: 250px;
+  margin: 5px;
   min-height: 450px;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
 
   &:hover {
-    box-shadow: 0 0 2px 3px $bg_color_main;
+    box-shadow: $box_shadow_main;
   }
+
   &_category {
     position: absolute;
     padding: 5px 10px;
@@ -183,8 +184,6 @@ p {
   }
 
   &_busket {
-    // border-bottom: 2px solid black;
-    // width: 50px;
     margin: 10px 0;
     font-weight: bold;
     transition: all 0.2s ease-in;

@@ -56,21 +56,7 @@
           </small>
         </div>
       </div>
-      <!-- Description - input -->
-      <!-- <div class="form_section">
-        <input id='description' class="form_input" v-model.trim="$v.description.$model" type="text" required="">
-        <label for='description' class="form_label">Оисание товара</label>
-        <small
-          class="form_helper invalid"
-          v-if="$v.description.$dirty && !$v.description.required"
-        >Введите описание товара
-        </small>
-        <small
-          class="form_helper invalid"
-          v-if="$v.description.$dirty && !$v.description.minLength"
-        >Поле должно содержать не меньше {{ this.$v.description.$params.minLength.min }} символов, сейчас {{ description.length }}
-        </small>
-      </div> -->
+
       <div class="form_section flex"> <!-- Photo -->
         <button class="modal_btn admin_bg" @click.prevent="click1">Выберите фото <span class="material-icons">image</span></button>
         <button class="modal_btn admin_bg ml-auto" @click.prevent="cleareAllImagesOnServer">Удалить все фото <span class="material-icons">delete</span></button>
@@ -270,6 +256,7 @@ export default {
       this.price = this.product.price || ''
       this.img = this.product.img || []
       this.description = this.product.description || ''
+      this.currentCategory = this.product.categoryId
     }
     console.log(this.$route, 'this.$route.');
 

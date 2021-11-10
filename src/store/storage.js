@@ -18,6 +18,21 @@ export default {
     },
     async DELETE_ITEM({ dispatch, commit, getters }, {pathToFile, fileName}) {
       await firebase.storage().ref(pathToFile).child(fileName).delete()
-    }
+    },
+    async PUT_ITEM({ dispatch, commit, getters }, {pathToFile, file}) {
+      const storageRef = firebase.storage().ref(pathToFile).put(file)
+      let uploadValue = 0
+      storageRef.on(
+        `state_changed`,
+        snapshot=>{
+        uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        },
+        error=>{console.log(error.message, 'error.message')},
+        ()=>{uploadValue=100;
+          return storageRef.snapshot.ref.getDownloadURL()
+        }
+      )
+
+    },
   },
 }

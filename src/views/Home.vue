@@ -13,7 +13,7 @@
       <!-- <Card :product="item" v-for="(item, index) in PRODUCTS" :key="index"/> -->
 
       <swiper :options="swiperOptionsCards">
-        <swiper-slide v-for="(item, index) in PRODUCTS" :key="index">
+        <swiper-slide v-for="(item, index) in PRODUCTS.slice(getRandomNum(1, 5), getRandomNum(10, PRODUCTS.length))" :key="index">
           <Card :product="item" />
         </swiper-slide>
         <div class="swiper-button-prev color" slot="button-prev"></div>
@@ -23,7 +23,7 @@
 
 <!-- ====== CATEGORY BLOCK ====== -->
     <div class="section mw700">
-      <CategoryBlock v-for="(item, index) in dataForCatalogBlock" :key="index" :data="item"></CategoryBlock>
+      <CategoryBlock v-for="(item, index) in categories.slice(1, 4)" :key="index" :data="item"></CategoryBlock>
     </div>
 
 <!-- ====== 'WHY WE' BLOCK ====== -->
@@ -88,6 +88,7 @@ export default {
     return {
       isLoading: false,
       timer: null,
+      categories: [],
       carusel:[
         { img:'https://static-sl.insales.ru/files/1/7093/11598773/original/slide1_2048x800_crop_top.webp',
           title: 'Title for post',
@@ -123,7 +124,7 @@ export default {
             spaceBetween: 10
           },
           1000: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 10
           },
         },
@@ -157,16 +158,15 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('FETCH_PRODUCTS')
+    this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
     window.addEventListener('resize', this.changeMaxSlidePerPage);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.changeMaxSlidePerPage);
   },
   methods: {
-    getRandomNum() {
-      const max = this.PRODUCTS.length || 10
-      const result = Math.floor(Math.random() * max)
-      return result
+    getRandomNum(min = 5, max = 5) {
+      return Math.floor(Math.random() * (max - min) + min)
     },
     changeMaxSlidePerPage() {
       if (this.timer) return;
@@ -185,7 +185,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['PRODUCTS']),
+    ...mapGetters(['PRODUCTS','CATEGORIES']),
   },
   components: {
     CategoryBlock,

@@ -1,8 +1,8 @@
 <template>
   <div class="category" :style="styleObject">
     <h2>{{ data.title }}</h2>
-    <p>{{ data.text }}</p>
-    <button @click.prevent="$router.push(data.btnUrl)">{{ data.btnTitle }}</button>
+    <p>{{ data.description || 'описание категори' }} </p>
+    <button @click.prevent="$router.push(`/catalog/${data.id}` || '/catalog')">{{ data.btnTitle || 'Подробнее' }}</button>
   </div>
 </template>
 

@@ -108,7 +108,7 @@ p {
   display: flex;
 
   &:hover {
-    box-shadow: 0 0 2px 3px $bg_color_main;
+    box-shadow: $box_shadow_main;
   }
 
   &_img {

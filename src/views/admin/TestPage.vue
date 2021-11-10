@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="product_container">
-
       <div class="search">
         <p>{{ search }}</p> <br>
         <div class="search-wrapper">
@@ -97,7 +96,6 @@ export default {
     Confirm() {
       console.log(this.idForDel, '... удален ');
       this.showModal = false
-
     },
     confirmDelete(id, title) {
       this.idForDel = id

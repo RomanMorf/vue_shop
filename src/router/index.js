@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import firebase from 'firebase/app'
 import store from '../store'
+const { isNavigationFailure, NavigationFailureType } = VueRouter
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,13 @@ const routes = [
   },
   { // catalog
     path: '/catalog',
-    name: 'Catalog',
+    // name: 'Catalog',
+    meta: { layout: 'main' },
+    component: () => import('@/views/Catalog.vue'),
+  },
+  { // catalog/:id
+    path: '/catalog/:id',
+    // name: 'Catalog',
     meta: { layout: 'main' },
     component: () => import('@/views/Catalog.vue'),
   },
@@ -159,9 +166,21 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser
+  // const currentUser = firebase.auth().currentUser
   // to.meta.auth && !currentUser ? next('/login') : next()
-  to.meta.role === 'admin' ? console.log('you got to be admin') : null;
+  // to.meta.role === 'admin' ? console.log('you got to be admin') : null;
+
+  // if (to.name === from.name && to.path !== from.path) {
+  //   console.log(from.path, 'from.path');
+  //   console.log(to.path, 'to.path');
+  //   next(to.path)
+  // }
+
+  if (isNavigationFailure(NavigationFailureType.duplicated)) {
+    // отображение уведомления пользователю
+    console.log('router - DUPLICATED');
+    // showToast('Необходимо авторизоваться для доступа к панели администрирования')
+  }
   next()
 })
 

@@ -23,6 +23,7 @@
         <div class="number">
           Показывать по
           <select name="number" id="number" v-model="maxProdOnPage">
+            <option value="4">4</option>
             <option value="8">8</option>
             <option value="16">16</option>
             <option value="32">32</option>
@@ -30,7 +31,7 @@
           </select>
         </div>
         <div class="views">
-          <div class="cards" :class="{active: showAsCards}" @click="showAsCards = true">
+          <div class="cards mr-5" :class="{active: showAsCards}" @click="showAsCards = true">
             <span class="cards_icon"></span>
             <span class="cards_icon vertical"></span>
           </div>
@@ -42,9 +43,10 @@
       <transition name="translate">
         <div v-if="showAsCards" class="card-wrapper" :class="{list: !showAsCards}">
           <Card
-            v-for="product in products.slice(0, maxProdOnPage)"
+            v-for="product in products.slice(startSlice, maxProdOnPage)"
             :key="product.id"
             :product="product"
+            class="margin-5"
           />
         </div>
       </transition>
@@ -56,8 +58,13 @@
             :product="product"
           />
         </div>
+        <div v-if="products.length < 1" class="center">
+          <h3>В даной категории пока нет товаров</h3>
+          <p>Вернуться в <a @click="toCatalog" class="pointer">Каталог</a> </p>
+        </div>
       </transition>
     </div>
+    <div><button v-for="(paginate, index) in paginatePages" :key="index" @click="currentPage = index + 1">page {{index + 1}}</button></div>
 
   </div>
 </template>
@@ -75,11 +82,54 @@ export default {
       isLoding: true,
       showAsCards: true,
       sorting: 'default',
+
       maxProdOnPage: 8,
+      paginatePages: 0,
+      currentPage: 1,
+      startSlice: 0,
     }
+  },
+  methods: {
+    async toCatalog() {
+      this.$router.push('/catalog')
+      this.products = await this.$store.dispatch('FETCH_PRODUCTS')
+    },
+    setupPaginate() {
+      let total = +this.products.length
+      let maxOnPage = +this.maxProdOnPage
+
+      this.startSlice = this.maxProdOnPage * this.currentPage
+      console.log(this.startSlice, this.maxProdOnPage, ' slice ');
+
+      this.products.slice(this.startSlice, this.finishSlice)
+      this.paginatePages = Math.floor(total / maxOnPage)
+      let difrence = total % maxOnPage
+
+      if (difrence > 0) {
+        this.paginatePages += 1
+      }
+
+      console.log(this.$route.query.page, 'this.$route.params');
+      console.log(this.$route.query.total, 'this.$route.params');
+      // console.log(this.paginatePages, 'paginatePages');
+    },
+    nextPage() {
+      this.currentPage++
+    },
+    prevPage() {
+      this.currentPage--
+    },
   },
   async mounted() {
     this.products = await this.$store.dispatch('FETCH_PRODUCTS')
+    this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
+    const id = this.$route.params.id
+    this.setupPaginate()
+    if (id) {
+      this.products = this.PRODUCTS.filter(prod => {
+        return prod.categoryId === id
+      })
+    }
     if (localStorage.getItem('maxProdOnPage')) this.maxProdOnPage = JSON.parse(localStorage.getItem('maxProdOnPage'))
     this.isLoding = false
   },
@@ -128,7 +178,9 @@ export default {
     },
     maxProdOnPage(value){
       localStorage.setItem('maxProdOnPage', JSON.stringify(value))
-    }
+      this.setupPaginate()
+    },
+
   }
 }
 </script>
@@ -144,6 +196,9 @@ export default {
   &.list {
     flex-direction: column;
     align-items: center;
+  }
+  .margin-5 {
+    margin: 5px;
   }
 }
 
@@ -178,6 +233,10 @@ export default {
     height: 30px;
     position: relative;
     padding: 3px;
+    &:hover {
+      box-shadow: $box_shadow_main;
+    }
+
 
     &.active {
       background-color:$bg_color_main;
@@ -272,6 +331,10 @@ export default {
       background-color: black;
     }
   }
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 

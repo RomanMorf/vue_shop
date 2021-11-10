@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   min-width: 350px;
   margin: 0;
@@ -39,18 +40,23 @@ ul {
   display: flex;
 }
 .flex-column {
+  display: flex;
   flex-direction: column;
 }
 .flex-row {
+  display: flex;
   flex-direction: row;
 }
 .flex-center {
+  display: flex;
   align-items: center;
 }
 .flex-space {
+  display: flex;
   justify-content: space-around;
 }
 .flex-wrap {
+  display: flex;
   flex-wrap: wrap;
 }
 
@@ -63,6 +69,9 @@ ul {
 .mr-auto {
   margin-right: auto;
 }
+.mr-5 {
+  margin-right: 5px;
+}
 .mb-10 {
   margin-bottom: 10px;
 }
@@ -72,6 +81,7 @@ ul {
 .mw-50 {
   max-width: 50%;
 }
+
 
 .form {
   display: flex;
@@ -226,6 +236,11 @@ ul {
         box-shadow: $box_shadow_main;
         transform: translateY(-5px);
       }
+      &.mw-100{
+        max-width: 100%;
+        max-height: 500px;
+      }
+  
     }
   }
 
@@ -273,6 +288,7 @@ ul {
 
 .modal_btn {
   min-width: 50px;
+  margin-bottom: 7px;
   background-color: $bg_color_main;
   display: flex;
   align-items: center;
@@ -462,6 +478,11 @@ ul {
     opacity: 1;
     transition: opacity .15s;
   }
+}
+
+// стили Toastification
+.Vue-Toastification__toast.Vue-Toastification__toast--warning {
+  color: #000;
 }
 
 @media (max-width: 580px){

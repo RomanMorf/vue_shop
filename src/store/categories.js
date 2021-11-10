@@ -15,14 +15,11 @@ export default {
   actions: {
     async CREATE_CATEGORY({ dispatch, commit, getters }, data) {
       try {
-        console.log(data, 'data')
-
         return await firebase
           .database()
-          .ref(`/categories/`)
-          .push(data)
+          .ref(`/categories/${data.id}`)
+          .set(data)
       } catch (error) {
-        console.log(error.message, 'error - message')
         throw error
       }
     },
@@ -48,7 +45,6 @@ export default {
           .remove()
       } catch (error) {
         // commit('setError', error)
-        console.log('У вас не прав для даной операции. Обратитесь к администратору...');
         throw error
       }
     },

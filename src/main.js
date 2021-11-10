@@ -12,9 +12,16 @@ import Loader from '@/components/Loader'
 import ToTop from '@/components/ToTop'
 import Modal from '@/components/Modal'
 import Vuelidate from 'vuelidate'
-
 import localizeFilter from '@/filters/localize.filter.js'
 import '@/assets/scss/style.scss'
+
+import Toast from "vue-toastification"
+import "vue-toastification/dist/index.css"
+const options = {}
+Vue.use(Toast, options)
+import messagePlugin from '@/utils/message.plugin'
+Vue.use(messagePlugin)
+
 
 Vue.config.productionTip = false
 
