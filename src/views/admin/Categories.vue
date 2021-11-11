@@ -142,6 +142,7 @@
 
 <script>
 import firebase from 'firebase'
+import { mapGetters } from 'vuex'
 
 import messages from '@/utils/messages'
 import {required} from 'vuelidate/lib/validators'
@@ -186,6 +187,7 @@ export default {
     },
 
 
+
     async createCategory() { // вызываем создание категории
       if (this.$v.$invalid) { // проверка на валидность формы
         this.$v.$touch()
@@ -202,6 +204,7 @@ export default {
         await this.fetchCategories()
         this.$success(`Категория "${this.selectedTitle}" - была создана`)
         this.fetchCategories()
+        this.btnCloseForm()
         this.clearForm()
       } catch (error) {
         if (messages[error.code]) {
@@ -339,6 +342,10 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters(['INFO'])
+  },
+
   validations: {
     selectedTitle: {required},
     description: {required},
@@ -346,7 +353,13 @@ export default {
   },
 
   async mounted() { // запрашиваем категории при загрузке страницы
-      this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
+    this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
+    await this.$store.dispatch('FETCH_INFO')
+
+    if (this.$route.meta.role === 'admin' && this.INFO.role !== 'admin') {
+      this.$showMessage(`Для изменения и добавления - необходимо обладать рпавами Администратора`, 'error')
+    }
+
   },
 
 }
@@ -363,7 +376,7 @@ export default {
   max-width: 40%;
   margin: 5px;
   overflow: hidden;
-  
+
   &:hover {
     transition: all .5s ease;
     box-shadow: $box_shadow_main;

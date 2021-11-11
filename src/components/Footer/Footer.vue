@@ -55,6 +55,7 @@
           <a href="http://www.copyright.ru/ru/documents/zashita_avtorskih_prav/znak_ohrani_avtorskih_i_smegnih_prav/">Copiright © Romario inc. 2021</a>
         </div>
       </div>
+      <div class="footer_wrapper_line"></div>
     </div>
   </div>
 </template>

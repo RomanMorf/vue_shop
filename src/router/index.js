@@ -170,17 +170,11 @@ router.beforeEach((to, from, next) => {
   // to.meta.auth && !currentUser ? next('/login') : next()
   // to.meta.role === 'admin' ? console.log('you got to be admin') : null;
 
-  // if (to.name === from.name && to.path !== from.path) {
-  //   console.log(from.path, 'from.path');
-  //   console.log(to.path, 'to.path');
-  //   next(to.path)
+  // if (isNavigationFailure(NavigationFailureType.duplicated)) {
+  //   // отображение уведомления пользователю
+  //   console.log('router - DUPLICATED');
+  //   // showToast('Необходимо авторизоваться для доступа к панели администрирования')
   // }
-
-  if (isNavigationFailure(NavigationFailureType.duplicated)) {
-    // отображение уведомления пользователю
-    console.log('router - DUPLICATED');
-    // showToast('Необходимо авторизоваться для доступа к панели администрирования')
-  }
   next()
 })
 

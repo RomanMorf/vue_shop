@@ -8,7 +8,7 @@
 
       <burger-menu :class="{active: showBurgerMenu}" @closeBurgerMenu="closeBurgerMenu" :links="links" />
 
-      <nav class="nav">
+      <nav class="nav unselectable">
         <ul class="nav-list">
           <router-link
             v-for="(link, index) in links"

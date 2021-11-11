@@ -1,5 +1,5 @@
 <template>
-  <div class="side-bar">
+  <div class="side-bar unselectable">
     <button v-tooltip="'Изменить размер меню'" class="side-bar_btn" @click="toggleSideBar">
       <span class="material-icons-outlined" v-show="!INTERFACE.sideBarIsOpen">
         menu

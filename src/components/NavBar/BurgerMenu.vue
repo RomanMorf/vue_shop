@@ -1,5 +1,5 @@
 <template>
-  <div class="burger">
+  <div class="burger unselectable">
     <span @click="close" class="material-icons burger_btn">close</span>
     <ul class="burger_list" @click="close">
       <router-link

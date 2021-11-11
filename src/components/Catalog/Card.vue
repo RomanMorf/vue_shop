@@ -50,9 +50,13 @@ export default {
     styleObject() { // вычисляемое свойство
       if (this.product.img) { // если есть ссылки на изображения товара
         if (this.product.img.length >= 2) { // если 2 картинки и больше - используй две
-          return this.flag
-            ? { backgroundImage: `url("${this.product.img[0]}")` }
-            : { backgroundImage: `url("${this.product.img[1]}")` }
+          if (window.innerWidth > 600) { // если ширина жкрана меньше 600px - используй только одну
+            return this.flag
+              ? { backgroundImage: `url("${this.product.img[0]}")` }
+              : { backgroundImage: `url("${this.product.img[1]}")` }
+          } else {
+            return { backgroundImage: `url("${this.product.img[0]}")` }
+          }
         }
 
         if (this.product.img.length == 1) { // если 1 картинки - используй только одну

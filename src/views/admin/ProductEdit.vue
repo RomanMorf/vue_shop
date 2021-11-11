@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Loader v-if="loading"/>
+    <Loader v-if="loading"/> <!-- Loader -->
+    <button class="modal_btn admin_bg ml-auto"  @click="$router.push(`/admin/products`)"> <!-- Вернуться назад btn -->
+      Вернуться назад
+      <span class="material-icons">keyboard_return</span>
+    </button>
     <form class="form">
       <div class="form_section"> <!-- Title -->
         <h2 v-if="$route.params.id">Редактирование продукта </h2>
@@ -56,7 +60,6 @@
           </small>
         </div>
       </div>
-
       <div class="form_section flex"> <!-- Photo -->
         <button class="modal_btn admin_bg" @click.prevent="click1">Выберите фото <span class="material-icons">image</span></button>
         <button class="modal_btn admin_bg ml-auto" @click.prevent="cleareAllImagesOnServer">Удалить все фото <span class="material-icons">delete</span></button>
@@ -88,14 +91,18 @@
       <div class="form_section"> <!-- Description -->
         <EditorForVue :content="description" @update:content="getUpdatedContent"/>
       </div>
-      <div class="form_section"> <!-- Botton section -->
+      <div class="form_section flex"> <!-- Botton section -->
         <button class="modal_btn admin_bg"  @click.prevent="createProduct">
           Сохранить карту товара
           <span class="material-icons">save</span>
         </button>
+        <button class="modal_btn admin_bg ml-auto"  @click.prevent="clearForm">
+          Очистить форму
+          <span class="material-icons">backspace</span>
+        </button>
       </div>
     </form>
-    <Modal v-show="showModal" @close="showModal = !showModal">
+    <Modal v-show="showModal" @close="showModal = !showModal"> <!-- Модальное окно -->
       <template v-slot:content>
         <h4 class="center">Заполните все обязательные поля формы</h4>
       </template>
@@ -151,6 +158,15 @@ export default {
     generateId() {
       this.id = 'p-' + Date.now()
     },
+    clearForm() {
+      this.generateId()
+      this.title = ''
+      this.price = ''
+      this.img = []
+      this.description = ''
+      this.currentCategory = ''
+    },
+
     async cleareAllImagesOnServer() {
       await this.$store.dispatch('DELETE_ALL_ITEMS_IN_FOLDER', this.id)
       this.imageDataArr = []
@@ -178,23 +194,29 @@ export default {
         return
       }
 
-      const product = {
-        id: this.id,
-        img: this.img,
-        title: this.title,
-        price: this.price,
-        description: this.description,
+      try {
+        const product = {
+          id: this.id,
+          img: this.img,
+          title: this.title,
+          price: this.price,
+          description: this.description,
+          categoryId: this.categoryId,
+          categoryName: this.categoryName,
+        }
+        this.$store.dispatch('CREATE_PRODUCT', product)
 
-        categoryId: this.categoryId,
-        categoryName: this.categoryName,
+        if (this.$route.params.id) {
+          this.$showMessage(`Продукт ${this.title} успешно изменен`, 'success')
+        } else {
+          this.$showMessage(`Продукт ${this.title} успешно создан`, 'success')
+          this.clearForm()
+        }
+
+      } catch (error) {
+        this.$showMessage(error.message, 'error')
+        throw error
       }
-      this.$store.dispatch('CREATE_PRODUCT', product)
-      .then((response) => {
-        // console.log(response, 'response')
-      })
-      .catch(err => {
-        // console.log(err, 'err')
-      })
     },
     click1() { // выбрать инпут для загрузки файлов
       this.$refs.input1.click()
@@ -243,7 +265,6 @@ export default {
       this.colorHex = colorHex
     }
   },
-
   async mounted() {
     this.categories = await this.$store.dispatch('FETCH_CATEGORIES')
     const id = this.$route.params.id
@@ -258,7 +279,6 @@ export default {
       this.description = this.product.description || ''
       this.currentCategory = this.product.categoryId
     }
-    console.log(this.$route, 'this.$route.');
 
     this.id = id ||'p-' + Date.now()
 
@@ -267,7 +287,6 @@ export default {
   components: {
     EditorForVue,
   }
-
 }
 </script>
 

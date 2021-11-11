@@ -15,6 +15,10 @@ import Vuelidate from 'vuelidate'
 import localizeFilter from '@/filters/localize.filter.js'
 import '@/assets/scss/style.scss'
 
+import Paginate from 'vuejs-paginate'
+Vue.component('Paginate', Paginate)
+
+
 import Toast from "vue-toastification"
 import "vue-toastification/dist/index.css"
 const options = {}

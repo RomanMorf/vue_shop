@@ -258,6 +258,27 @@ ul {
   }
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 20px;
+
+  &_btn {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    border-bottom: 1px solid #000;
+    &:hover {
+      box-shadow: $box_shadow_main;
+    }
+    &.active {
+      box-shadow: $box_shadow_main;
+    }
+  }
+}
+
 
 .btn.bottom-swipe {
   display: inline-block;
