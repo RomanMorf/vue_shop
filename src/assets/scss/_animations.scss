@@ -104,3 +104,17 @@ transform: translateY(-30px);
   opacity: 0;
   transform: translateY(30px);
 }
+
+
+// == slide-top ==
+.slide-top-enter-active {
+  transition: all .3s ease;
+}
+.slide-top-leave-active {
+  transition: all .3s ease;
+}
+.slide-top-enter, .slide-top-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateY(-50%);
+  opacity: 0;
+}

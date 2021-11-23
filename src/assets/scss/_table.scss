@@ -1,0 +1,85 @@
+
+table {
+  overflow-x: auto;
+  white-space: break-spaces;
+}
+
+tr {
+  margin-bottom: 10px;
+  position: relative;
+  background-color: rgba(194, 193, 193, 0.1);
+  transition: all ease .5s;
+  white-space: break-spaces;
+
+  &:nth-child(odd) {
+    background-color: rgba(194, 193, 193, 0.25);
+    transition: all ease .5s
+  }
+  td {
+    padding: 10px;
+    white-space: break-spaces;
+
+    &:first-child {
+      padding-right: 80px;
+      font-weight: 700;
+    }
+  }
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+}
+tr:hover,
+tr:nth-child(odd):hover {
+  background-color: rgba(194, 193, 193, 0.55);
+  transition: all ease .5s
+}
+// -------------- ADMIN ---------------
+.admin {
+  tr {
+    td:first-child {
+      width: 30px;
+      padding-right: 10px;
+    }
+  }
+}
+
+
+@media screen and (max-width: 900px){
+  tr {
+    td {
+      padding: 5px;
+      font-size: 14px;
+    }
+
+    td:first-child {
+      padding-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 580px){
+  tr {
+    font-size: 12px;
+    td {
+      font-size: 10px;
+    }
+    td:first-child {
+      padding-right: 5px;
+      font-weight: 700;
+    }
+  }
+  .admin {
+    tr {
+      td {
+        font-size: 10px;
+        max-width: 83px;
+      }
+      td:first-child {
+        max-width: 100px;
+      }
+    }
+  }
+
+}

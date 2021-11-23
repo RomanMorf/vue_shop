@@ -95,10 +95,10 @@ export default {
   }
   @keyframes lds-roller {
     0% {
-      transform: rotate(0deg);
+      transform: slide-top(0deg);
     }
     100% {
-      transform: rotate(360deg);
+      transform: slide-top(360deg);
     }
   }
-</style> 
+</style>

@@ -8,8 +8,8 @@ export default {
   },
 
   mutations: {
-    SET_USERS(state) {
-      state.pages = []
+    SET_USERS(state, users) {
+      state.users = users
     },
   },
 
@@ -23,8 +23,11 @@ export default {
               .ref(`/users/`)
               .once('value')
           ).val() || {}
-        commit('SET_USERS', users)
-        return users
+        const newUsers = Object.keys(users).map((key) => ({
+          ...users[key],
+          id: key,
+        }))
+        commit('SET_USERS', newUsers)
       } catch (error) {
         throw error
       }

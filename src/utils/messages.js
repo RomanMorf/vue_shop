@@ -12,8 +12,8 @@ export default {
   "TOKEN_EXPIRED": 'Учетные данные пользователя больше не действительны. Перезайдите в систему',
   "INVALID_ID_TOKEN:The ": 'Учетные данные пользователя больше не действительны. Перезайдите в систему',
   "WEAK_PASSWORD": 'Пароль должен быть не меньше 6 символов',
-  
-  'PERMISSION_DENIED: Permission denied': 'У вас нет прав для создания или редактирования. Обратить к администратору',
+
+  'PERMISSION_DENIED: Permission denied': 'У вас нет прав для создания или редактирования контента. Обратить к администратору',
 
 
   'EN_passWasChange': 'Password was changed successful',

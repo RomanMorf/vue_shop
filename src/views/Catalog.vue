@@ -104,7 +104,7 @@ export default {
   mixins: [paginationMixins],
   methods: {
     async toCatalog() {
-      // this.$router.push('/catalog')
+      this.$router.push('/catalog')
       this.products = await this.$store.dispatch('FETCH_PRODUCTS')
     },
   },
@@ -290,7 +290,7 @@ export default {
       height: 2px;
       background-color: transparent;
       margin: 0 auto;
-      transform: rotate(90deg);
+      transform: slide-top(90deg);
 
       &::before {
         content: '';

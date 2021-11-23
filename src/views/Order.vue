@@ -1,7 +1,7 @@
 <template>
   <div class="orders">
     <h3 class="center">Заполните форму заказ</h3>
-    <form>
+    <form @submit.prevent="createOrder">
       <div class="form_section">
         <transition-group name="translate">
           <div class="content" v-for="product in BASKET" :key="product.id">
@@ -24,7 +24,7 @@
         <p>Итого: <strong>{{ totalSum }}</strong> UAH</p>
       </div>
       <div class="form_section">
-        <input id="email" class="form_input" v-model.trim="userEmail" type="text"  required="">
+        <input @keyup.enter="createOrder" id="email" class="form_input" v-model.trim="userEmail" type="text"  required="">
         <label for="email" class="form_label">Введите ваш Email</label>
         <small
           class="form_helper invalid"
@@ -33,11 +33,11 @@
         </small>
       </div>
       <div class="form_section">
-        <input id="tel" class="form_input" v-model.trim="userTel" type="tel"  required="">
+        <input @keyup.enter="createOrder" id="tel" class="form_input" v-model.trim="userTel" type="tel"  required="">
         <label for="tel" class="form_label">Введите ваш номер телефона</label>
       </div>
       <div class="form_section">
-        <input id='name' class="form_input" v-model.trim="$v.userName.$model" type="text" required="">
+        <input @keyup.enter="createOrder" id='name' class="form_input" v-model.trim="$v.userName.$model" type="text" required="">
         <label for='name' class="form_label">Введите имя</label>
         <small
           class="form_helper invalid"
@@ -51,7 +51,7 @@
         </small>
       </div>
       <div class="form_section">
-        <input id="comment" class="form_input" v-model.trim="userComment" type="text"  required="">
+        <input @keyup.enter="createOrder" id="comment" class="form_input" v-model.trim="userComment" type="text"  required="">
         <label for="comment" class="form_label">Оставьте комментарий, если необходимо</label>
       </div>
       <div class="form_section btn">
@@ -90,18 +90,27 @@ export default {
         this.$v.$touch()
         return
       }
-      const newOrder = {
-        userEmail: this.userEmail,
-        userTel: this.userTel,
-        userName: this.userName,
-        userComment: this.userComment,
-        orderList: this.BASKET,
-        dateCreated: new Date()
+      try {
+        if (this.BASKET.length > 0) {
+          const newOrder = {
+            userEmail: this.userEmail,
+            userTel: this.userTel,
+            userName: this.userName,
+            userComment: this.userComment,
+            orderList: this.BASKET,
+            dateCreated: Date.now()
+          }
+          await this.$store.dispatch('CREATE_NEW_ORDER', newOrder)
+          await this.$store.dispatch('CLEARE_BASKET')
+          console.log('new order created', newOrder);
+          this.$router.push('/thanks')
+          this.$showMessage('Заказ успешно создан.')  
+        } else {
+          this.$showMessage('Список пуст... Добавьте товар в корзину и вопторите попытку...', 'error')  
+        }
+      } catch (error) {
+        throw error
       }
-      await this.$store.dispatch('CREATE_NEW_ORDER', newOrder)
-      await this.$store.dispatch('CLEARE_BASKET')
-      console.log('new order created', newOrder);
-      this.$router.push('/thanks')
     },
 
   },

@@ -182,7 +182,6 @@ export default {
       }
     },
     createNewOrder() {
-      this.$store.dispatch('CREATE_NEW_ORDER', this.BASKET)
       this.$router.push('/order')
       this.closeModalBasket()
     }

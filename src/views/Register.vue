@@ -96,9 +96,19 @@ export default {
         this.$v.$touch()
         return
       }
+      
+      try {
+        await this.$store.dispatch('REGISTER', userInfo)
+        this.$router.push('/login')
+        this.$showMessage('Аккаунт успешно создан. Теперь Вы можете авторизироваться в системе. ', 'success')
+      } catch (error) {
+        if (messages[error.code]) {
+          this.$showMessage(messages[error.code])
+          throw error
+        }
+        throw error
+      }
 
-      await this.$store.dispatch('REGISTER', userInfo)
-      this.$router.push('/login')
     }
   },
 }

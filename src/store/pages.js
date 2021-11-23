@@ -19,7 +19,7 @@ export default {
   },
 
   actions: {
-    async UPDATE_PAGES({dispatch, commit, getters}, toUpdate) {
+    async UPDATE_PAGES({dispatch, commit, getters}, toUpdate) { // обновить тексты
       const updatedData = {...getters.PAGES, ...toUpdate}
       try {
         commit('SET_PAGES', updatedData)
@@ -32,7 +32,7 @@ export default {
         throw error
       }
     },
-    async FETCH_TEXTS({ dispatch, commit }) {
+    async FETCH_TEXTS({ dispatch, commit }) { // получить тексты от сервера
       try {
         const texts =
           (

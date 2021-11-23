@@ -13,7 +13,7 @@ export default {
     },
   },
   actions: {
-    async CREATE_CATEGORY({ dispatch, commit, getters }, data) {
+    async CREATE_CATEGORY({ dispatch, commit, getters }, data) { // создать категорию
       try {
         return await firebase
           .database()
@@ -23,7 +23,7 @@ export default {
         throw error
       }
     },
-    async EDIT_CATEGORY({ dispatch, commit }, newInfo) {
+    async EDIT_CATEGORY({ dispatch, commit }, newInfo) { // редактировать категорию
       try {
         await firebase
           .database()
@@ -35,7 +35,7 @@ export default {
         throw error
       }
     },
-    async DELETE_CATEGORY({ dispatch, commit }, data) {
+    async DELETE_CATEGORY({ dispatch, commit }, data) { // удалить категорию
       console.log(data.id, 'id');
       try {
         await firebase
@@ -48,7 +48,7 @@ export default {
         throw error
       }
     },
-    async FETCH_CATEGORIES({ dispatch, commit }) {
+    async FETCH_CATEGORIES({ dispatch, commit }) { // получить все категории от сервера
       try {
         const categorise =
           (

@@ -1,7 +1,7 @@
 <template>
   <div class="form_wrapper">
     <div class="form">
-      <h3 class="center">Вход в личный кабинет</h3>
+      <h3 class="center">Сброс пароля</h3>
       <form class="form">
         <div class="form_section">
           <input id="email" class="form_input" v-model.trim="$v.userEmail.$model" type="text"  required="">
@@ -12,19 +12,8 @@
             >Введите Email
           </small>
         </div>
-        <div class="form_section">
-          <input id="tel" class="form_input" v-model.trim="$v.userPass.$model" type="password"  required="">
-          <label for="tel" class="form_label">Введите ваш пароль</label>
-          <small
-            class="form_helper invalid"
-            v-if="($v.userPass.$dirty && !$v.userPass.required)"
-            >Введите пароль
-          </small>
-
-        </div>
         <div class="form_section btn">
-          <button @click.prevent="authUserWithEmailPass">Войти</button>
-          <a @click="$router.push('/reset')">Восстановить пароль</a>
+          <button @click.prevent="resetPassWithEmail">Сбросить пароль</button>
           <a @click="$router.push('/register')">Зарегиcтрироваться</a>
         </div>
       </form>
@@ -37,32 +26,25 @@ import {required} from 'vuelidate/lib/validators'
 import messages from '@/utils/messages'
 
 export default {
-  name: 'Register',
+  name: 'ResetPasswpod',
   data() {
     return {
       userEmail: '',
-      userPass: '',
     }
   },
   validations: {
     userEmail: {required},
-    userPass: {required},
   },
   methods: {
-    async authUserWithEmailPass() {
-      const userInfo = {
-        email: this.userEmail,
-        password: this.userPass,
-      }
-
+    async resetPassWithEmail() {
       if (this.$v.$invalid) { // проверка на валидность формы
         this.$v.$touch()
         return
       }
       try {
-        await this.$store.dispatch('LOGIN', userInfo)
-        this.$router.push('/cabinet')
-        this.$showMessage('Здравствуйте... Вы вошли в систему ', 'success')
+        await this.$store.dispatch('RESET_PASSWORD', this.userEmail)
+        this.$router.push('/login')
+        this.$showMessage('Письмо с инструкциями было выслано Вам на почту...', 'success')
       } catch (error) {
         if (messages[error.code]) {
           this.$showMessage(messages[error.code], 'error')

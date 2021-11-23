@@ -10,7 +10,6 @@
 
 <!-- ====== CATALOG BLOCK ====== -->
     <div class="section">
-      <!-- <Card :product="item" v-for="(item, index) in PRODUCTS" :key="index"/> -->
 
       <swiper :options="swiperOptionsCards">
         <swiper-slide v-for="(item, index) in PRODUCTS.slice(getRandomNum(1, 5), getRandomNum(10, PRODUCTS.length))" :key="index">

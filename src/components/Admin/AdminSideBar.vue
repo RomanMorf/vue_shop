@@ -37,7 +37,7 @@ export default {
         {title: 'Создать продутк', path: '/admin/create', icon: 'create_new_folder'},
         {title: 'Категории', path: '/admin/categories', icon: 'category'},
         {title: 'Редактор контента', path: '/admin/editor', icon: 'edit_note'},
-        {title: 'Пользователи', path: '/admin/profiles', icon: 'account_circle'},
+        {title: 'Пользователи', path: '/admin/profiles', icon: 'manage_accounts'},
         {title: '!!! Test !!!', path: '/admin/testpage', icon: 'contacts'},
       ]
     }

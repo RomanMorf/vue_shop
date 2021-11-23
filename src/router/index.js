@@ -92,6 +92,12 @@ const routes = [
     meta: { layout: 'main' },
     component: () => import('@/views/Register.vue'),
   },
+  { //reset
+    path: '/reset',
+    name: 'Reset',
+    meta: { layout: 'main' },
+    component: () => import('@/views/ResetPassword.vue'),
+  },
   // =============================================
 
   // =============== ADMIN ===============

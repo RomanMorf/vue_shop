@@ -11,13 +11,13 @@ export default {
     },
   },
   actions: {
-    BASKET_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) {
+    BASKET_GET_FROM_LOCAL_STORE({ dispatch, commit, getters }) { // получить массив из локального хранилища
       if (localStorage.basket) {
         const basket = localStorage.getItem('basket') || []
         commit('SET_PRODUCT_TO_BASKET', JSON.parse(basket))
       }
     },
-    ADD_TO_BASKET({ dispatch, commit, getters }, data) {
+    ADD_TO_BASKET({ dispatch, commit, getters }, data) { // добавть товар в корзину
       const id = data.id || data
       const basket = getters.BASKET
       const index = basket.findIndex((el) => el.id === id)
@@ -37,7 +37,7 @@ export default {
         localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
-    DELETE_FROM_BASKET({ dispatch, commit, getters }, id) {
+    DELETE_FROM_BASKET({ dispatch, commit, getters }, id) { // удалить товар из корзины
       const basket = getters.BASKET
       const index = basket.findIndex((el) => el.id === id)
       if (index !== -1) {
@@ -46,12 +46,12 @@ export default {
         localStorage.setItem('basket', JSON.stringify(basket))
       }
     },
-    CLEARE_BASKET({ dispatch, commit, getters }) {
+    CLEARE_BASKET({ dispatch, commit, getters }) { // очистить корзину
       const basket = []
       commit('SET_PRODUCT_TO_BASKET', basket)
       localStorage.setItem('basket', JSON.stringify(basket))
     },
-    BASKET_PRODUCT_INCREMENT({ dispatch, commit, getters }, data) {
+    BASKET_PRODUCT_INCREMENT({ dispatch, commit, getters }, data) { // увеличить количество товара в корзине на 1
       const id = data.id || data
       const basket = getters.BASKET
       const index = basket.findIndex((el) => el.id === id)
@@ -59,7 +59,7 @@ export default {
       commit('SET_PRODUCT_TO_BASKET', basket)
       localStorage.setItem('basket', JSON.stringify(basket))
     },
-    BASKET_PRODUCT_DECREMENT({ dispatch, commit, getters }, data) {
+    BASKET_PRODUCT_DECREMENT({ dispatch, commit, getters }, data) { // уменьшить количество товара в корзине на 1
       const id = data.id || data
       const basket = getters.BASKET
       const index = basket.findIndex((el) => el.id === id)
@@ -72,11 +72,6 @@ export default {
         commit('SET_PRODUCT_TO_BASKET', basket)
         localStorage.setItem('basket', JSON.stringify(basket))
       }
-    },
-    CLEARE_BASKET({ dispatch, commit, getters }, id) {
-      const basket = []
-      commit('CLEAR_BASKET')
-      localStorage.removeItem('basket')
     },
   },
   getters: {

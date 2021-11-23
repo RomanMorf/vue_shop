@@ -13,7 +13,7 @@ export default {
     },
   },
   actions: {
-    async CREATE_PRODUCT({ dispatch, commit, getters }, data) {
+    async CREATE_PRODUCT({ dispatch, commit, getters }, data) { // создать продукт
       console.log(data);
       try {
         return await firebase
@@ -25,7 +25,7 @@ export default {
         throw error
       }
     },
-    async EDIT_PRODUCT({ dispatch, commit }, newInfo) {
+    async EDIT_PRODUCT({ dispatch, commit }, newInfo) { // редактировать продукт
       try {
         await firebase
           .database()
@@ -37,7 +37,7 @@ export default {
         throw error
       }
     },
-    async DELETE_PRODUCT({ dispatch, commit }, data) {
+    async DELETE_PRODUCT({ dispatch, commit }, data) { // удалить продукт
       console.log(data.id, 'id')
       try {
         await firebase
@@ -50,7 +50,7 @@ export default {
         throw error
       }
     },
-    async FETCH_PRODUCTS({ dispatch, commit }) {
+    async FETCH_PRODUCTS({ dispatch, commit }) { // получить все продукты от сервера
       try {
         const products =
           (
@@ -69,7 +69,7 @@ export default {
         throw error
       }
     },
-    async FETCH_PRODUCT_BY_ID({ dispatch, commit }, id) {
+    async FETCH_PRODUCT_BY_ID({ dispatch, commit }, id) { // получить продукт по ID
       try {
         const product =
           (

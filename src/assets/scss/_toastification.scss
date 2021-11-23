@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+// стили Toastification
+.Vue-Toastification__toast.Vue-Toastification__toast--warning {
+  color: #000;
+  // background-color: #ffc107; // default
+  background-color: #ff8b07;
+}
+.Vue-Toastification__toast.Vue-Toastification__toast--success {
+  background-color: #4caf50; // default
+}
+.Vue-Toastification__toast.Vue-Toastification__toast--default {
+  // background-color: #1976d2; // default
+  background-color: $bg_color_main;
+}

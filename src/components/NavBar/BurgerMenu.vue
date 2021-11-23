@@ -42,7 +42,7 @@ export default {
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4);
 
   background-color: $bg_color_main;
-  z-index: 2;
+  z-index: 110;
   transition: all .5s ease;
 
   &_list {
