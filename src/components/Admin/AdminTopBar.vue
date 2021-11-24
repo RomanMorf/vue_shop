@@ -1,6 +1,6 @@
 <template>
   <div class="top-bar">
-    <span class="top-bar_greetings" v-if="INFO">Здравствуйте, {{ INFO.name }}</span>
+    <span class="top-bar_greetings" v-if="Object.keys(INFO).length > 0">Здравствуйте, {{ INFO.name }}</span>
     <button class="top-bar_btn modal_btn " @click="$router.push('/')">Назад в магазин</button>
   </div>
 </template>

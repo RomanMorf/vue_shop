@@ -38,7 +38,6 @@ export default {
       }
     },
     async DELETE_PRODUCT({ dispatch, commit }, data) { // удалить продукт
-      console.log(data.id, 'id')
       try {
         await firebase
           .database()

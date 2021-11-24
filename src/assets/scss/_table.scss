@@ -2,6 +2,7 @@
 table {
   overflow-x: auto;
   white-space: break-spaces;
+  width: 100%;
 }
 
 tr {
@@ -18,6 +19,8 @@ tr {
   td {
     padding: 10px;
     white-space: break-spaces;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     &:first-child {
       padding-right: 80px;

@@ -90,6 +90,7 @@ export default {
         this.$v.$touch()
         return
       }
+
       try {
         if (this.BASKET.length > 0) {
           const newOrder = {
@@ -98,15 +99,15 @@ export default {
             userName: this.userName,
             userComment: this.userComment,
             orderList: this.BASKET,
-            dateCreated: Date.now()
+            dateCreated: Date()
           }
           await this.$store.dispatch('CREATE_NEW_ORDER', newOrder)
           await this.$store.dispatch('CLEARE_BASKET')
           console.log('new order created', newOrder);
           this.$router.push('/thanks')
-          this.$showMessage('Заказ успешно создан.')  
+          this.$showMessage('Заказ успешно создан.')
         } else {
-          this.$showMessage('Список пуст... Добавьте товар в корзину и вопторите попытку...', 'error')  
+          this.$showMessage('Список пуст... Добавьте товар в корзину и вопторите попытку...', 'error')
         }
       } catch (error) {
         throw error

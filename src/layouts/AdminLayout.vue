@@ -40,6 +40,7 @@ export default {
   transition: all ease 0.5s;
   padding: 10px;
   min-height: calc(100vh - 70px);
+  overflow-x: hidden;
 
   &.full {
     margin-left: 50px;

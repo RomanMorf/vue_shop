@@ -62,6 +62,7 @@ export default {
     transition: all 0.3s ease 0s;
     background-color: $bg_color_main;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 
     &:hover {
       transition: all 0.3s ease 0s;

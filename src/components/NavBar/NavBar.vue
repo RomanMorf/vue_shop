@@ -96,7 +96,6 @@ export default {
   },
   async mounted() {
     this.$store.dispatch('FETCH_INFO')
-    console.log(this.INFO, 'INFO');
   },
   computed: {
     ...mapGetters(['INFO'])

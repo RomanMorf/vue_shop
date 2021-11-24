@@ -48,7 +48,7 @@ export default {
         throw error
       }
     },
-    async FETCH_ORDERS_IN_PROCESS({ dispatch, commit }) { // получить список ВЫПОЛНЯЕМЫХ заказов
+    async FETCH_ORDERS_IN_PROCESSED({ dispatch, commit }) { // получить список ВЫПОЛНЯЕМЫХ заказов
       try {
         const orders =
           (
@@ -61,7 +61,6 @@ export default {
           ...orders[key],
           id: key,
         }))
-        console.log(ordersWithId, 'FETCH_ORDERS from store');
         commit('SET_ORDERS_IN_PROCESS', ordersWithId)
         return ordersWithId
       } catch (error) {
@@ -87,7 +86,96 @@ export default {
         throw error
       }
     },
+    async FETCH_ORDER_BY_ID({ dispatch, commit }, order) { // получить список ВЫПОЛНЕНЫХ заказов
+      try {
+        const orderFromServer =
+          (
+            await firebase
+              .database()
+              .ref(`/orders/${order.category}`)
+              .child(order.id)
+              .once('value')
+          ).val() || {}
+        orderFromServer.id = order.id
+        return orderFromServer
+      } catch (error) {
+        throw error
+      }
+    },
+    async DELETE_ORDER_BY_ID({ dispatch, commit, getters }, data) { // удалить заказ по ID
+      try {
+        await firebase
+          .database()
+          .ref(`/orders/${data.status}`)
+          .child(data.id)
+          .remove()
+      } catch (error) {
+        commit('setError', error)
+        throw error
+      }
+    },
+    async CHANGE_ORDER_STATUS({ dispatch, commit, getters }, dataForChange) { // изменить статус заказа
+      try {
+        await firebase
+          .database()
+          .ref(`/orders/${dataForChange.newStatus}/`)
+          .child(dataForChange.order.id)
+          .set(dataForChange.order)
+      } catch (error) {
+        console.log(error.message, 'error')
+        throw error
+      }
+      switch (dataForChange.newStatus) {
+        case 'processed':
+          const newOrdersInProcess = getters.ORDERS_IN_PROCESS
+          newOrdersInProcess.push(dataForChange.order)
+          commit('SET_ORDERS_IN_PROCESS', newOrdersInProcess)
+          const newOrders = getters.ORDERS_NEW
+          let idx
+          newOrders.forEach((el, index) => {
+            if (el.id === dataForChange.order.id) {
+              idx = index
+            }
+          })
+          newOrders.splice(idx, 1)
+          commit('SET_ORDERS_NEW', newOrders)
+          break;
 
+          case 'done':
+            const ordersDone = getters.ORDERS_DONE
+            ordersDone.push(dataForChange.order)
+            commit('SET_ORDERS_DONE', ordersDone)
+            const oldOrdersInProcess = getters.ORDERS_IN_PROCESS
+            let idxPrecess
+            oldOrdersInProcess.forEach((el, index) => {
+              if (el.id === dataForChange.order.id) {
+                idxPrecess = index
+              }
+            })
+            oldOrdersInProcess.splice(idxPrecess, 1)
+            commit('SET_ORDERS_IN_PROCESS', oldOrdersInProcess)
+            break;
+
+          case 'new':
+            const newOrdersArr = getters.ORDERS_NEW
+            newOrdersArr.push(dataForChange.order)
+            commit('SET_ORDERS_NEW', newOrdersArr)
+
+            const oldOrdersDone = getters.ORDERS_DONE
+            let idxDone
+            oldOrdersDone.forEach((el, index) => {
+              if (el.id === dataForChange.order.id) {
+                idxDone = index
+              }
+            })
+            oldOrdersDone.splice(idxDone, 1)
+            commit('SET_ORDERS_DONE', oldOrdersDone)
+            break;
+
+        default:
+          break;
+      }
+    },
   },
   getters: {
     ORDERS_NEW: (s) => s.ordersNew,

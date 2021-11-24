@@ -12,6 +12,7 @@ import Loader from '@/components/Loader'
 import ToTop from '@/components/ToTop'
 import Modal from '@/components/Modal'
 import Vuelidate from 'vuelidate'
+import dateFilter from '@/filters/date.filter.js'
 import localizeFilter from '@/filters/localize.filter.js'
 import '@/assets/scss/style.scss'
 
@@ -25,6 +26,9 @@ const options = {}
 Vue.use(Toast, options)
 import messagePlugin from '@/utils/message.plugin'
 Vue.use(messagePlugin)
+
+Vue.filter('localize', localizeFilter)
+Vue.filter('date', dateFilter)
 
 
 Vue.config.productionTip = false
@@ -45,7 +49,6 @@ firebase.initializeApp({
   measurementId: "G-VZ87V7G0CH"
 })
 
-Vue.filter('localize', localizeFilter)
 Vue.use(VTooltip)
 Vue.use(Vuelidate)
 
