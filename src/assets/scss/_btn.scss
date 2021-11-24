@@ -1,0 +1,60 @@
+.modal_btn {
+  min-width: 50px;
+  margin-bottom: 7px;
+  background-color: $bg_color_main;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 5px 5px  rgba(0,0,0,0.12), 3px 5px 5px rgba(0,0,0,0.24);
+  transition: all .5s ease;
+  cursor: pointer;
+
+  &:hover {
+    transition: all .5s ease;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 10px  rgba(0,0,0,0.12), 5px 10px 10px rgba(0,0,0,0.24);
+  }
+  &.admin_bg  {
+    background-color: $bg_color_admin !important;
+    &.error {
+      background-color: $bg_error !important;
+    }
+    &.warning {
+      background-color: $bg_warning !important;
+    }
+  }
+}
+.modal_btn:not(:last-child) {
+  margin-right: 5px;
+}
+
+
+.btn.bottom-swipe {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+  transition: all 600ms ease;
+
+  .btn_text:hover {
+    transition: all 600ms ease;
+    color: $hover_color_main;
+  }
+  .btn_text::after {
+    content: "";
+    border: 1px solid $hover_color_main;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    left: 0;
+    transition: all 600ms ease;
+    z-index: -1;
+  }
+  .btn_text:hover::after {
+    left: 100px;
+    transition: all 800ms ease;
+  }
+}

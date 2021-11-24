@@ -10,7 +10,7 @@
   transform: translateX(200px);
 }
 
-// == translate ==
+// == translate2 ==
 .translate2-enter-active {
   transition: all 0.5s;
 }
@@ -52,7 +52,7 @@
   opacity: 0;
 }
 
-// == scale ==
+// == table ==
 .table-enter-active, .table-leave-active {
 transition: all 1s;
 }
@@ -77,13 +77,12 @@ transform: translateY(-30px);
     transform: scale(1);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
   }
 }
-
 @keyframes appeare {
   0% {
     opacity: 0;
@@ -93,6 +92,7 @@ transform: translateY(-30px);
   }
 }
 
+// == list ==
 .list-item {
   display: inline-block;
   margin-right: 10px;
@@ -104,7 +104,6 @@ transform: translateY(-30px);
   opacity: 0;
   transform: translateY(30px);
 }
-
 
 // == slide-top ==
 .slide-top-enter-active {

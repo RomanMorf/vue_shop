@@ -4,11 +4,15 @@
 @import './table';
 @import './form';
 @import './toastification';
+@import './tooltip';
+@import './scrollbar';
+@import './margin';
+@import './flex';
+@import './btn';
 
 * {
   box-sizing: border-box;
 }
-
 
 body {
   min-width: 350px;
@@ -40,52 +44,6 @@ ul {
   font-weight: bold;
 }
 
-.flex {
-  display: flex;
-}
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-.flex-center {
-  display: flex;
-  align-items: center;
-}
-.flex-space {
-  display: flex;
-  justify-content: space-around;
-}
-.flex-wrap {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.m-auto {
-  margin: 0 auto;
-}
-.ml-auto {
-  margin-left: auto;
-}
-.mr-auto {
-  margin-right: auto;
-}
-.mr-5 {
-  margin-right: 5px;
-}
-.mb-10 {
-  margin-bottom: 10px;
-}
-.mb-20 {
-  margin-bottom: 20px;
-}
-.mw-50 {
-  max-width: 50%;
-}
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -107,64 +65,18 @@ ul {
   }
 }
 
-.btn.bottom-swipe {
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-  padding: 10px 0;
-  transition: all 600ms ease;
+.swiper-pagination {
+  .swiper-pagination-bullet {
+    width: 30px;
+    height: 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    background: #e09284;
+  }
 
-  .btn_text:hover {
-    transition: all 600ms ease;
-    color: $hover_color_main;
+  .swiper-pagination-bullet-active {
+    background: #e09284;
   }
-  .btn_text::after {
-    content: "";
-    border: 1px solid $hover_color_main;
-    position: absolute;
-    bottom: 5px;
-    width: 100%;
-    left: 0;
-    transition: all 600ms ease;
-    z-index: -1;
-  }
-  .btn_text:hover::after {
-    left: 100px;
-    transition: all 800ms ease;
-  }
-}
-
-.modal_btn {
-  min-width: 50px;
-  margin-bottom: 7px;
-  background-color: $bg_color_main;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 5px 5px  rgba(0,0,0,0.12), 3px 5px 5px rgba(0,0,0,0.24);
-  transition: all .5s ease;
-  cursor: pointer;
-
-  &:hover {
-    transition: all .5s ease;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 10px  rgba(0,0,0,0.12), 5px 10px 10px rgba(0,0,0,0.24);
-  }
-  &.admin_bg  {
-    background-color: $bg_color_admin !important;
-    &.error {
-      background-color: $bg_error !important;
-    }
-    &.warning {
-      background-color: $bg_warning !important;
-    }
-  }
-}
-.modal_btn:not(:last-child) {
-  margin-right: 5px;
 }
 
 .page {
@@ -211,138 +123,6 @@ ul {
   text-align: right;
 }
 
-.swiper-pagination {
-  .swiper-pagination-bullet {
-    width: 30px;
-    height: 5px;
-    font-size: 12px;
-    border-radius: 3px;
-    background: #e09284;
-  }
-
-  .swiper-pagination-bullet-active {
-    background: #e09284;
-  }
-}
-
-.tooltip { // стили tooltip
-  display: block !important;
-  z-index: 10000;
-
-  .tooltip-inner {
-    background: black;
-    color: white;
-    border-radius: 16px;
-    padding: 5px 10px 4px;
-  }
-
-  .tooltip-arrow {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    position: absolute;
-    margin: 5px;
-    border-color: black;
-    z-index: 1;
-  }
-
-  &[x-placement^="top"] {
-    margin-bottom: 5px;
-
-    .tooltip-arrow {
-      border-width: 5px 5px 0 5px;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-      border-bottom-color: transparent !important;
-      bottom: -5px;
-      left: calc(50% - 5px);
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-
-  &[x-placement^="bottom"] {
-    margin-top: 5px;
-
-    .tooltip-arrow {
-      border-width: 0 5px 5px 5px;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-      border-top-color: transparent !important;
-      top: -5px;
-      left: calc(50% - 5px);
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-
-  &[x-placement^="right"] {
-    margin-left: 5px;
-
-    .tooltip-arrow {
-      border-width: 5px 5px 5px 0;
-      border-left-color: transparent !important;
-      border-top-color: transparent !important;
-      border-bottom-color: transparent !important;
-      left: -5px;
-      top: calc(50% - 5px);
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  &[x-placement^="left"] {
-    margin-right: 5px;
-
-    .tooltip-arrow {
-      border-width: 5px 0 5px 5px;
-      border-top-color: transparent !important;
-      border-right-color: transparent !important;
-      border-bottom-color: transparent !important;
-      right: -5px;
-      top: calc(50% - 5px);
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  &.popover {
-    $color: #f9f9f9;
-
-    .popover-inner {
-      background: $color;
-      color: black;
-      padding: 24px;
-      border-radius: 5px;
-      box-shadow: 0 5px 30px rgba(black, .1);
-    }
-
-    .popover-arrow {
-      border-color: $color;
-    }
-  }
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .15s, visibility .15s;
-  }
-
-  &[aria-hidden='false'] {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity .15s;
-  }
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: $bg_color_main;
-}
 
 
 @media (max-width: 580px){

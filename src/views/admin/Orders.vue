@@ -70,38 +70,41 @@
         </div>
       </div>
     </div>
-    <Modal v-if="showModal" @close="showModal = !showModal"> <!-- Модальное окно -->
-      <template v-slot:header>
-        <h3 class="center">Карта заказа</h3>
-      </template>
-      <template v-slot:content v-if="currentOrder">
-        <p>Заказ создан: {{ currentOrder.dateCreated | date('datetime') }}</p>
-        <p v-if="currentOrder.dateLastModified">Последнее изменение: {{ currentOrder.dateLastModified | date('datetime') }}</p>
-        <p v-if="currentOrder.dateProcessed">Принят в обработку: {{ currentOrder.dateProcessed | date('datetime') }}</p>
-        <p v-if="currentOrder.dateDone">Выполнен: {{ currentOrder.dateDone | date('datetime') }}</p>
-        <br>
-        <p>{{ currentOrder.userEmail }}</p>
-        <p>{{ currentOrder.userName }}</p>
-        <p>{{ currentOrder.userTel }}</p>
-        <p>{{ currentOrder.userComment }}</p>
-        <br>
-        <div class="flex-wrap">
-          <div v-for="product in currentOrder.orderList" :key="product.id">
-            <p>Название: {{ product.title }}</p>
-            <p>Кол-во: {{ product.count }}</p>
-            <p>Цена: {{ product.price }}</p>
-            <p><img class="img" :src="product.img[0]" alt=""></p>
+    <transition name="bounce">
+      <Modal v-if="showModal" @close="showModal = !showModal"> <!-- Модальное окно -->
+        <template v-slot:header>
+          <h3 class="center">Карта заказа</h3>
+        </template>
+        <template v-slot:content v-if="currentOrder">
+          <p>Заказ создан: {{ currentOrder.dateCreated | date('datetime') }}</p>
+          <p v-if="currentOrder.dateLastModified">Последнее изменение: {{ currentOrder.dateLastModified | date('datetime') }}</p>
+          <p v-if="currentOrder.dateProcessed">Принят в обработку: {{ currentOrder.dateProcessed | date('datetime') }}</p>
+          <p v-if="currentOrder.dateDone">Выполнен: {{ currentOrder.dateDone | date('datetime') }}</p>
+          <br>
+          <p>{{ currentOrder.userEmail }}</p>
+          <p>{{ currentOrder.userName }}</p>
+          <p>{{ currentOrder.userTel }}</p>
+          <p>{{ currentOrder.userComment }}</p>
+          <br>
+          <div class="flex-wrap">
+            <div v-for="product in currentOrder.orderList" :key="product.id">
+              <p>Название: {{ product.title }}</p>
+              <p>Кол-во: {{ product.count }}</p>
+              <p>Цена: {{ product.price }}</p>
+              <p><img class="img" :src="product.img[0]" alt=""></p>
+            </div>
           </div>
-        </div>
-      </template>
-      <template v-slot:footer>
-        <button class="modal_btn admin_bg admin_bg" v-if="currentStatus === 'new'" @click="switchOrderCategory('processed')" >Переместить на стадию в обработке</button>
-        <button class="modal_btn admin_bg admin_bg" v-if="currentStatus === 'processed'" @click="switchOrderCategory('done')">Переместить на стадию в выполнен</button>
-        <button class="modal_btn admin_bg admin_bg error" v-if="currentStatus === 'done'" @click="switchOrderCategory('new')" >Восстановить, как НОВЫЙ</button>
-        <button class="modal_btn admin_bg admin_bg warning" @click="deleteOrder">Удалить</button>
-        <button class="modal_btn admin_bg admin_bg" @click="showModal = false">Отмена</button>
-      </template>
-    </Modal>
+        </template>
+        <template v-slot:footer>
+          <button class="modal_btn admin_bg admin_bg" v-if="currentStatus === 'new'" @click="switchOrderCategory('processed')" >Переместить на стадию в обработке</button>
+          <button class="modal_btn admin_bg admin_bg" v-if="currentStatus === 'processed'" @click="switchOrderCategory('done')">Переместить на стадию в выполнен</button>
+          <button class="modal_btn admin_bg admin_bg error" v-if="currentStatus === 'done'" @click="switchOrderCategory('new')" >Восстановить, как НОВЫЙ</button>
+          <button class="modal_btn admin_bg admin_bg warning" @click="deleteOrder">Удалить</button>
+          <button class="modal_btn admin_bg admin_bg" @click="showModal = false">Отмена</button>
+        </template>
+      </Modal>
+    </transition>
+
   </div>
 </template>
 
