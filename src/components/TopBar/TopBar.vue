@@ -1,8 +1,28 @@
 <template>
   <div class="bar">
-    <div class="bar_logo">
-      LOGO
+    <transition name="scale">
+
+    <div class="breadcrumbs" v-if="$route.path !== '/'">
+
+      <ul class="breadcrumbs_list">
+        <transition-group name="scale" class="breadcrumbs_list">
+        <li class="breadcrumbs_item" @click="$router.push('/')" :key="0">
+          <span class="material-icons-outlined">home</span>
+          <span class="material-icons-outlined breadcrumbs_arrow">chevron_right</span>
+        </li>
+        <li v-show="showCurrentPage" class="breadcrumbs_item" @click="$router.push('/catalog')" :key="1">
+          {{currentPage}}
+          <span v-if="showCategory" class="material-icons-outlined breadcrumbs_arrow_nex">chevron_right</span>
+        </li>
+        <li v-if="showCategory" class="breadcrumbs_item" @click="$router.push(`/catalog/${productCategoryId}`)" :key="2">
+          {{productCategoryName}}
+        </li>
+      </transition-group>
+
+      </ul>
+
     </div>
+    </transition>
 
     <div class="bar_categories">
       CATEGORIES
@@ -126,6 +146,11 @@ export default {
       showConfirmClearBasket: false,
       productNameForDelete: '',
       productIdForDelete: '',
+
+      showCurrentPage: true,
+      showCategory: false,
+      productCategoryName: '',
+      productCategoryId: '',
     }
   },
   methods: {
@@ -187,13 +212,48 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['BASKET', 'FAVORITE', 'COMPARE']),
+    ...mapGetters(['BASKET', 'FAVORITE', 'COMPARE', 'CURRENT_PRODUCT', 'GET_CATEGORIES']),
     totalSum() {
       let sum = 0
       this.BASKET.forEach(item => {
         sum += (+item.price * +item.count)
       })
       return sum
+    },
+    currentPage() {
+      const routeName = this.$route.path.split('/')
+      switch (routeName[1]) {
+        case 'product':
+          if (this.CURRENT_PRODUCT) {
+            this.productCategoryId = this.CURRENT_PRODUCT.categoryId
+            this.productCategoryName = this.CURRENT_PRODUCT.categoryName
+            this.showCategory = true
+          }
+          return `Каталог`
+
+        case 'catalog':
+          if (routeName.length > 2) {
+            this.$store.dispatch('FETCH_PRODUCTS')
+            const id = this.$route.params.id
+            const currentCategory = this.GET_CATEGORIES
+            this.productCategoryId = this.CURRENT_PRODUCT.categoryId
+            this.productCategoryName = this.CURRENT_PRODUCT.categoryName
+            this.showCategory = true
+          }
+          if (routeName.length <= 2) {
+            this.productCategoryId = ''
+            this.productCategoryName = ''
+            this.showCategory = false
+          }
+          return `Каталог`
+
+        default:
+          this.productCategoryId = ''
+          this.productCategoryName = ''
+          this.showCategory = false
+
+          return this.$route.name
+      }
     }
   },
 }
@@ -201,6 +261,43 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/scss/variables.scss';
+
+.breadcrumbs {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: absolute;
+  bottom: -45px;
+  left: 0;
+
+  &_list {
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+  }
+
+  &_item {
+    cursor: pointer;
+    transition: all .5s ease;
+    margin-right: 30px;
+    position: relative;
+
+    &:hover {
+      color: $hover_color_main;
+      transition: all .5s ease;
+    }
+  }
+  &_arrow {
+    position: absolute;
+    bottom: 3px;
+    right: -24px;
+  }
+  &_arrow_nex {
+    position: absolute;
+    bottom: -3px;
+    right: -24px;
+  }
+
+}
 
 .btn {
   cursor: pointer;
@@ -245,6 +342,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   &_buttons {
     width: 150px;
@@ -278,6 +376,7 @@ export default {
     }
   }
 }
+
 .material-icons.md-40 {
   font-size: 40px;
 }
@@ -299,7 +398,13 @@ export default {
   .material-icons-outlined.md-30 {
     font-size: 30px;
   }
-  .bar_logo {
+  // .breadcrumbs {
+  //   display: none;
+  // }
+  .bar {
+    justify-content: space-around;
+  }
+  .bar_categories {
     display: none;
   }
   .bar_btn_number {

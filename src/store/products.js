@@ -3,14 +3,22 @@ import firebase from 'firebase/app'
 export default {
   state: {
     products: [],
+    currentProduct: {},
   },
   mutations: {
     SET_PRODUCTS(state, products) {
       state.products = products
     },
+    SET_CURRENT_PRODUCT(state, product) {
+      state.currentProduct = product
+    },
     CLEAR_SET_PRODUCTS(state) {
       state.products = []
     },
+    CLEARE_CURRENT_PRODUCT(state) {
+      state.currentProduct = {}
+    },
+
   },
   actions: {
     async CREATE_PRODUCT({ dispatch, commit, getters }, data) { // создать продукт
@@ -78,6 +86,7 @@ export default {
               .child(id)
               .once('value')
           ).val() || {}
+          commit('SET_CURRENT_PRODUCT', product)
         return product
       } catch (error) {
         throw error
@@ -86,5 +95,6 @@ export default {
   },
   getters: {
     PRODUCTS: (s) => s.products,
+    CURRENT_PRODUCT: (s) => s.currentProduct,
   },
 }

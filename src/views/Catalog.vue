@@ -41,6 +41,7 @@
           </div>
         </div>
       </div>
+
       <transition name="translate">
         <div v-if="showAsCards" class="card-wrapper" :class="{list: !showAsCards}">
           <Card
@@ -104,8 +105,9 @@ export default {
   mixins: [paginationMixins],
   methods: {
     async toCatalog() {
-      this.$router.push('/catalog')
+      this.$router.push('/catalog-redirect')
       this.products = await this.$store.dispatch('FETCH_PRODUCTS')
+      this.setupPagination(this.products, this.maxProdOnPage)
     },
   },
   async mounted() {
@@ -134,7 +136,6 @@ export default {
     nextBtn() {
       return 'Следующая'
     },
-
   },
   watch: {
     sorting(type) {
@@ -283,6 +284,7 @@ export default {
     height: 2px;
     background-color: black;
     margin: 0 auto;
+
     &.vertical {
       position: absolute;
       top: 14px;
@@ -290,7 +292,7 @@ export default {
       height: 2px;
       background-color: transparent;
       margin: 0 auto;
-      transform: slide-top(90deg);
+      transform: rotate(90deg);
 
       &::before {
         content: '';

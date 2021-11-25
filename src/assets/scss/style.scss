@@ -40,8 +40,16 @@ ul {
   text-align: center;
 }
 
+.cursor {
+  cursor: pointer;
+}
+
 .bold {
   font-weight: bold;
+}
+
+.max_w-50 {
+  max-width: 50%;
 }
 
 .pagination {

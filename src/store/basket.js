@@ -29,7 +29,6 @@ export default {
         basket.push(product)
         commit('SET_PRODUCT_TO_BASKET', basket)
         localStorage.setItem('basket', JSON.stringify(basket))
-
       }
       if (index !== -1) {
         basket[index].count++

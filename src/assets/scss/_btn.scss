@@ -11,6 +11,7 @@
   box-shadow: 0 5px 5px  rgba(0,0,0,0.12), 3px 5px 5px rgba(0,0,0,0.24);
   transition: all .5s ease;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     transition: all .5s ease;
@@ -25,6 +26,16 @@
     &.warning {
       background-color: $bg_warning !important;
     }
+  }
+  & .inBasket{
+    position: absolute;
+    display: none;
+    top: -10px;
+    right: -10px;
+    background-image: url('./../../assets/img/checked.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
   }
 }
 .modal_btn:not(:last-child) {

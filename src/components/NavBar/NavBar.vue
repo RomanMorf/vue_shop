@@ -27,7 +27,7 @@
       </nav>
 
       <div class="select_body"  @click="showSelect = !showSelect">
-        <span class="material-icons-outlined btn">
+        <span class="material-icons-outlined cursor">
           account_circle
         </span>
         <div class="select_container" v-show="showSelect"></div>

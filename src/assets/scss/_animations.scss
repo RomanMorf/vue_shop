@@ -7,7 +7,7 @@
 }
 .translate-enter, .translate-leave-to {
   opacity: 0;
-  transform: translateX(200px);
+  transform: translateX(100px);
 }
 
 // == translate2 ==
@@ -19,11 +19,11 @@
 }
 .translate2-enter {
   opacity: 0;
-  transform: translateX(-300px);
+  transform: translateX(-100px);
 }
 .translate2-leave-to {
   opacity: 0;
-  transform: translateX(300px);
+  transform: translateX(100px);
 }
 
 // == slide ==

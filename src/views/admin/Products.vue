@@ -6,7 +6,7 @@
       <h3>Products page</h3>
       <div class="search">
         <div class="form_section">
-          <input class="form_input mw-50" type="text" v-model="search" required=""/>
+          <input class="form_input max_w-50" type="text" v-model="search" required=""/>
           <label class="form_label">Поиск...</label>
         </div>
         <div class="flex flex-wrap flex-space">

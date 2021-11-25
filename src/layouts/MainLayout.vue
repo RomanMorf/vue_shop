@@ -4,10 +4,11 @@
 
     <div class="container">
       <TopBar />
-
-      <transition name="translate2" mode="out-in">
-        <router-view />
-      </transition>
+      <div class="view_wrapper">
+        <transition name="translate2" mode="out-in">
+          <router-view />
+        </transition>
+      </div>
     </div>
 
     <Footer />
@@ -30,5 +31,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-
+.view_wrapper {
+  overflow-x: hidden;
+  min-height: 50vh;
+}
 </style>
