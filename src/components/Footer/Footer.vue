@@ -42,7 +42,7 @@
     <div class="footer_wrapper">
       <div class="container">
         <div class="logo" @click="$router.push('/')">
-          <img class="logo_img" src="../../assets/img/logo4.png" alt="">
+          <img class="logo_img" src="@/assets/img/logo4.png" alt="">
         </div>
         <div class="social">
           <img class="social-img" src="@/assets/img/social/001-twitter.svg" alt="twitter">

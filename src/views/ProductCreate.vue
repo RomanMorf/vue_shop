@@ -157,10 +157,8 @@ export default {
       this.img = []
     },
     deleteImage(imageIndex) { // показать инфо
-      console.log(imageIndex, 'imageIndex');
       const tempArr = this.img[imageIndex].split('%2F')
       const imgName = tempArr[tempArr.length - 1].split('?alt=media')
-      console.log(imgName, 'tempArr');
 
       const fileForDelete = {
         pathToFile: 'products/'+tempArr[1],
@@ -188,11 +186,9 @@ export default {
         categoryName: this.categoryName,
       }
       this.$store.dispatch('CREATE_PRODUCT', product)
-      .then((response) => {
-        // console.log(response, 'response')
-      })
-      .catch(err => {
-        // console.log(err, 'err')
+      .then((response) => {})
+      .catch( e => {
+        throw e
       })
     },
     click1() { // выбрать инпут для загрузки файлов
