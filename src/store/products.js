@@ -22,14 +22,12 @@ export default {
   },
   actions: {
     async CREATE_PRODUCT({ dispatch, commit, getters }, data) { // создать продукт
-      console.log(data);
       try {
         return await firebase
           .database()
           .ref(`/products/${data.id}`)
           .set(data)
       } catch (error) {
-        console.log(error.message, 'error')
         throw error
       }
     },

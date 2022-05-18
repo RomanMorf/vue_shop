@@ -103,7 +103,6 @@ export default {
           }
           await this.$store.dispatch('CREATE_NEW_ORDER', newOrder)
           await this.$store.dispatch('CLEARE_BASKET')
-          console.log('new order created', newOrder);
           this.$router.push('/thanks')
           this.$showMessage('Заказ успешно создан.')
         } else {

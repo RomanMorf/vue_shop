@@ -86,7 +86,6 @@ export default {
   },
   methods: {
     Confirm() {
-      console.log(this.idForDel, '... удален ');
       this.showModal = false
     },
     confirmDelete(id, title) {
@@ -100,12 +99,6 @@ export default {
     fetchProducts() {
       this.$store.dispatch('FETCH_PRODUCTS')
     },
-    productEdit(id) {
-      console.log(id, 'id for edit')
-    },
-    productDelete(id) {
-      console.log(id, 'id for delete')
-    },
     async fetchUsersList() {
       const products =
           (
@@ -114,7 +107,6 @@ export default {
               .ref(`/users/`)
               .once('value')
           ).val() || {}
-          console.log(JSON.parse(products), 'users');
           this.usersList = products
     },
   },

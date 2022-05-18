@@ -45,7 +45,6 @@ export default {
           html: this.content
         }
         data[this.current] = newData
-        console.log(data, 'data');
         this.$store.dispatch('UPDATE_PAGES', data)
       }
     },

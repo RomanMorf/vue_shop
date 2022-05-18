@@ -28,7 +28,6 @@ export default {
           .ref(`/texts/`)
           .set(updatedData)
       } catch (error) {
-        console.log(error.message, 'error')
         throw error
       }
     },

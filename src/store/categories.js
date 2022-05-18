@@ -36,7 +36,6 @@ export default {
       }
     },
     async DELETE_CATEGORY({ dispatch, commit }, data) { // удалить категорию
-      console.log(data.id, 'id');
       try {
         await firebase
           .database()

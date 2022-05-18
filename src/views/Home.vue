@@ -171,11 +171,9 @@ export default {
       this.timer = setTimeout(() => {
         if (window.innerWidth > 700 && window.innerWidth < 1000) {
           this.swiperOptions = {slidesPerView: 3}
-          console.log(this.swiperOptions.slidesPerView, 'slidesPerView');
         }
         if (window.innerWidth > 300 && window.innerWidth < 700) {
           this.swiperOptions.slidesPerView = 2
-          console.log(this.swiperOptions.slidesPerView, 'slidesPerView');
         }
         clearTimeout(this.timer);
         this.timer = null;

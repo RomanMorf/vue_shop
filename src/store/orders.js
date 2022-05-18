@@ -25,7 +25,6 @@ export default {
           .ref(`/orders/new/`)
           .push(order)
       } catch (error) {
-        console.log(error.message, 'error')
         throw error
       }
     },
@@ -122,7 +121,6 @@ export default {
           .child(dataForChange.order.id)
           .set(dataForChange.order)
       } catch (error) {
-        console.log(error.message, 'error')
         throw error
       }
       switch (dataForChange.newStatus) {

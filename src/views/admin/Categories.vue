@@ -271,7 +271,6 @@ export default {
     },
     startEditCategory (cat) {
       this.btnEdit()
-      console.log(cat, 'cat');
       this.img = cat.img
       this.selectedTitle = cat.title
       this.description = cat.description
@@ -299,7 +298,6 @@ export default {
       this.imageData.forEach((image, imgIndex) => {
         const extension = image.name.split('.')
         // даем имя файлу - как ID продукта + порядковый номер
-        console.log(this.categoryId, 'this.categoryId');
         const storageRef=firebase.storage().ref(`categories/${this.categoryId}/${this.categoryId}-img.${extension[extension.length - 1]}`).put(image);
         storageRef.on(`state_changed`,
           snapshot=>{
@@ -312,7 +310,6 @@ export default {
                 storageRef.snapshot.ref.getDownloadURL().then((url)=>{
                     this.loadingImg = false
                     this.img = url
-                    console.log(this.img, 'this.img');
                   });
                 }
           )

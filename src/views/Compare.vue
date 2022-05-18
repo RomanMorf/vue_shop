@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     deleteFromDavorite(id) {
-      console.log(id, 'id')
       this.$store.dispatch('COMPARE_TOGGLE', id)
     }
   },

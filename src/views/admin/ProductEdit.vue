@@ -174,10 +174,8 @@ export default {
       this.img = []
     },
     deleteImage(imageIndex) { // показать инфо
-      console.log(imageIndex, 'imageIndex');
       const tempArr = this.img[imageIndex].split('%2F')
       const imgName = tempArr[tempArr.length - 1].split('?alt=media')
-      console.log(imgName, 'tempArr');
 
       const fileForDelete = {
         pathToFile: 'products/'+tempArr[1],

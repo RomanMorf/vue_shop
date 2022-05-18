@@ -5,8 +5,6 @@ export default {
     async LOGIN ({commit}, {email, password}) { // Авторизация
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password) // авторизация через firebase
-        console.log(firebase, 'firebase');
-        console.log(firebase.auth(), 'firebase.auth()');
       } catch (e) {
         commit('setError', e)
         console.log(e, 'message from store')
@@ -33,7 +31,6 @@ export default {
 
     async REGISTER ({dispatch, commit}, data) { // регистрация
       try {
-        console.log(data, 'from store')
         const { name, email, password, tel } = data
 
         await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -56,7 +53,6 @@ export default {
     async RESET_PASSWORD ({commit}, email) { // сбросить пароль. восставновить через почту
       await firebase.auth().sendPasswordResetEmail(email)
           .then(function() {
-            // console.log('success');
           })
           .catch(function(e) {
             commit('setError', e)
