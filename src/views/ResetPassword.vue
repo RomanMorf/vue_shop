@@ -13,7 +13,7 @@
           </small>
         </div>
         <div class="form_section btn">
-          <button @click.prevent="resetPassWithEmail">Сбросить пароль</button>
+          <button class="modal_btn" @click.prevent="resetPassWithEmail">Сбросить пароль</button>
           <a @click="$router.push('/register')">Зарегиcтрироваться</a>
         </div>
       </form>

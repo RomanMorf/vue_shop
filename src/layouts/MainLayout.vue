@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang='scss'>
 .view_wrapper {
-  overflow-x: hidden;
   min-height: 50vh;
+  padding-top: 10px;
 }
 </style>

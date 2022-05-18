@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1 class="center">This is an home page</h1>
     <Loader v-if="isLoading"></Loader>
 
 <!-- ====== SWIPE PROMO ====== -->
@@ -89,19 +88,19 @@ export default {
       timer: null,
       categories: [],
       carusel:[
-        { img:'https://static-sl.insales.ru/files/1/7093/11598773/original/slide1_2048x800_crop_top.webp',
+        { img:'https://www.helitaly.com/wp-content/uploads/fashion-week-milano-2020-1440x740.jpg',
           title: 'Title for post',
           text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere minima aspernatur ducimus suscipit nesciunt laborum consequuntur repudiandae nemo? Doloremque nulla totam iusto corrupti voluptas adipisci sunt consequuntur, et inventore vero!',
           btnTitle: 'В каталог',
           btnUrl: '/catalog',
         },
-        { img:'https://static-sl.insales.ru/files/1/7101/11598781/original/slide2_2048x800_crop_top.webp',
+        { img:'https://images3.alphacoders.com/274/thumb-1920-274899.jpg',
           title: 'Title for post',
           text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere minima aspernatur ducimus suscipit nesciunt laborum consequuntur repudiandae nemo? Doloremque nulla totam iusto corrupti voluptas adipisci sunt consequuntur, et inventore vero!',
           btnTitle: 'В каталог',
           btnUrl: '/catalog',
         },
-        { img:'https://static-sl.insales.ru/files/1/7231/11598911/original/slide3_2048x800_crop_top.webp',
+        { img:'https://browsecat.net/sites/default/files/backgrounds-for-fashion-photography-126871-613871-7963742.png',
           title: 'Title for post',
           text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere minima aspernatur ducimus suscipit nesciunt laborum consequuntur repudiandae nemo? Doloremque nulla totam iusto corrupti voluptas adipisci sunt consequuntur, et inventore vero!',
           btnTitle: 'В каталог',

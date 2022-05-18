@@ -2,7 +2,7 @@
   <div class="nav-bar" @click="checkAuth">
     <div class="container">
       <div class="logo" @click="$router.push('/')">
-        <img class="logo_img" src="https://svgsilh.com/svg_v2/311825.svg" alt="">
+        <img class="logo_img" src="../../assets/img/logo4.png" alt="">
       </div>
 
       <div @click="showBurgerMenu = !showBurgerMenu" class="burger_btn"><span class="material-icons">menu</span></div>
@@ -124,7 +124,6 @@ export default {
     top: 0px;
     right: 0px;
     overflow: hidden;
-    transition: all ease .3s;
   }
 
   &_container {
@@ -171,7 +170,6 @@ export default {
   }
 }
 
-
 .burger {
   &_btn {
     display: none;
@@ -186,6 +184,7 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 

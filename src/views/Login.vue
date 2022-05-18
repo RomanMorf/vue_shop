@@ -23,7 +23,7 @@
 
         </div>
         <div class="form_section btn">
-          <button @click.prevent="authUserWithEmailPass">Войти</button>
+          <button class="modal_btn" @click.prevent="authUserWithEmailPass">Войти</button>
           <a @click="$router.push('/reset')">Восстановить пароль</a>
           <a @click="$router.push('/register')">Зарегиcтрироваться</a>
         </div>

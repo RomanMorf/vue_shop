@@ -1,9 +1,7 @@
 <template>
   <div class="bar">
     <transition name="scale">
-
     <div class="breadcrumbs" v-if="$route.path !== '/'">
-
       <ul class="breadcrumbs_list">
         <transition-group name="scale" class="breadcrumbs_list">
         <li class="breadcrumbs_item" @click="$router.push('/')" :key="0">
@@ -18,14 +16,12 @@
           {{productCategoryName}}
         </li>
       </transition-group>
-
       </ul>
-
     </div>
     </transition>
 
     <div class="bar_categories">
-      CATEGORIES
+      Some content
     </div>
 
     <div class="bar_buttons">
@@ -266,13 +262,14 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   position: absolute;
-  bottom: -45px;
+  bottom: -30px;
   left: 0;
 
   &_list {
     display: flex;
     align-items: center;
     padding-left: 0;
+    margin: 0;
   }
 
   &_item {
@@ -398,9 +395,6 @@ export default {
   .material-icons-outlined.md-30 {
     font-size: 30px;
   }
-  // .breadcrumbs {
-  //   display: none;
-  // }
   .bar {
     justify-content: space-around;
   }
@@ -415,6 +409,9 @@ export default {
     & img {
       max-width: 50px;
     }
+  }
+  .breadcrumbs {
+    bottom: -26px;
   }
 }
 

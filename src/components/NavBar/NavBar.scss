@@ -27,15 +27,16 @@
 }
 
 .logo {
-  width: 100px;
-  height: 30px;
+  max-width: 150px;
+  max-height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
+  margin-left: 10px;
   &_img {
-    max-width: 70px;
+    max-width: 150px;
+    max-height: 45px;  
   }
 }
 

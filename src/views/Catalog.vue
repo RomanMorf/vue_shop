@@ -71,7 +71,7 @@
         v-if="pageCount > 1"
         v-model="page"
         :page-range="30"
-        :margin-pages="20"
+        :margin-pages="2"
         :page-count="pageCount"
         :click-handler="pageChangeHandler"
         :prev-text="prevBtn"
@@ -99,7 +99,7 @@ export default {
       isLoding: true,
       showAsCards: true,
       sorting: 'default',
-      maxProdOnPage: 8,
+      maxProdOnPage: "8",
     }
   },
   mixins: [paginationMixins],
@@ -121,7 +121,12 @@ export default {
       })
     }
 
-    if (localStorage.getItem('maxProdOnPage')) this.maxProdOnPage = JSON.parse(localStorage.getItem('maxProdOnPage'))
+    if (localStorage.getItem('maxProdOnPage')) {
+      this.maxProdOnPage = JSON.parse(localStorage.getItem('maxProdOnPage'))
+    } else  {
+      localStorage.setItem('maxProdOnPage', JSON.stringify(this.maxProdOnPage))
+    }
+    this.setupPagination(this.products, this.maxProdOnPage)
     this.isLoding = false
   },
   components: {

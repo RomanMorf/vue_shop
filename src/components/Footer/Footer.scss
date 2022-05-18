@@ -55,18 +55,19 @@
   }
 
   .logo {
-    max-width: 100px;
-    height: 30px;
+    max-width: 150px;
+    max-height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
+    margin-left: 10px;
     &_img {
-      max-width: 70px;
+      max-width: 150px;
+      max-height: 45px;  
     }
-
   }
+  
   .social-img {
     width: 20px;
     height: 20px;
@@ -77,6 +78,7 @@
 
 @media (max-width: 500px) {
   .footer {
+    margin-top: 20px;
     .section, 
     .copiright, 
     .logo {
@@ -85,6 +87,10 @@
     .container {
       justify-content: space-around;
       padding: 0 5px;
+      &.content {
+        display: none;
+      }
     }
+    
   }
 }

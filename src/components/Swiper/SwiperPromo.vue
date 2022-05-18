@@ -64,6 +64,9 @@ export default {
     position: absolute;
     top: 15%;
     left: 50%;
+    background-color: rgb(255 255 255 / 70%);
+    border-radius: 5px;
+    padding: 5px;
   }
 
   &_btn {
@@ -85,7 +88,7 @@ export default {
     margin: 0;
     font-size: 40px;
   }
-  
+
   &_text {
     margin: 20px 0;
     padding: 0 10px 0 0;

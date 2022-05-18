@@ -183,9 +183,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // const currentUser = firebase.auth().currentUser
-  // to.meta.auth && !currentUser ? next('/login') : next()
-  // to.meta.role === 'admin' ? console.log('you got to be admin') : null;
+  const currentUser = firebase.auth().currentUser
+  to.meta.auth && !currentUser ? next('/login') : next()
+  to.meta.role === 'admin' ? console.log('you got to be admin') : null;
 
   // if (isNavigationFailure(NavigationFailureType.duplicated)) {
   //   // отображение уведомления пользователю

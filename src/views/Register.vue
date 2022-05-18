@@ -54,7 +54,7 @@
           </small>
         </div>
         <div class="form_section btn">
-          <button class="btn" @click.prevent="registerUser">Регистрация</button>
+          <button class="modal_btn" @click.prevent="registerUser">Регистрация</button>
           <a class="btn" @click.prevent="$router.push('/login')">У меня уже есть аккаунт</a>
         </div>
 
@@ -96,7 +96,7 @@ export default {
         this.$v.$touch()
         return
       }
-      
+
       try {
         await this.$store.dispatch('REGISTER', userInfo)
         this.$router.push('/login')
